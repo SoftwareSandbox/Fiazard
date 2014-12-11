@@ -2,8 +2,8 @@ apply plugin: 'java'
 apply plugin: 'gradle-one-jar'
 apply plugin: 'application'
 
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 version = '0.0.1-SNAPSHOT'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
