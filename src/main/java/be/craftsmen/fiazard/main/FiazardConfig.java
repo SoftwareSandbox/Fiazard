@@ -1,4 +1,4 @@
-package be.craftsmen.fiazardtje.main;
+package be.craftsmen.fiazard.main;
 
 import io.dropwizard.Configuration;
 

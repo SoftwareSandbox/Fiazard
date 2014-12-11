@@ -1,8 +1,8 @@
-package be.craftsmen.fiazardtje.resource;
+package be.craftsmen.fiazard.resource;
 
-import be.craftsmen.fiazardtje.common.Id;
-import be.craftsmen.fiazardtje.representation.category.CategoryR;
-import be.craftsmen.fiazardtje.representation.error.ErrorR;
+import be.craftsmen.fiazard.common.Id;
+import be.craftsmen.fiazard.representation.category.CategoryR;
+import be.craftsmen.fiazard.representation.error.ErrorR;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;
 import com.wordnik.swagger.annotations.Api;
@@ -16,10 +16,11 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Api(value = "/v1/category", description = "Operations about categories")
-@Path("/v1/category")
+@Path(CategoryResourceV1.CATEGORY_BASE_URI)
 @Produces(MediaType.APPLICATION_JSON)
 public class CategoryResourceV1 {
 
+    public static final String CATEGORY_BASE_URI = "/v1/category";
     private static final List<CategoryR> categories;
 
     static {
@@ -27,6 +28,7 @@ public class CategoryResourceV1 {
         CategoryR cheese = new CategoryR(Id.random(), "Cheese");
         categories = Lists.newArrayList(ham, cheese);
     }
+
 
     @GET
     @Timed

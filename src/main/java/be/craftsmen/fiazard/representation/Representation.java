@@ -1,4 +1,4 @@
-package be.craftsmen.fiazardtje.representation;
+package be.craftsmen.fiazard.representation;
 
 /**
  * Marker interface

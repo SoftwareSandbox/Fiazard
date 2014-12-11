@@ -48,7 +48,9 @@ dependencies {
 
     testCompile (
             'junit:junit:' + junitVersion,
-            'org.assertj:assertj-core:' + assertJVersion
+            'org.assertj:assertj-core:' + assertJVersion,
+            'io.dropwizard:dropwizard-testing:' + dropwizardVersion,
+            'io.dropwizard:dropwizard-client:' + dropwizardVersion,
     )
 
 }

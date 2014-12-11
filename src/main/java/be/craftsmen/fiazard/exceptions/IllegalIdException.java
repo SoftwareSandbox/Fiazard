@@ -1,8 +1,9 @@
-package be.craftsmen.fiazardtje.exceptions;
+package be.craftsmen.fiazard.exceptions;
 
-import be.craftsmen.fiazardtje.common.error.AppErrorCode;
+import be.craftsmen.fiazard.common.error.AppErrorCode;
 
 public class IllegalIdException extends FiazardException {
+
     public IllegalIdException(String id) {
         super(String.format("id invalid: %s", id));
     }

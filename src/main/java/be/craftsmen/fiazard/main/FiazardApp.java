@@ -1,6 +1,6 @@
-package be.craftsmen.fiazardtje.main;
+package be.craftsmen.fiazard.main;
 
-import be.craftsmen.fiazardtje.resource.CategoryResourceV1;
+import be.craftsmen.fiazard.resource.CategoryResourceV1;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.Application;

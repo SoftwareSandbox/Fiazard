@@ -28,7 +28,7 @@ logging:
   loggers:
 
     # Sets the level for 'com.example.app' to DEBUG.
-    be.craftsmen.fiazardtje: DEBUG
+    be.craftsmen.fiazard: DEBUG
 
   appenders:
     - type: console
