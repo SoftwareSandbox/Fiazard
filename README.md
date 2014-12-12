@@ -3,6 +3,8 @@ Fiazard
 
 Learning project in which we try to make our sandwich ordering site better. This is the backend project, providing RESTful webservices with DropWizard.
 
+Build status:
+
 ## Tech Stack
 [Dropwizard 0.7.x](http://dropwizard.io/), in combination with 
 [Guice](https://github.com/HubSpot/dropwizard-guice) for **Dependency Injection**, and
