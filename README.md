@@ -3,7 +3,7 @@ Fiazard
 
 Learning project in which we try to make our sandwich ordering site better. This is the backend project, providing RESTful webservices with DropWizard.
 
-Build status:
+[![Build Status](https://travis-ci.org/Sch3lp/Fiazard.svg?branch=master)](https://travis-ci.org/Sch3lp/Fiazard)
 
 ## Tech Stack
 [Dropwizard 0.7.x](http://dropwizard.io/), in combination with 
