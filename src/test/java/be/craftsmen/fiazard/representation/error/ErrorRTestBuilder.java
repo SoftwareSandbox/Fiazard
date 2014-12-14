@@ -1,17 +1,26 @@
 package be.craftsmen.fiazard.representation.error;
 
+import com.google.common.collect.Lists;
 import junit.framework.TestCase;
+
+import java.util.List;
 
 public class ErrorRTestBuilder {
 
     private String errorCode;
     private String message;
-    private String[] fields;
+    private List<String> fields;
+    private int status;
 
     public ErrorRTestBuilder(){}
 
     public ErrorR build(){
-        return new ErrorR(errorCode, message, fields);
+        return new ErrorR(status, errorCode, message, fields);
+    }
+
+    public ErrorRTestBuilder withStatus(int status) {
+        this.status = status;
+        return this;
     }
 
     public ErrorRTestBuilder withErrorCode(String errorCode) {
@@ -25,7 +34,7 @@ public class ErrorRTestBuilder {
     }
 
     public ErrorRTestBuilder withFields(String... fields) {
-        this.fields = fields;
+        this.fields = Lists.newArrayList(fields);
         return this;
     }
 }

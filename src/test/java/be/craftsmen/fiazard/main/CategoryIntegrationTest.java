@@ -29,5 +29,4 @@ public class CategoryIntegrationTest {
 
         assertThat(clientResponse.getEntity(CategoryR[].class)).isNotEmpty();
     }
-
 }
