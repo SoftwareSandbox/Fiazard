@@ -24,3 +24,12 @@ We'll eventually get continuous feedback thanks to
 [TravisCI](https://travis-ci.org/)/[Codeship](http://codeship.io/) (TBD) as our **Continuous Integration**, which will trigger
 [Gradle](http://www.gradle.org/) **build(s)** to run our tests, of which some might use
 the [rest-scenarios](https://github.com/cegeka/rest-scenarios) framework to make some readable **scenario tests**.
+
+## Usage of /resources/json/*.json files
+If you're not yet using [SublimeText3](http://www.sublimetext.com/3), shame on you. Buy and download it now.
+
+1. Install [Package Control](https://sublime.wbond.net/installation#st3).
+2. Install [HttpRequester](https://github.com/braindamageinc/SublimeHttpRequester) in Sublime: `Ctrl+Shift+P`, `Install`, Http Requester.
+3. Make sure your FiazardApp is running.
+4. Open a .json file in Sublime, e.g. [category.json](src/main/resources/json/category.json).
+5. Press `Ctrl+Alt+R`
