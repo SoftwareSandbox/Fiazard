@@ -1,9 +1,8 @@
-package be.craftsmen.fiazard.resource;
+package be.craftsmen.fiazard.managing.representation.resource;
 
 import be.craftsmen.fiazard.common.Id;
-import be.craftsmen.fiazard.exceptions.IllegalIdException;
-import be.craftsmen.fiazard.representation.category.CategoryR;
-import be.craftsmen.fiazard.representation.error.ErrorR;
+import be.craftsmen.fiazard.managing.representation.category.CategoryR;
+import be.craftsmen.fiazard.common.error.ErrorR;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;
 import com.wordnik.swagger.annotations.Api;
@@ -12,7 +11,6 @@ import com.wordnik.swagger.annotations.*;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;

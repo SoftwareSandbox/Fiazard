@@ -1,7 +1,7 @@
-package be.craftsmen.fiazardtje.exceptions;
+package be.craftsmen.fiazard.common.exceptions;
 
-import be.craftsmen.fiazard.exceptions.FiazardException;
-import be.craftsmen.fiazard.representation.error.ErrorR;
+import be.craftsmen.fiazard.common.exceptions.FiazardException;
+import be.craftsmen.fiazard.common.error.ErrorR;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

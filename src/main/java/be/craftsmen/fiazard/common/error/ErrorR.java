@@ -1,15 +1,11 @@
-package be.craftsmen.fiazard.representation.error;
+package be.craftsmen.fiazard.common.error;
 
 
-import be.craftsmen.fiazard.common.error.AppErrorCode;
-import be.craftsmen.fiazard.exceptions.FiazardException;
-import be.craftsmen.fiazard.representation.Representation;
+import be.craftsmen.fiazard.common.exceptions.FiazardException;
+import be.craftsmen.fiazard.common.Representation;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class ErrorR implements Representation {
     private int status;

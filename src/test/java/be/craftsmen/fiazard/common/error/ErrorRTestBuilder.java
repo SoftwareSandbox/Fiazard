@@ -1,7 +1,6 @@
-package be.craftsmen.fiazard.representation.error;
+package be.craftsmen.fiazard.common.error;
 
 import com.google.common.collect.Lists;
-import junit.framework.TestCase;
 
 import java.util.List;
 

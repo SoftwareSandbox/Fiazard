@@ -1,18 +1,15 @@
-package be.craftsmen.fiazardtje.exceptions;
+package be.craftsmen.fiazard.common.exceptions;
 
 import be.craftsmen.fiazard.common.error.AppErrorCode;
-import be.craftsmen.fiazard.representation.error.ErrorR;
-import be.craftsmen.fiazard.representation.error.ErrorRTestBuilder;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.dropwizard.jackson.Jackson;
+import be.craftsmen.fiazard.common.error.ErrorR;
+import be.craftsmen.fiazard.common.error.ErrorRTestBuilder;
 import org.assertj.core.api.Assertions;
-import org.json4s.jackson.Json;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
 
-import static be.craftsmen.fiazardtje.exceptions.FiazardExceptionBuilder.someFiazardExceptionBuilder;
+import static be.craftsmen.fiazard.common.exceptions.FiazardExceptionBuilder.someFiazardExceptionBuilder;
 
 public class FiazardExceptionToJSONMapperTest {
 

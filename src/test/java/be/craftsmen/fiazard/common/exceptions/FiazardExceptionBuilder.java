@@ -1,7 +1,6 @@
-package be.craftsmen.fiazardtje.exceptions;
+package be.craftsmen.fiazard.common.exceptions;
 
 import be.craftsmen.fiazard.common.error.AppErrorCode;
-import be.craftsmen.fiazard.exceptions.FiazardException;
 import com.google.common.collect.Lists;
 
 import java.util.List;

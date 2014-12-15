@@ -1,4 +1,4 @@
-package be.craftsmen.fiazard.exceptions;
+package be.craftsmen.fiazard.common.exceptions;
 
 import be.craftsmen.fiazard.common.error.AppErrorCode;
 import com.google.common.collect.Lists;

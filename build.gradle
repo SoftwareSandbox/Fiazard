@@ -29,6 +29,7 @@ project.ext {
     swaggerVersion = '1.3.11'
     junitVersion = '4.12'
     assertJVersion = '1.7.0'
+    dropwizardGuiceVersion = '0.7.2'
 }
 
 repositories {
@@ -43,6 +44,7 @@ dependencies {
             'com.google.guava:guava:' + guavaVersion,
             'com.wordnik:swagger-jaxrs_2.10:' + swaggerVersion,
             'com.wordnik:swagger-annotations:' + swaggerVersion,
+            'com.hubspot.dropwizard:dropwizard-guice:' + dropwizardGuiceVersion,
             'com.h2database:h2:1.3.168'
     )
 

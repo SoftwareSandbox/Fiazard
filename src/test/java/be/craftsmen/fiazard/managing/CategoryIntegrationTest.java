@@ -1,6 +1,8 @@
-package be.craftsmen.fiazard.main;
+package be.craftsmen.fiazard.managing;
 
-import be.craftsmen.fiazard.representation.category.CategoryR;
+import be.craftsmen.fiazard.main.FiazardApp;
+import be.craftsmen.fiazard.main.FiazardConfig;
+import be.craftsmen.fiazard.managing.representation.category.CategoryR;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import io.dropwizard.testing.junit.DropwizardAppRule;
@@ -9,7 +11,7 @@ import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
 
-import static be.craftsmen.fiazard.resource.CategoryResourceV1.CATEGORY_BASE_URI;
+import static be.craftsmen.fiazard.managing.representation.resource.CategoryResourceV1.CATEGORY_BASE_URI;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryIntegrationTest {

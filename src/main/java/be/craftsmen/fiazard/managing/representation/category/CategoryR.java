@@ -1,7 +1,7 @@
-package be.craftsmen.fiazard.representation.category;
+package be.craftsmen.fiazard.managing.representation.category;
 
 import be.craftsmen.fiazard.common.Id;
-import be.craftsmen.fiazard.representation.Representation;
+import be.craftsmen.fiazard.common.Representation;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;

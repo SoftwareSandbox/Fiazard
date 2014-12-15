@@ -1,7 +1,7 @@
 package be.craftsmen.fiazard.common;
 
 
-import be.craftsmen.fiazard.exceptions.IllegalIdException;
+import be.craftsmen.fiazard.common.exceptions.IllegalIdException;
 import com.google.common.base.Strings;
 
 import java.io.Serializable;
