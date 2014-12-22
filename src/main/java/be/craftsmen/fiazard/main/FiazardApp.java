@@ -1,7 +1,7 @@
 package be.craftsmen.fiazard.main;
 
 import be.craftsmen.fiazard.managing.guice.FiazardManagingModule;
-import be.craftsmen.fiazard.managing.representation.resource.CategoryResourceV1;
+import be.craftsmen.fiazard.managing.resource.CategoryResourceV1;
 import be.craftsmen.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.setup.Bootstrap;

@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
 
-import static be.craftsmen.fiazard.managing.representation.resource.CategoryResourceV1.CATEGORY_BASE_URI;
+import static be.craftsmen.fiazard.managing.resource.CategoryResourceV1.CATEGORY_BASE_URI;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryIntegrationTest {

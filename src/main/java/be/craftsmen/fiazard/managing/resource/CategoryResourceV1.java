@@ -1,4 +1,4 @@
-package be.craftsmen.fiazard.managing.representation.resource;
+package be.craftsmen.fiazard.managing.resource;
 
 import be.craftsmen.fiazard.common.Id;
 import be.craftsmen.fiazard.managing.representation.category.CategoryR;
