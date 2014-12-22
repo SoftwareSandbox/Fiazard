@@ -15,17 +15,17 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Api(value = "/v1/category", description = "Operations about categories")
+@Api(value = CategoryResourceV1.CATEGORY_BASE_URI, description = "Operations about categories")
 @Path(CategoryResourceV1.CATEGORY_BASE_URI)
 @Produces(MediaType.APPLICATION_JSON)
 public class CategoryResourceV1 {
 
     public static final String CATEGORY_BASE_URI = "/v1/category";
     private static final List<CategoryR> categories;
+    public static CategoryR ham = new CategoryR(Id.random(), "Ham");
+    public static CategoryR cheese = new CategoryR(Id.random(), "Cheese");
 
     static {
-        CategoryR ham = new CategoryR(Id.random(), "Ham");
-        CategoryR cheese = new CategoryR(Id.random(), "Cheese");
         categories = Lists.newArrayList(ham, cheese);
     }
 

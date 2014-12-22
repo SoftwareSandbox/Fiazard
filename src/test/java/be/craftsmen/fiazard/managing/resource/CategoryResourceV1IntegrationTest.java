@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import static be.craftsmen.fiazard.managing.resource.CategoryResourceV1.CATEGORY_BASE_URI;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CategoryIntegrationTest {
+public class CategoryResourceV1IntegrationTest {
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule = new DropwizardAppRule<>(FiazardApp.class, "src/main/resources/dev.yml");
@@ -24,7 +24,8 @@ public class CategoryIntegrationTest {
     @Test
     public void categoriesAreReturnedAsJSON() throws Exception {
         ClientResponse clientResponse = new Client()
-                .resource(BASE_URL + CATEGORY_BASE_URI)
+                .resource(BASE_URL)
+                .path(CATEGORY_BASE_URI)
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);

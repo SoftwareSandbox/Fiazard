@@ -3,6 +3,7 @@ package be.craftsmen.fiazard.main;
 import be.craftsmen.fiazard.managing.guice.FiazardManagingModule;
 import be.craftsmen.fiazard.managing.resource.CategoryResourceV1;
 import be.craftsmen.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
+import be.craftsmen.fiazard.managing.resource.ProductResourceV1;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -30,6 +31,7 @@ public class FiazardApp extends Application<FiazardConfig> {
     public void run(FiazardConfig configuration, Environment environment) throws Exception {
         environment.jersey().register(FiazardExceptionToJSONMapper.class);
         environment.jersey().register(CategoryResourceV1.class);
+        environment.jersey().register(ProductResourceV1.class);
     }
 
     public static void main(String[] args) throws Exception {
