@@ -1,4 +1,4 @@
-package be.craftsmen.fiazard.managing;
+package be.craftsmen.fiazard.managing.resource;
 
 import be.craftsmen.fiazard.main.FiazardApp;
 import be.craftsmen.fiazard.main.FiazardConfig;
