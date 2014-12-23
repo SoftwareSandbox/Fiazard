@@ -5,17 +5,17 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IllegalIdExceptionTest {
+public class IllegalIdFiazardExceptionTest {
 
     @Test
     public void message_ReturnsCorrectMessage(){
-        String actual = new IllegalIdException("my id").getMessage();
+        String actual = new IllegalIdFiazardException("my id").getMessage();
         assertThat(actual).isEqualTo("id invalid: my id");
     }
 
     @Test
     public void errorCode_ReturnsIllegalId() throws Exception {
-        AppErrorCode actual = new IllegalIdException("my id").getErrorCode();
+        AppErrorCode actual = new IllegalIdFiazardException("my id").getErrorCode();
         assertThat(actual).isEqualTo(AppErrorCode.ILLEGAL_ID);
     }
 }

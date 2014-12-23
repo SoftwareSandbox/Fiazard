@@ -2,7 +2,7 @@ package be.craftsmen.fiazard.common.exceptions;
 
 import be.craftsmen.fiazard.common.error.AppErrorCode;
 import be.craftsmen.fiazard.common.error.ErrorR;
-import be.craftsmen.fiazard.common.error.ErrorRTestBuilder;
+import be.craftsmen.fiazard.common.error.ErrorRBuilderForTests;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class FiazardExceptionToJSONMapperTest {
         AppErrorCode expectedAppError = AppErrorCode.ILLEGAL_ID;
         String expectedMessage = "exception message";
         int expectedStatus = 400;
-        ErrorR expectedErrorR = new ErrorRTestBuilder()
+        ErrorR expectedErrorR = new ErrorRBuilderForTests()
                 .withStatus(expectedStatus)
                 .withErrorCode(expectedAppError.getErrorCode())
                 .withMessage(expectedMessage)

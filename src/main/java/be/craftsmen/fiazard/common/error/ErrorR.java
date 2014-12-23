@@ -3,6 +3,7 @@ package be.craftsmen.fiazard.common.error;
 
 import be.craftsmen.fiazard.common.exceptions.FiazardException;
 import be.craftsmen.fiazard.common.Representation;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -13,7 +14,10 @@ public class ErrorR implements Representation {
     private Iterable<String> fields;
     private String message;
 
-    ErrorR(int status, String errorCode, String message, Iterable<String> fields){
+
+    private ErrorR(){ /*noop, necessary for Jackson :s, or we might need to annotate the actual constructor*/ }
+
+    ErrorR(int status, String errorCode, String message, Iterable<String> fields) {
         this.status = status;
         this.errorCode = errorCode;
         this.message = message;

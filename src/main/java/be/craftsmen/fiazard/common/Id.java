@@ -1,7 +1,7 @@
 package be.craftsmen.fiazard.common;
 
 
-import be.craftsmen.fiazard.common.exceptions.IllegalIdException;
+import be.craftsmen.fiazard.common.exceptions.IllegalIdFiazardException;
 import com.google.common.base.Strings;
 
 import java.io.Serializable;
@@ -22,7 +22,7 @@ public class Id implements Serializable {
         try {
             uuid = UUID.fromString(id);
         } catch (IllegalArgumentException e) {
-            throw new IllegalIdException(id);
+            throw new IllegalIdFiazardException(id);
         }
 
         return new Id(uuid);

@@ -2,6 +2,7 @@ package be.craftsmen.fiazard.managing.representation.product;
 
 import be.craftsmen.fiazard.common.Id;
 import be.craftsmen.fiazard.common.Representation;
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -33,6 +34,24 @@ public class ProductR implements Representation {
 
     public List<String> getSauces() {
         return sauces;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProductR other = (ProductR) o;
+        return Objects.equal(this.id, other.id)
+                && Objects.equal(this.categoryId, other.categoryId)
+                && Objects.equal(this.name, other.name)
+                && Objects.equal(this.composition, other.composition)
+                && Objects.equal(this.sauces, other.sauces);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.id, this.categoryId, this.name, this.composition, this.sauces);
     }
 
     public static class ProductRBuilder {

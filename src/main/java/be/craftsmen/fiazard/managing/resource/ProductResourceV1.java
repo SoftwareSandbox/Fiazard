@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 @Produces(MediaType.APPLICATION_JSON)
 public class ProductResourceV1 {
 
-    public static final String PRODUCTS_BASE_URI = "/v1/product";
+    public static final String PRODUCTS_BASE_URI = "/v1/products";
     private static final List<ProductR> allProducts;
 
     static {
