@@ -10,10 +10,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.*;
 import org.eclipse.jetty.http.HttpStatus;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -22,6 +19,7 @@ import java.util.Optional;
 @Api(value = CategoryResourceV1.CATEGORY_BASE_URI, description = "Operations about categories")
 @Path(CategoryResourceV1.CATEGORY_BASE_URI)
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class CategoryResourceV1 {
 
     public static final String CATEGORY_BASE_URI = "/v1/categories";
