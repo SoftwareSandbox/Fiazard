@@ -13,6 +13,7 @@ You'll have to download oracle's Java 8 since openjdk still has no package out y
 $ sudo add-apt-repository ppa:webupd8team/java
 $ sudo apt-get update
 $ sudo apt-get install oracle-java8-installer
+$ sudo apt-get install oracle-java8-set-default
 ```
 
 ##Never forget...
