@@ -25,6 +25,8 @@ $ sudo apt-get install oracle-java8-installer
 $ sudo apt-get install oracle-java8-set-default
 ```
 
+There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
+
 ##Never forget...
 
 * To sync with master before starting on new issue/feature. (with `git pull --rebase upstream master`)
