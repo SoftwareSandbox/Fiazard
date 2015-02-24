@@ -8,6 +8,9 @@
 # IDE Files #
 .idea/
 *.iml
+.project
+.classpath
+.settings/
 
 # Gradle wrapper #
 .gradle/
