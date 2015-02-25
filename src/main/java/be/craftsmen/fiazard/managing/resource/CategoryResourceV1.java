@@ -1,20 +1,27 @@
 package be.craftsmen.fiazard.managing.resource;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.eclipse.jetty.http.HttpStatus;
+
 import be.craftsmen.fiazard.common.Id;
-import be.craftsmen.fiazard.managing.representation.category.CategoryR;
 import be.craftsmen.fiazard.common.error.ErrorR;
-import be.craftsmen.fiazard.managing.representation.product.ProductR;
+import be.craftsmen.fiazard.managing.representation.category.CategoryR;
+
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;
 import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.*;
-import org.eclipse.jetty.http.HttpStatus;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.Optional;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Api(value = CategoryResourceV1.CATEGORY_BASE_URI, description = "Operations about categories")
 @Path(CategoryResourceV1.CATEGORY_BASE_URI)

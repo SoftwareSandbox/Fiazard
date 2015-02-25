@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'eclipse'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
@@ -62,7 +63,6 @@ dependencies {
             'io.dropwizard:dropwizard-testing:' + dropwizardVersion,
             'io.dropwizard:dropwizard-client:' + dropwizardVersion,
     )
-
 }
 
 jar {

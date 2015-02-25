@@ -1,20 +1,25 @@
 package be.craftsmen.fiazard.managing.resource;
 
+import java.util.List;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import be.craftsmen.fiazard.common.Id;
 import be.craftsmen.fiazard.common.error.ErrorR;
 import be.craftsmen.fiazard.managing.representation.product.ProductR;
+
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.stream.Stream;
 
 @Api(value = ProductResourceV1.PRODUCTS_BASE_URI, description = "Operations about Products")
 @Path(ProductResourceV1.PRODUCTS_BASE_URI)

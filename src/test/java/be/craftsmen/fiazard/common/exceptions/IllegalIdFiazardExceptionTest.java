@@ -1,9 +1,10 @@
 package be.craftsmen.fiazard.common.exceptions;
 
-import be.craftsmen.fiazard.common.error.AppErrorCode;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import be.craftsmen.fiazard.common.error.AppErrorCode;
 
 public class IllegalIdFiazardExceptionTest {
 

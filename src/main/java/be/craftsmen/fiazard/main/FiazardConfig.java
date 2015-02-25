@@ -1,11 +1,12 @@
 package be.craftsmen.fiazard.main;
 
-import com.commercehub.dropwizard.mongo.MongoClientFactory;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import com.commercehub.dropwizard.mongo.MongoClientFactory;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FiazardConfig extends Configuration{
 
