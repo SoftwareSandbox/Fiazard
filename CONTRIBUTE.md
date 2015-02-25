@@ -5,6 +5,7 @@
 Fork it baby!
 
 ## Setting up your environment
+
 Clone this repo using `git clone --recursive`. This will also clone the repo in the vagrant folder, which will set up your MongoDB environment.
 
 Install [Vagrant](http://vagrantup.com) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
@@ -13,7 +14,7 @@ Open up a shell, navigate to the vagrant dir and type `vagrant up`. This will do
 
 After installing [Robomongo](http://robomongo.org/), add a connection to `10.11.12.13:27017`.
 
-##On Ubuntu
+### On Ubuntu
 
 Download Vagrant through https://www.vagrantup.com/downloads.html because `apt-get install vagrant` installs an older version.
 
@@ -27,8 +28,18 @@ $ sudo apt-get install oracle-java8-set-default
 
 There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
 
-##Never forget...
+### Running your Dropwizard Application locally
+
+Make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
+
+## Never forget...
 
 * To sync with master before starting on new issue/feature. (with `git pull --rebase upstream master` see this [cool article](http://kentnguyen.com/development/visualized-git-practices-for-team/) on the why)
 * To rebase your commits into one before submitting pull requests.
 * To have fun!
+
+## Some Conventions
+
+Always suffix Representation classes (java classes that will be transformed into JSON by Jackson) with an R.
+
+`OpeningHour.java` becomes `OpeningHourR.java`
