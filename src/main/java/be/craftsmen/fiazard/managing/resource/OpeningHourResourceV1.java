@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import be.craftsmen.fiazard.common.error.ErrorR;
-import be.craftsmen.fiazard.managing.representation.openinghour.OpenPeriod;
+import be.craftsmen.fiazard.managing.representation.openinghour.OpenPeriodR;
 import be.craftsmen.fiazard.managing.representation.openinghour.OpeningHourR;
 
 import com.codahale.metrics.annotation.Timed;
@@ -31,7 +31,7 @@ public class OpeningHourResourceV1 {
 
 	private static final OpeningHourR mondayOpeningHour = new OpeningHourR.Builder()
 			.withDayOfWeek(DayOfWeek.MONDAY)
-			.withOpenPeriod(new OpenPeriod.Builder()
+			.withOpenPeriod(new OpenPeriodR.Builder()
 					.withFrom(LocalTime.of(9, 30))
 					.withUntil(LocalTime.of(17, 30))
 					.build())
