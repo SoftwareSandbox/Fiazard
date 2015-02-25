@@ -1,11 +1,12 @@
 package be.craftsmen.fiazard.common;
 
 
-import be.craftsmen.fiazard.common.exceptions.IllegalIdFiazardException;
-import com.google.common.base.Strings;
-
 import java.io.Serializable;
 import java.util.UUID;
+
+import be.craftsmen.fiazard.common.exceptions.IllegalIdFiazardException;
+
+import com.google.common.base.Strings;
 
 public class Id implements Serializable {
 

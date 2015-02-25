@@ -63,7 +63,6 @@ dependencies {
             'io.dropwizard:dropwizard-testing:' + dropwizardVersion,
             'io.dropwizard:dropwizard-client:' + dropwizardVersion,
     )
-
 }
 
 jar {

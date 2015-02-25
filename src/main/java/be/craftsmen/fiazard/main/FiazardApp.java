@@ -1,15 +1,16 @@
 package be.craftsmen.fiazard.main;
 
-import be.craftsmen.fiazard.managing.guice.FiazardManagingModule;
-import be.craftsmen.fiazard.managing.resource.CategoryResourceV1;
-import be.craftsmen.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
-import be.craftsmen.fiazard.managing.resource.ProductResourceV1;
-import com.commercehub.dropwizard.mongo.ManagedMongoClient;
-import com.hubspot.dropwizard.guice.GuiceBundle;
-import com.mongodb.DB;
+import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import io.dropwizard.Application;
+import be.craftsmen.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
+import be.craftsmen.fiazard.managing.guice.FiazardManagingModule;
+import be.craftsmen.fiazard.managing.representation.util.FiazardJacksonModuleFactory;
+import be.craftsmen.fiazard.managing.resource.CategoryResourceV1;
+import be.craftsmen.fiazard.managing.resource.OpeningHourResourceV1;
+import be.craftsmen.fiazard.managing.resource.ProductResourceV1;
+
+import com.hubspot.dropwizard.guice.GuiceBundle;
 
 public class FiazardApp extends Application<FiazardConfig> {
 
@@ -21,7 +22,7 @@ public class FiazardApp extends Application<FiazardConfig> {
     }
 
     @Override
-    public void initialize(Bootstrap bootstrap) {
+    public void initialize(Bootstrap<FiazardConfig> bootstrap) {
         guiceBundle = GuiceBundle.<FiazardConfig>newBuilder()
                 .addModule(new FiazardManagingModule())
                 .setConfigClass(getConfigurationClass())
@@ -34,10 +35,13 @@ public class FiazardApp extends Application<FiazardConfig> {
 //        ManagedMongoClient mongoClient = config.getMongo().build();
 //        environment.lifecycle().manage(mongoClient);
 //        DB db = mongoClient.getDB(config.getMongo().getDbName());
-
+    	
         environment.jersey().register(FiazardExceptionToJSONMapper.class);
         environment.jersey().register(CategoryResourceV1.class);
         environment.jersey().register(ProductResourceV1.class);
+        environment.jersey().register(OpeningHourResourceV1.class);
+        
+        environment.getObjectMapper().registerModule(FiazardJacksonModuleFactory.newModule());
     }
 
     public static void main(String[] args) throws Exception {

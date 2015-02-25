@@ -1,8 +1,8 @@
 package be.craftsmen.fiazard.common.test;
 
-import com.google.common.io.Resources;
-
 import java.io.File;
+
+import com.google.common.io.Resources;
 
 public class ResourceHelper {
     public static String resourceFilePath(final String resourceClassPathLocation) {

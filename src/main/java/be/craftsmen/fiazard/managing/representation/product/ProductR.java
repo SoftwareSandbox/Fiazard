@@ -1,11 +1,12 @@
 package be.craftsmen.fiazard.managing.representation.product;
 
+import java.util.List;
+
 import be.craftsmen.fiazard.common.Id;
 import be.craftsmen.fiazard.common.Representation;
+
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
-
-import java.util.List;
 
 public class ProductR implements Representation {
     private Id id;

@@ -1,9 +1,9 @@
 package be.craftsmen.fiazard.common.error;
 
 
-import be.craftsmen.fiazard.common.exceptions.FiazardException;
 import be.craftsmen.fiazard.common.Representation;
-import com.fasterxml.jackson.annotation.JsonCreator;
+import be.craftsmen.fiazard.common.exceptions.FiazardException;
+
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;

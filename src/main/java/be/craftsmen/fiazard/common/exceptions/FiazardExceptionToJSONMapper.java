@@ -1,11 +1,10 @@
 package be.craftsmen.fiazard.common.exceptions;
 
-import be.craftsmen.fiazard.common.exceptions.FiazardException;
-import be.craftsmen.fiazard.common.error.ErrorR;
-
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+
+import be.craftsmen.fiazard.common.error.ErrorR;
 
 public class FiazardExceptionToJSONMapper implements ExceptionMapper<FiazardException> {
 

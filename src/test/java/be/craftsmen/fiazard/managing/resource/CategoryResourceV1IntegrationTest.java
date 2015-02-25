@@ -1,21 +1,23 @@
 package be.craftsmen.fiazard.managing.resource;
 
+import static be.craftsmen.fiazard.managing.resource.CategoryResourceV1.CATEGORY_BASE_URI;
+import static org.assertj.core.api.Assertions.assertThat;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+
+import javax.ws.rs.core.MediaType;
+
+import org.junit.ClassRule;
+import org.junit.Test;
+
 import be.craftsmen.fiazard.common.Id;
 import be.craftsmen.fiazard.common.error.ErrorR;
 import be.craftsmen.fiazard.common.exceptions.IllegalIdFiazardException;
 import be.craftsmen.fiazard.main.FiazardApp;
 import be.craftsmen.fiazard.main.FiazardConfig;
 import be.craftsmen.fiazard.managing.representation.category.CategoryR;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-import org.junit.ClassRule;
-import org.junit.Test;
-
-import javax.ws.rs.core.MediaType;
-
-import static be.craftsmen.fiazard.managing.resource.CategoryResourceV1.CATEGORY_BASE_URI;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryResourceV1IntegrationTest {
 

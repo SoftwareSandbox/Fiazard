@@ -1,11 +1,13 @@
 package be.craftsmen.fiazard.managing.representation.category;
 
-import be.craftsmen.fiazard.common.Id;
-import be.craftsmen.fiazard.common.Representation;
-import com.google.common.base.Objects;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotNull;
+import be.craftsmen.fiazard.common.Id;
+import be.craftsmen.fiazard.common.Representation;
+
+import com.google.common.base.Objects;
 
 public class CategoryR implements Representation {
 
