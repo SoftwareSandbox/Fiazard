@@ -31,7 +31,7 @@ public class OpeningHourResourceV1IntegrationTest {
 				.type(MediaType.APPLICATION_JSON_TYPE)
 				.accept(MediaType.APPLICATION_JSON_TYPE)
 				.get(ClientResponse.class);
-
+		
 		assertThat(clientResponse.getEntity(OpeningHourR[].class)).isNotEmpty();
 	}
 
