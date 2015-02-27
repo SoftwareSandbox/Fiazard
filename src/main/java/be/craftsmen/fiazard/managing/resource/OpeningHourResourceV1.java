@@ -31,14 +31,63 @@ public class OpeningHourResourceV1 {
 
 	private static final OpeningHourR mondayOpeningHour = new OpeningHourR.Builder()
 			.withDayOfWeek(DayOfWeek.MONDAY)
-			.withOpenPeriod(new OpenPeriodR.Builder()
+			.withHour(new OpenPeriodR.Builder()
+					.withFrom(LocalTime.of(9, 30))
+					.withUntil(LocalTime.of(17, 30))
+					.build())
+			.build();
+	private static final OpeningHourR tuesdayOpeningHour = new OpeningHourR.Builder()
+			.withDayOfWeek(DayOfWeek.TUESDAY)
+			.withHour(new OpenPeriodR.Builder()
+					.withFrom(LocalTime.of(9, 30))
+					.withUntil(LocalTime.of(17, 30))
+					.build())
+			.build();
+	private static final OpeningHourR wednesdayOpeningHour = new OpeningHourR.Builder()
+			.withDayOfWeek(DayOfWeek.WEDNESDAY)
+			.withHour(new OpenPeriodR.Builder()
+					.withFrom(LocalTime.of(9, 30))
+					.withUntil(LocalTime.of(17, 30))
+					.build())
+			.build();
+	private static final OpeningHourR thursdayOpeningHour = new OpeningHourR.Builder()
+			.withDayOfWeek(DayOfWeek.THURSDAY)
+			.withHour(new OpenPeriodR.Builder()
+					.withFrom(LocalTime.of(9, 30))
+					.withUntil(LocalTime.of(17, 30))
+					.build())
+			.build();
+	private static final OpeningHourR fridayOpeningHour = new OpeningHourR.Builder()
+			.withDayOfWeek(DayOfWeek.FRIDAY)
+			.withHour(new OpenPeriodR.Builder()
+					.withFrom(LocalTime.of(9, 30))
+					.withUntil(LocalTime.of(17, 30))
+					.build())
+			.build();
+	private static final OpeningHourR saturdayOpeningHour = new OpeningHourR.Builder()
+			.withDayOfWeek(DayOfWeek.SATURDAY)
+			.withHour(new OpenPeriodR.Builder()
+					.withFrom(LocalTime.of(9, 30))
+					.withUntil(LocalTime.of(17, 30))
+					.build())
+			.build();
+	private static final OpeningHourR sundayOpeningHour = new OpeningHourR.Builder()
+			.withDayOfWeek(DayOfWeek.SUNDAY)
+			.withHour(new OpenPeriodR.Builder()
 					.withFrom(LocalTime.of(9, 30))
 					.withUntil(LocalTime.of(17, 30))
 					.build())
 			.build();
 
 	static {
-		openingHours = Lists.newArrayList(mondayOpeningHour);
+		openingHours = Lists.newArrayList(
+				mondayOpeningHour,
+				tuesdayOpeningHour,
+				wednesdayOpeningHour,
+				thursdayOpeningHour,
+				fridayOpeningHour,
+				saturdayOpeningHour,
+				sundayOpeningHour);
 	}
 
 	@GET

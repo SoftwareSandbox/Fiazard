@@ -14,7 +14,7 @@ public class OpeningHourR implements Representation {
 
 	private DayOfWeek day;
 
-	private List<OpenPeriodR> openPeriods;
+	private List<OpenPeriodR> hours;
 
 	private OpeningHourR() {
 	}
@@ -27,14 +27,14 @@ public class OpeningHourR implements Representation {
 		return day;
 	}
 	
-	public List<OpenPeriodR> getOpenPeriods() {
-		return openPeriods;
+	public List<OpenPeriodR> getHours() {
+		return hours;
 	}
 
 	public static class Builder {
 		private Id id;
 		private DayOfWeek dayOfWeek;
-		private List<OpenPeriodR> openPeriods = Lists.newArrayList();
+		private List<OpenPeriodR> hours = Lists.newArrayList();
 
 		public Builder() {
 			id = Id.random();
@@ -45,7 +45,7 @@ public class OpeningHourR implements Representation {
 
 			openingHourR.id = id;
 			openingHourR.day = dayOfWeek;
-			openingHourR.openPeriods = openPeriods;
+			openingHourR.hours = hours;
 
 			return openingHourR;
 		}
@@ -60,13 +60,13 @@ public class OpeningHourR implements Representation {
 			return this;
 		}
 
-		public Builder withOpenPeriods(List<OpenPeriodR> openPeriods) {
-			this.openPeriods.addAll(openPeriods);
+		public Builder withHours(List<OpenPeriodR> hours) {
+			this.hours.addAll(hours);
 			return this;
 		}
 
-		public Builder withOpenPeriod(OpenPeriodR openPeriod) {
-			this.openPeriods.add(openPeriod);
+		public Builder withHour(OpenPeriodR openPeriod) {
+			this.hours.add(openPeriod);
 			return this;
 		}
 
