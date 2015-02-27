@@ -2,14 +2,8 @@ package be.craftsmen.fiazard.managing.representation.openinghour;
 
 import java.time.LocalTime;
 
-import be.craftsmen.fiazard.managing.representation.util.LocalTimeDeserializer;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 public class OpenPeriodR {
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
 	private LocalTime from;
-	@JsonDeserialize(using = LocalTimeDeserializer.class)
 	private LocalTime until;
 
 	private OpenPeriodR() {

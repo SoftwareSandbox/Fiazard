@@ -7,26 +7,30 @@ import io.dropwizard.testing.junit.DropwizardAppRule;
 import javax.ws.rs.core.MediaType;
 
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 
 import be.craftsmen.fiazard.common.error.ErrorR;
 import be.craftsmen.fiazard.common.exceptions.IllegalIdFiazardException;
+import be.craftsmen.fiazard.common.test.ClientRule;
 import be.craftsmen.fiazard.main.FiazardApp;
 import be.craftsmen.fiazard.main.FiazardConfig;
 import be.craftsmen.fiazard.managing.representation.product.ProductR;
 
-import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 
 public class ProductResourceV1IntegrationTest {
+	public static final String BASE_URL = "http://localhost:8080";
 
-    @ClassRule
+	@ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule = new DropwizardAppRule<>(FiazardApp.class, "src/main/resources/dev.yml");
-    public static final String BASE_URL = "http://localhost:8080";
+	
+	@Rule
+	public ClientRule clientRule = new ClientRule();
 
     @Test
     public void getByCategoryId_WhenIdIsNotAUUID_ReturnsInvalidIdError() throws Exception {
-        ClientResponse clientResponse = new Client()
+        ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
                 .path(PRODUCTS_BASE_URI)
                 .queryParam("categoryId","not-a-uuid")
@@ -39,7 +43,7 @@ public class ProductResourceV1IntegrationTest {
 
     @Test
     public void getByCategoryId_WhenNoCategoryIdGiven_ReturnsAllProducts() throws Exception {
-        ClientResponse clientResponse = new Client()
+        ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
                 .path(PRODUCTS_BASE_URI)
                 .type(MediaType.APPLICATION_JSON_TYPE)
@@ -51,7 +55,7 @@ public class ProductResourceV1IntegrationTest {
 
     @Test
     public void getByCategoryId_WhenCategoryIdGiven_ReturnsAllProductsOfGivenCategoryId() throws Exception {
-        ClientResponse clientResponse = new Client()
+        ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
                 .path(PRODUCTS_BASE_URI)
                 .queryParam("categoryId", CategoryResourceV1.cheese.getId())

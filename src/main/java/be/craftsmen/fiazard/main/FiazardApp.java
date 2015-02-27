@@ -1,11 +1,11 @@
 package be.craftsmen.fiazard.main;
 
+import static be.craftsmen.fiazard.managing.representation.util.FiazardJacksonModule.MODULE;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import be.craftsmen.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
 import be.craftsmen.fiazard.managing.guice.FiazardManagingModule;
-import be.craftsmen.fiazard.managing.representation.util.FiazardJacksonModuleFactory;
 import be.craftsmen.fiazard.managing.resource.CategoryResourceV1;
 import be.craftsmen.fiazard.managing.resource.OpeningHourResourceV1;
 import be.craftsmen.fiazard.managing.resource.ProductResourceV1;
@@ -41,7 +41,7 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.jersey().register(ProductResourceV1.class);
         environment.jersey().register(OpeningHourResourceV1.class);
         
-        environment.getObjectMapper().registerModule(FiazardJacksonModuleFactory.newModule());
+        environment.getObjectMapper().registerModule(MODULE);
     }
 
     public static void main(String[] args) throws Exception {

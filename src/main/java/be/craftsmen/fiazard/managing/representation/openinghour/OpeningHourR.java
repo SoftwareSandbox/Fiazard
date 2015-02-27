@@ -5,16 +5,13 @@ import java.util.List;
 
 import be.craftsmen.fiazard.common.Id;
 import be.craftsmen.fiazard.common.Representation;
-import be.craftsmen.fiazard.managing.representation.util.DayOfWeekDeserializer;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.collect.Lists;
 
 public class OpeningHourR implements Representation {
 
 	private Id id;
 
-	@JsonDeserialize(using = DayOfWeekDeserializer.class)
 	private DayOfWeek day;
 
 	private List<OpenPeriodR> hours;
