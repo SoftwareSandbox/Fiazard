@@ -1,4 +1,6 @@
+db = new Mongo().getDB("local");
 /* Products */
+db.products.remove({});
 db.products.insert({
     "category": {"name":"Cheese", "img":"/images/250px-Sandvich.png"},
     "name": "Club cheese",
