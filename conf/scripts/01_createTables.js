@@ -1,6 +1,5 @@
-/* Categories */
-db.createCollection('categories');
-/* Products */
+/* Products (also contain Categories) */
 db.createCollection('products');
+
 /* Openinghours */
 db.createCollection('openinghours');
