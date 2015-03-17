@@ -1,16 +1,17 @@
 package be.craftsmen.fiazard.main;
 
-import static be.craftsmen.fiazard.managing.representation.util.FiazardJacksonModule.MODULE;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
 import be.craftsmen.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
+import be.craftsmen.fiazard.managing.dw.MongoDBHealthCheck;
 import be.craftsmen.fiazard.managing.guice.FiazardManagingModule;
 import be.craftsmen.fiazard.managing.resource.CategoryResourceV1;
 import be.craftsmen.fiazard.managing.resource.OpeningHourResourceV1;
 import be.craftsmen.fiazard.managing.resource.ProductResourceV1;
-
 import com.hubspot.dropwizard.guice.GuiceBundle;
+import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+
+import static be.craftsmen.fiazard.managing.representation.util.FiazardJacksonModule.MODULE;
 
 public class FiazardApp extends Application<FiazardConfig> {
 
@@ -24,23 +25,21 @@ public class FiazardApp extends Application<FiazardConfig> {
     @Override
     public void initialize(Bootstrap<FiazardConfig> bootstrap) {
         guiceBundle = GuiceBundle.<FiazardConfig>newBuilder()
-                .addModule(new FiazardManagingModule())
                 .setConfigClass(getConfigurationClass())
+                .addModule(new FiazardManagingModule())
                 .build();
         bootstrap.addBundle(guiceBundle);
     }
 
     @Override
     public void run(FiazardConfig config, Environment environment) throws Exception {
-//        ManagedMongoClient mongoClient = config.getMongo().build();
-//        environment.lifecycle().manage(mongoClient);
-//        DB db = mongoClient.getDB(config.getMongo().getDbName());
-    	
+        environment.lifecycle().manage(config.getMongo().build());
+        environment.healthChecks().register("MongoDBHealthCheck", guiceBundle.getInjector().getInstance(MongoDBHealthCheck.class));
         environment.jersey().register(FiazardExceptionToJSONMapper.class);
         environment.jersey().register(CategoryResourceV1.class);
         environment.jersey().register(ProductResourceV1.class);
         environment.jersey().register(OpeningHourResourceV1.class);
-        
+
         environment.getObjectMapper().registerModule(MODULE);
     }
 
