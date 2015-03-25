@@ -1,4 +1,4 @@
-db = new Mongo().getDB("local");
+db = new Mongo().getDB("fiazard");
 /* Products */
 db.products.remove({});
 db.products.insert({
