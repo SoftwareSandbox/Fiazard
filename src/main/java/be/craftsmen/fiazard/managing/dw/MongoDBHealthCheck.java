@@ -2,7 +2,6 @@ package be.craftsmen.fiazard.managing.dw;
 
 import com.codahale.metrics.health.HealthCheck;
 import com.google.common.base.Joiner;
-import com.google.inject.Inject;
 import com.mongodb.DB;
 
 import java.util.Arrays;
