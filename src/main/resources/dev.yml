@@ -21,7 +21,7 @@ server:
 # Mongo DB config.
 mongo:
   uri: mongodb://localhost:27017/?maxPoolSize=50&maxIdleTimeMS=300000
-  dbName: local
+  dbName: fiazard
 
 # Logging settings.
 logging:
