@@ -6,9 +6,6 @@ import be.craftsmen.fiazard.managing.representation.category.CategoryR;
 
 import com.google.common.collect.Lists;
 
-/**
- * Created by sch3lp on 30/12/14.
- */
 public class CategoryDAO {
 
 

@@ -26,7 +26,6 @@ project.ext {
     swaggerVersion = '1.3.11'
     junitVersion = '4.12'
     assertJVersion = '1.7.0'
-    dropwizardGuiceVersion = '0.7.2'
     mongoDBJavaDriverVersion = '1.3'
     mongoJackVersion = '2.1.0'
     dropwizardMongoVersion = '2.0.0'
@@ -51,7 +50,6 @@ dependencies {
             'com.google.guava:guava:' + guavaVersion,
             'com.wordnik:swagger-jaxrs_2.10:' + swaggerVersion,
             'com.wordnik:swagger-annotations:' + swaggerVersion,
-            'com.hubspot.dropwizard:dropwizard-guice:' + dropwizardGuiceVersion,
             'org.mongodb:mongo-java-driver:' + mongoDBJavaDriverVersion,
             'org.mongojack:mongojack:' + mongoJackVersion,
             "com.commercehub.dropwizard:dropwizard-mongo:" + dropwizardMongoVersion

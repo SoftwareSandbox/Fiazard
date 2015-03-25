@@ -15,8 +15,11 @@ public class MongoDBHealthCheck extends HealthCheck {
 
     private static Logger logger = Logger.getLogger(MongoDBHealthCheck.class.getName());
 
-    @Inject
     private DB db;
+
+    public MongoDBHealthCheck(DB db){
+        this.db = db;
+    }
 
     @Override
     protected Result check() throws Exception {
