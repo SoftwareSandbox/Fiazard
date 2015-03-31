@@ -3,17 +3,26 @@ package be.craftsmen.fiazard.common.mongo;
 
 import be.craftsmen.fiazard.managing.domain.product.Product;
 import com.commercehub.dropwizard.mongo.MongoClientFactory;
+import com.google.common.collect.Lists;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.MongoClientURI;
+import com.mongodb.WriteResult;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.mongojack.JacksonDBCollection;
 
 import java.net.UnknownHostException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MongoDBRule extends TestWatcher {
 
+    private static Logger logger = Logger.getLogger(MongoDBRule.class.getName());
+
     private DB db;
+    private List<String> mongoDBReservedColls = Lists.newArrayList("system.indexes");
 
     public static MongoDBRule create() {
         try {
@@ -25,7 +34,7 @@ public class MongoDBRule extends TestWatcher {
 
     private MongoDBRule() throws UnknownHostException {
         MongoClientFactory mongoClientFactory = new MongoClientFactory();
-        String dbName = "fiazard";
+        String dbName = "fiazard-test";
         mongoClientFactory.setDbName(dbName);
         mongoClientFactory.setUri(new MongoClientURI("mongodb://localhost:27017/?maxPoolSize=50&maxIdleTimeMS=300000"));
         db = mongoClientFactory.build().getDB(dbName);
@@ -53,6 +62,13 @@ public class MongoDBRule extends TestWatcher {
     }
 
     private void emptyAllMongoCollections() {
-        db.getCollectionNames().stream().map(collName -> db.getCollection(collName).remove(null));
+        db.getCollectionNames()
+                .stream()
+                .filter(collName -> !mongoDBReservedColls.contains(collName))
+                .forEach(collName -> {
+//                    logger.log(Level.INFO, "attempting deletion of all docs in {0}", collName);
+                    WriteResult result = db.getCollection(collName).remove(new BasicDBObject("", ""));
+                    logger.log(Level.INFO, "deleted {0} docs of collection {1}", new Object[]{result.getN(), collName});
+                });
     }
 }

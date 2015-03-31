@@ -1,21 +1,28 @@
 package be.craftsmen.fiazard.managing.domain.product;
 
-import be.craftsmen.fiazard.common.Id;
 import be.craftsmen.fiazard.managing.domain.category.Category;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.mongojack.MongoCollection;
 
 import java.util.List;
 
+@MongoCollection(name = Product.PRODUCTS_COLL_NAME)
 public class Product {
 
     public static final String PRODUCTS_COLL_NAME = "products";
 
-    private Id id;
-    private Category category;
+    @javax.persistence.Id
+    private Long id;
+    @JsonProperty
     private String name;
+    @JsonProperty
     private List<String> composition;
+    @JsonProperty
     private List<String> sauces;
+    @JsonProperty
+    private Category category;
 
-    public Product(Id id, Category category, String name, List<String> composition, List<String> sauces) {
+    public Product(Long id, Category category, String name, List<String> composition, List<String> sauces) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -27,7 +34,7 @@ public class Product {
         new Product(null, category, name, composition, sauces);
     }
 
-    public Id getId() {
+    public Long getId() {
         return id;
     }
 

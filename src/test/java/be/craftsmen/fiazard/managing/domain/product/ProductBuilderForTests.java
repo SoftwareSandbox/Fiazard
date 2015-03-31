@@ -15,7 +15,7 @@ public class ProductBuilderForTests {
     public static final List<String> COMPOSITION = Lists.newArrayList("salad", "tomato", "olives");
     public static final List<String> SAUCES = Lists.newArrayList("mayonaise");
 
-    private Id id;
+    private Long id;
     private Category category = CATEGORY;
     private String name = NAME;
     private List<String> composition = COMPOSITION;
@@ -25,7 +25,7 @@ public class ProductBuilderForTests {
         return new Product(id, category, name, composition, sauces);
     }
 
-    public ProductBuilderForTests withId(Id id) {
+    public ProductBuilderForTests withId(Long id) {
         this.id = id;
         return this;
     }
