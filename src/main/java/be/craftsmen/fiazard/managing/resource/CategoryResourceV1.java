@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import be.craftsmen.fiazard.managing.domain.category.CategoryDAO;
 import org.eclipse.jetty.http.HttpStatus;
 
 import be.craftsmen.fiazard.common.Id;
@@ -38,6 +39,11 @@ public class CategoryResourceV1 {
         categories = Lists.newArrayList(ham, cheese);
     }
 
+    private CategoryDAO categoryDAO;
+
+    public CategoryResourceV1(CategoryDAO dao){
+        categoryDAO = dao;
+    }
 
     @GET
     @Timed

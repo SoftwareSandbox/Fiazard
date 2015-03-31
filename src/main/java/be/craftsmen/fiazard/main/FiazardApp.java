@@ -1,6 +1,7 @@
 package be.craftsmen.fiazard.main;
 
 import be.craftsmen.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
+import be.craftsmen.fiazard.managing.domain.category.CategoryDAO;
 import be.craftsmen.fiazard.managing.dw.MongoDBHealthCheck;
 import be.craftsmen.fiazard.managing.resource.CategoryResourceV1;
 import be.craftsmen.fiazard.managing.resource.OpeningHourResourceV1;
@@ -33,7 +34,7 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.healthChecks().register("MongoDBHealthCheck", new MongoDBHealthCheck(db));
 
         environment.jersey().register(FiazardExceptionToJSONMapper.class);
-        environment.jersey().register(new CategoryResourceV1());
+        environment.jersey().register(new CategoryResourceV1(new CategoryDAO(db)));
         environment.jersey().register(new ProductResourceV1());
         environment.jersey().register(new OpeningHourResourceV1());
 
