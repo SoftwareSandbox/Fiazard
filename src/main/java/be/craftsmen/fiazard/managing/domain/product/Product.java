@@ -1,8 +1,10 @@
 package be.craftsmen.fiazard.managing.domain.product;
 
 import be.craftsmen.fiazard.managing.domain.category.Category;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.mongojack.MongoCollection;
+import org.mongojack.ObjectId;
 
 import java.util.List;
 
@@ -11,8 +13,7 @@ public class Product {
 
     public static final String PRODUCTS_COLL_NAME = "products";
 
-    @javax.persistence.Id
-    private Long id;
+    private String id;
     @JsonProperty
     private String name;
     @JsonProperty
@@ -22,7 +23,13 @@ public class Product {
     @JsonProperty
     private Category category;
 
-    public Product(Long id, Category category, String name, List<String> composition, List<String> sauces) {
+    @JsonCreator
+    public Product(
+            @ObjectId @JsonProperty("_id") String id,
+            @JsonProperty("category") Category category,
+            @JsonProperty("name") String name,
+            @JsonProperty("composition") List<String> composition,
+            @JsonProperty("sauces") List<String> sauces) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -34,7 +41,7 @@ public class Product {
         new Product(null, category, name, composition, sauces);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

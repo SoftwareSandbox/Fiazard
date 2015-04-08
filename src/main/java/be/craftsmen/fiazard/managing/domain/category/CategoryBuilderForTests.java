@@ -4,14 +4,14 @@ public class CategoryBuilderForTests {
 
     private static final String NAME = "Ham";
 
-    private Long id;
+    private String id;
     private String name = NAME;
 
     public Category build() {
         return new Category(id, name);
     }
 
-    public CategoryBuilderForTests withId(Long id) {
+    public CategoryBuilderForTests withId(String id) {
         this.id = id;
         return this;
     }

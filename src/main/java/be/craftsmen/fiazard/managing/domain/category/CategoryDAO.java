@@ -1,5 +1,6 @@
 package be.craftsmen.fiazard.managing.domain.category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import be.craftsmen.fiazard.managing.domain.product.Product;
@@ -17,6 +18,11 @@ public class CategoryDAO {
     }
 
     public List<Category> findAll(){
-        return Lists.newArrayList();
+        ArrayList<Category> categories = Lists.newArrayList();
+        JacksonDBCollection<Product, String> products = JacksonDBCollection.wrap(db.getCollection("products"), Product.class, String.class);
+        products.find().forEach((product) -> {
+            categories.add(product.getCategory());
+        });
+        return categories;
     }
 }
