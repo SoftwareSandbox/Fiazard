@@ -1,8 +1,18 @@
 #How to contribute
 
-##Fork this repo
+##Clone this repo
 
-Fork it baby!
+Clone this repo (using an url of your choosing), e.g. `git@github.com:Sch3lp/Fiazard.git`, and start coding.
+
+##Never forget...
+
+* To work in small commits.
+* To branch early and branch often.
+
+##We experimented with pull requests
+But decided we wanted to prioritize learning the tech frameworks and coding etc. then to learn Git.
+
+Here are our *Never forgets* for working with pull-requests:
 
 ## Setting up your environment
 
