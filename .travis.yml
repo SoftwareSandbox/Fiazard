@@ -1,6 +1,14 @@
 language: java
 jdk:
   - oraclejdk8
+
+services:
+  - mongodb
+
+before_script:
+  - sleep 15
+  - mongo fiazard-test --eval 'db.createCollection("products"); db.createCollection("openinghours");'
+
 notifications:
   slack:
     rooms:
