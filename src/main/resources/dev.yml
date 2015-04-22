@@ -32,7 +32,7 @@ logging:
   # Logger-specific levels.
   loggers:
 
-    be.craftsmen.fiazard: DEBUG
+    be.swsb.fiazard: DEBUG
     com.sun.jersey: DEBUG
 
 #  appenders:

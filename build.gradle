@@ -4,12 +4,12 @@ apply plugin: 'eclipse'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-group = 'be.craftsmen'
+group = 'be.swsb'
 version = '0.0.1-SNAPSHOT'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-mainClassName = 'be.craftsmen.fiazard.main.FiazardApp'
+mainClassName = 'be.swsb.fiazard.main.FiazardApp'
 
 // Most of this stuff I got from https://github.com/gini/dropwizard-gradle/blob/master/build.gradle
 
