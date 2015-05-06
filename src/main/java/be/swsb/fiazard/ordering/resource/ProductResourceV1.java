@@ -1,6 +1,7 @@
 package be.swsb.fiazard.ordering.resource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -72,10 +73,9 @@ public class ProductResourceV1 {
                     .build();
         }
 
-        List<ProductR> filteredProducts = Lists.newArrayList();
-        allProducts.stream()
+        List<ProductR> filteredProducts = allProducts.stream()
                 .filter(p -> Id.fromString(p.getCategoryId()).equals(Id.fromString(categoryId)))
-                .forEach(c -> filteredProducts.add(c));
+                .collect(Collectors.toList());
         return Response.ok(
                 filteredProducts,
                 MediaType.APPLICATION_JSON_TYPE)
