@@ -8,14 +8,12 @@ import java.util.List;
 
 public class ProductBuilderForTests {
 
-
-    public static final Category CATEGORY = new CategoryBuilderForTests().build();
     public static final String NAME = "Club Ham";
     public static final List<String> COMPOSITION = Lists.newArrayList("salad", "tomato", "olives");
     public static final List<String> SAUCES = Lists.newArrayList("mayonaise");
 
     private String id;
-    private Category category = CATEGORY;
+    private Category category = new CategoryBuilderForTests().build();
     private String name = NAME;
     private List<String> composition = COMPOSITION;
     private List<String> sauces = SAUCES;
