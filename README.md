@@ -8,6 +8,8 @@ Learning project in which we try to make our sandwich ordering site better. This
 [![Stories in Ready](https://badge.waffle.io/softwaresandbox/fiazard.svg?label=ready&title=Ready)](http://waffle.io/softwaresandbox/fiazard)
 [![Stories in Ready](https://badge.waffle.io/softwaresandbox/fiazard.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/softwaresandbox/fiazard)
 
+[![Throughput Graph](https://graphs.waffle.io/softwaresandbox/fiazard/throughput.svg)](https://waffle.io/softwaresandbox/fiazard/metrics)
+
 ## Tech Stack
 [Dropwizard 0.7.x](http://dropwizard.io/), in combination with 
 [Guice](https://github.com/HubSpot/dropwizard-guice) for **Dependency Injection**, and
