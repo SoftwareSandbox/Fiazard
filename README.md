@@ -3,7 +3,7 @@ Fiazard
 
 Learning project in which we try to make our sandwich ordering site better. This is the backend project, providing RESTful webservices with DropWizard to the [FiAngulartje frontend](https://github.com/SoftwareSandbox/FiAngulartje).
 
-[![Build Status](https://travis-ci.org/Sch3lp/Fiazard.svg?branch=master)](https://travis-ci.org/Sch3lp/Fiazard)
+[![Build Status](https://travis-ci.org/SoftwareSandbox/Fiazard.svg?branch=master)](https://travis-ci.org/SoftwareSandbox/Fiazard)
 
 [![Stories in Ready](https://badge.waffle.io/softwaresandbox/fiazard.svg?label=ready&title=Ready)](http://waffle.io/softwaresandbox/fiazard)
 [![Stories in Ready](https://badge.waffle.io/softwaresandbox/fiazard.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/softwaresandbox/fiazard)
