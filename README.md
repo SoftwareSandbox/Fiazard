@@ -10,6 +10,8 @@ Learning project in which we try to make our sandwich ordering site better. This
 
 [![Throughput Graph](https://graphs.waffle.io/softwaresandbox/fiazard/throughput.svg)](https://waffle.io/softwaresandbox/fiazard/metrics)
 
+Check [this important info](CONTRIBUTE.md) if you're interested in Contributing.
+
 ## Tech Stack
 [Dropwizard 0.7.x](http://dropwizard.io/), in combination with 
 [Guice](https://github.com/HubSpot/dropwizard-guice) for **Dependency Injection**, and
@@ -18,6 +20,8 @@ Learning project in which we try to make our sandwich ordering site better. This
 MySQL/Postgres/MongoDB/... (TBD) for **persistency**, 
 which will all be set up/provisioned using
 [Vagrant](https://www.vagrantup.com/)/[Docker](https://www.docker.com/)/... (TBD) for **provisioning**/Infrastructure as code.
+
+
 
 
 We'll eventually handle **authentication and authorization** using
