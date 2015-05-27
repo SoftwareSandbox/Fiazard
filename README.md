@@ -20,6 +20,8 @@ which will all be set up/provisioned using
 [Vagrant](https://www.vagrantup.com/)/[Docker](https://www.docker.com/)/... (TBD) for **provisioning**/Infrastructure as code.
 
 
+
+
 We'll eventually handle **authentication and authorization** using
 [Apache Shiro](http://shiro.apache.org/) with the [Dropwizard Plugin](https://github.com/silb/dropwizard-shiro), with
 [StormPath](https://stormpath.com/) as our **User & Access Management** backend.
