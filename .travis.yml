@@ -7,10 +7,11 @@ services:
 
 before_script:
   - sleep 15
-  - mongo fiazard-test --eval 'db.createCollection("products"); db.createCollection("openinghours");'
+  - mongo fiazard-test conf/scripts/01_createTables.js
+  - mongo fiazard-test conf/scripts/02_insertRefData.js
 
 notifications:
   slack:
     rooms:
-      - softwaresandbox:QkwyOuEOYV5NHwwPCqDx8PkB#fia_ci
+      - softwaresandbox:QkwyOuEOYV5NHwwPCqDx8PkB
       - fiangulartje:AccRWcnglPImsSDKzKYauQQj#general

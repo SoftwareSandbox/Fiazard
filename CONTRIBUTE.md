@@ -1,22 +1,13 @@
 #How to contribute
 
-##Clone this repo
-
-Clone this repo (using an url of your choosing), e.g. `git@github.com:Sch3lp/Fiazard.git`, and start coding.
-
-##Never forget...
-
-* To work in small commits.
-* To branch early and branch often.
-
-##We experimented with pull requests
-But decided we wanted to prioritize learning the tech frameworks and coding etc. then to learn Git.
-
-Here are our *Never forgets* for working with pull-requests:
-
 ## Setting up your environment
 
-Clone this repo using `git clone --recursive`. This will also clone the repo in the vagrant folder, which will set up your MongoDB environment.
+Fork [this repo](https://github.com/SoftwareSandbox/Fiazard/) into your own account, e.g. `git@github.com:MyGithubAccount/Fiazard.git` and clone your forked repo locally:  
+ ```
+ git clone https://github.com/MyGithubAccount/Fiazard --recursive
+ git remote add swsb https://github.com/SoftwareSandbox/Fiazard
+ ```  
+This will also clone the repo in the vagrant folder, which will set up your MongoDB environment.
 
 Install [Vagrant](http://vagrantup.com) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 
@@ -42,11 +33,22 @@ There's no need to download and install Gradle, use the gradlewrapper (gradlew i
 
 Make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
 
-## Never forget...
+##Pick up backlog items
+1. Pick up a backlog item at [waffle.io](https://waffle.io/softwaresandbox/fiazard) and assign it to yourself
+2. Make sure you are in sync with the latest version of the repository:  
+  `git pull swsb master`
+3. create a local branch for the feature you will be implementing (eg feature-branch-{featureId}):  
+  `git checkout -b feature-branch-{featureId}`
+4. commit your changes to the local branch + push them to your forked repo:  
+  `git commit -m 'connect #{featureId} {my specific comments}'`
+5. push your changes to your forked repo (use -u to push the feature branch):  
+  `git push -u feature-branch-{featureId}`
+6. create a pull request in github
+7. [Travis ci](https://travis-ci.org/SoftwareSandbox/Fiazard) will automatically pick up your changes and build
+8. When the build is green, a contributor will accept/reject your changes + remove the feature-branch in order not to pollute the repo.
+9. Remove your feature branch locally (not necessary - but will make your local repo cleaner):  
+  `git branch -d feature-branch-{featureId}`
 
-* To sync with master before starting on new issue/feature. (with `git pull --rebase upstream master` see this [cool article](http://kentnguyen.com/development/visualized-git-practices-for-team/) on the why)
-* To rebase your commits into one before submitting pull requests.
-* To have fun!
 
 ## Some Conventions
 

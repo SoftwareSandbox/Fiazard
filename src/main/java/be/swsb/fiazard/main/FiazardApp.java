@@ -6,8 +6,12 @@ import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
 import be.swsb.fiazard.ordering.resource.CategoryResourceV1;
 import be.swsb.fiazard.ordering.resource.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.resource.ProductResourceV1;
+import be.swsb.fiazard.managing.topping.ToppingDAO;
+import be.swsb.fiazard.managing.topping.ToppingResourceV1;
+
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
 import com.mongodb.DB;
+
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -35,6 +39,7 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.jersey().register(new CategoryResourceV1(new CategoryDAO(db)));
         environment.jersey().register(new ProductResourceV1());
         environment.jersey().register(new OpeningHourResourceV1());
+        environment.jersey().register(new ToppingResourceV1(new ToppingDAO(db)));
 
         environment.getObjectMapper().registerModule(MODULE);
     }
