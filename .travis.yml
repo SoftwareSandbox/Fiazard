@@ -7,7 +7,9 @@ services:
 
 before_script:
   - sleep 15
-  - mongo fiazard-test --eval 'db.createCollection("products"); db.createCollection("openinghours"); db.createCollection("toppings");'
+  - mongo fiazard-test --eval 'db.createCollection("products");'
+  - mongo fiazard-test --eval 'db.createCollection("openinghours");'
+  - mongo fiazard-test --eval 'db.createCollection("toppings");'
 
 notifications:
   slack:
