@@ -1,5 +1,6 @@
 package be.swsb.fiazard.management.resource;
 
+import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
@@ -21,12 +22,16 @@ public class ToppingResourceV1IntegrationTest {
     public static final DropwizardAppRule<FiazardConfig> appRule =
             new DropwizardAppRule<>(FiazardApp.class,
                     "src/main/resources/dev.yml");
+    @Rule
+    public MongoDBRule mongoDBRule = MongoDBRule.create();
 
     @Rule
     public ClientRule clientRule = new ClientRule();
 
     @Test
     public void openingHoursAreReturnedAsJSON() throws Exception {
+        mongoDBRule.persistTopping(new Topping(null, "Patrick", 4d));
+
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
                 .path(ToppingResourceV1.TOPPINGS_BASE_URI)
