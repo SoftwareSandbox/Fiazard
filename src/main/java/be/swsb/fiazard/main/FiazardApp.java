@@ -3,13 +3,15 @@ package be.swsb.fiazard.main;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
 import be.swsb.fiazard.ordering.domain.category.CategoryDAO;
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
-import be.swsb.fiazard.management.domain.topping.ToppingDAO;
 import be.swsb.fiazard.ordering.resource.CategoryResourceV1;
 import be.swsb.fiazard.ordering.resource.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.resource.ProductResourceV1;
-import be.swsb.fiazard.management.resource.ToppingResourceV1;
+import be.swsb.fiazard.managing.topping.ToppingDAO;
+import be.swsb.fiazard.managing.topping.ToppingResourceV1;
+
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
 import com.mongodb.DB;
+
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;

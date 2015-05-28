@@ -1,13 +1,15 @@
 package be.swsb.fiazard.common.mongo;
 
 
-import be.swsb.fiazard.management.domain.topping.Topping;
+import be.swsb.fiazard.managing.topping.Topping;
 import be.swsb.fiazard.ordering.domain.product.Product;
+
 import com.commercehub.dropwizard.mongo.MongoClientFactory;
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.MongoClientURI;
+
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.mongojack.JacksonDBCollection;

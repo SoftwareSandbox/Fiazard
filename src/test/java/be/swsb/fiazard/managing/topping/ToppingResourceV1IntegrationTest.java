@@ -1,12 +1,16 @@
-package be.swsb.fiazard.management.resource;
+package be.swsb.fiazard.managing.topping;
 
 import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-import be.swsb.fiazard.management.domain.topping.Topping;
+import be.swsb.fiazard.managing.topping.Topping;
+import be.swsb.fiazard.managing.topping.ToppingResourceV1;
+
 import com.sun.jersey.api.client.ClientResponse;
+
 import io.dropwizard.testing.junit.DropwizardAppRule;
+
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,7 +33,7 @@ public class ToppingResourceV1IntegrationTest {
     public ClientRule clientRule = new ClientRule();
 
     @Test
-    public void openingHoursAreReturnedAsJSON() throws Exception {
+    public void toppingsAreReturnedAsJSON() throws Exception {
         mongoDBRule.persistTopping(new Topping(null, "Patrick", 4d));
 
         ClientResponse clientResponse = clientRule.getClient()
