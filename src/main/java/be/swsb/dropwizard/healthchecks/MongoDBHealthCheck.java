@@ -24,7 +24,7 @@ public class MongoDBHealthCheck extends HealthCheck {
     @Override
     protected Result check() throws Exception {
         logger.log(Level.INFO, "db was instantiated: {0}", db);
-        List<String> missingCollections = findMissingCollections("products", "openinghours");
+        List<String> missingCollections = findMissingCollections("products", "openinghours", "toppings");
         if (missingCollections.isEmpty()){
             return Result.healthy("All necessary collections exist");
         }
