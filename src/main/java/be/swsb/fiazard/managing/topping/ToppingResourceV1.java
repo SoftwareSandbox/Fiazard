@@ -1,8 +1,7 @@
-package be.swsb.fiazard.management.resource;
+package be.swsb.fiazard.managing.topping;
 
 import be.swsb.fiazard.common.error.ErrorR;
-import be.swsb.fiazard.management.domain.topping.Topping;
-import be.swsb.fiazard.management.domain.topping.ToppingDAO;
+
 import com.codahale.metrics.annotation.Timed;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiResponse;

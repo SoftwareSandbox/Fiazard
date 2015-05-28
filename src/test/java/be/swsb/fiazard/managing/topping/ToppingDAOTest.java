@@ -1,6 +1,9 @@
-package be.swsb.fiazard.management.domain.topping;
+package be.swsb.fiazard.managing.topping;
 
 import be.swsb.fiazard.common.mongo.MongoDBRule;
+import be.swsb.fiazard.managing.topping.Topping;
+import be.swsb.fiazard.managing.topping.ToppingDAO;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

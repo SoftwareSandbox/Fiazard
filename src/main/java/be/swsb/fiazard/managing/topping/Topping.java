@@ -1,4 +1,4 @@
-package be.swsb.fiazard.management.domain.topping;
+package be.swsb.fiazard.managing.topping;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
