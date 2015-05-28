@@ -52,7 +52,7 @@ public class CategoryDAOTest {
 	private Product persistProductForCategory(String categoryId, String categoryName) {
 		Category category1 = new CategoryBuilderForTests().withId(categoryId).withName(categoryName).build();
 		Product product = new ProductBuilderForTests().withCategory(category1).build();
-		mongoDBRule.persist(product);
+		mongoDBRule.persistProduct(product);
 		return product;
 	}
 }

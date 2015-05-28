@@ -3,9 +3,11 @@ package be.swsb.fiazard.main;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
 import be.swsb.fiazard.ordering.domain.category.CategoryDAO;
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
+import be.swsb.fiazard.management.domain.topping.ToppingDAO;
 import be.swsb.fiazard.ordering.resource.CategoryResourceV1;
 import be.swsb.fiazard.ordering.resource.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.resource.ProductResourceV1;
+import be.swsb.fiazard.management.resource.ToppingResourceV1;
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
 import com.mongodb.DB;
 import io.dropwizard.Application;
@@ -35,6 +37,7 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.jersey().register(new CategoryResourceV1(new CategoryDAO(db)));
         environment.jersey().register(new ProductResourceV1());
         environment.jersey().register(new OpeningHourResourceV1());
+        environment.jersey().register(new ToppingResourceV1(new ToppingDAO(db)));
 
         environment.getObjectMapper().registerModule(MODULE);
     }
