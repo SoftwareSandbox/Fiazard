@@ -1,1 +1,1 @@
-web: java -jar build/libs/Fiazard-0.0.1-SNAPSHOT.jar server src/main/resources/heroku.yml
+web: java $JAVA_OPTS -Ddw.server.applicationConnectors[0].port=$PORT -jar build/libs/Fiazard-0.0.1-SNAPSHOT.jar server src/main/resources/heroku.yml
