@@ -21,7 +21,7 @@ public class ToppingResourceV1IntegrationTest {
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
             new DropwizardAppRule<>(FiazardApp.class,
-                    "src/main/resources/dev.yml");
+                    "src/test/resources/test.yml");
     @Rule
     public MongoDBRule mongoDBRule = MongoDBRule.create();
 
