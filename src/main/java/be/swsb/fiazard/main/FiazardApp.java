@@ -41,7 +41,7 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.jersey().register(new ProductResourceV1());
         environment.jersey().register(new OpeningHourResourceV1());
         configureManaging(environment, db);
-        configureOrdering(environment);
+        configureOrdering(environment, db);
 
         environment.getObjectMapper().registerModule(MODULE);
     }
@@ -50,8 +50,8 @@ public class FiazardApp extends Application<FiazardConfig> {
 		environment.jersey().register(new ToppingResourceV1(new ToppingDAO(db)));
 	}
 
-	private void configureOrdering(Environment environment) {
-		EventStore eventStore = new EventStore();
+	private void configureOrdering(Environment environment, DB db) {
+		EventStore eventStore = new EventStore(db);
 		environment.jersey().register(new OrderingResourceV1(eventStore));
 	}
 
