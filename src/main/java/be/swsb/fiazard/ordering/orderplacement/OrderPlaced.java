@@ -3,22 +3,20 @@ package be.swsb.fiazard.ordering.orderplacement;
 import java.util.Date;
 import java.util.List;
 
-import org.mongojack.MongoCollection;
 import org.mongojack.ObjectId;
+
+import be.swsb.fiazard.common.eventsourcing.Event;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import be.swsb.fiazard.common.eventsourcing.Event;
-
-@MongoCollection(name = "events")
 public class OrderPlaced extends Event {
 
 	private String orderId;
 	private List<Sandwich> sandwiches;
 
     @JsonCreator
-	public OrderPlaced(@ObjectId @JsonProperty("_id") String id, 
+	public OrderPlaced(@ObjectId @JsonProperty("_id") org.bson.types.ObjectId id, 
 			@JsonProperty("timestamp") Date timestamp, 
 			@JsonProperty("orderId") String orderId, 
 			@JsonProperty("sandwiches") List<Sandwich> sandwiches) {
