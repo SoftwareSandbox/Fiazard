@@ -59,13 +59,13 @@ public class MongoDBRule extends TestWatcher {
     @Override
     protected void starting(Description description) {
         super.starting(description);
-//        emptyAllMongoCollections();
+        emptyAllMongoCollections();
     }
 
     @Override
     protected void finished(Description description) {
         super.finished(description);
-        emptyAllMongoCollections();
+//        emptyAllMongoCollections();
     }
 
     private void emptyAllMongoCollections() {
