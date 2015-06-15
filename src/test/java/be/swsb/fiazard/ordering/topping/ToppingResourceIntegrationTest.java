@@ -1,23 +1,20 @@
 package be.swsb.fiazard.ordering.topping;
 
-import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.common.test.ClientRule;
-import be.swsb.fiazard.main.FiazardApp;
-import be.swsb.fiazard.main.FiazardConfig;
-import be.swsb.fiazard.ordering.topping.Topping;
-import be.swsb.fiazard.ordering.topping.ToppingResource;
-
-import com.sun.jersey.api.client.ClientResponse;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import io.dropwizard.testing.junit.DropwizardAppRule;
+
+import javax.ws.rs.core.MediaType;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import javax.ws.rs.core.MediaType;
+import be.swsb.fiazard.common.mongo.MongoDBRule;
+import be.swsb.fiazard.common.test.ClientRule;
+import be.swsb.fiazard.main.FiazardApp;
+import be.swsb.fiazard.main.FiazardConfig;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.sun.jersey.api.client.ClientResponse;
 
 public class ToppingResourceIntegrationTest {
 	
