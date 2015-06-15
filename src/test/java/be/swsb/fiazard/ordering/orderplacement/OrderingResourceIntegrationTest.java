@@ -23,9 +23,10 @@ import be.swsb.fiazard.main.FiazardConfig;
 
 import com.sun.jersey.api.client.ClientResponse;
 
-public class OrderingResourceV1IntegrationTest {
+public class OrderingResourceIntegrationTest {
 	
-    public static final String BASE_URL = "http://localhost:8080";
+    private static final String BASE_URL = "http://localhost:8080";
+    private static final String ORDERING_BASE_URI = "/ordering";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -49,7 +50,7 @@ public class OrderingResourceV1IntegrationTest {
     	PlaceOrder placeOrder = new PlaceOrder(new ArrayList<Sandwich>());
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
-                .path(OrderingResourceV1.ORDERING_BASE_URI + "/placeorder")
+                .path(ORDERING_BASE_URI + "/placeorder")
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .entity(placeOrder)
