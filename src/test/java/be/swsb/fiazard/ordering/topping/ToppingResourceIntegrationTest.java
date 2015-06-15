@@ -1,11 +1,11 @@
-package be.swsb.fiazard.managing.topping;
+package be.swsb.fiazard.ordering.topping;
 
 import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-import be.swsb.fiazard.managing.topping.Topping;
-import be.swsb.fiazard.managing.topping.ToppingResourceV1;
+import be.swsb.fiazard.ordering.topping.Topping;
+import be.swsb.fiazard.ordering.topping.ToppingResource;
 
 import com.sun.jersey.api.client.ClientResponse;
 
@@ -19,8 +19,10 @@ import javax.ws.rs.core.MediaType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ToppingResourceV1IntegrationTest {
+public class ToppingResourceIntegrationTest {
+	
     public static final String BASE_URL = "http://localhost:8080";
+    public static final String TOPPINGS_PATH = "/ordering/topping";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -38,7 +40,7 @@ public class ToppingResourceV1IntegrationTest {
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
-                .path(ToppingResourceV1.TOPPINGS_BASE_URI)
+                .path(TOPPINGS_PATH)
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);

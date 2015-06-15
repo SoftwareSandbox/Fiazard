@@ -10,13 +10,13 @@ import java.net.UnknownHostException;
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
-import be.swsb.fiazard.managing.topping.ToppingDAO;
-import be.swsb.fiazard.managing.topping.ToppingResourceV1;
 import be.swsb.fiazard.ordering.domain.category.CategoryDAO;
 import be.swsb.fiazard.ordering.orderplacement.OrderingResourceV1;
 import be.swsb.fiazard.ordering.resource.CategoryResourceV1;
 import be.swsb.fiazard.ordering.resource.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.resource.ProductResourceV1;
+import be.swsb.fiazard.ordering.topping.ToppingDAO;
+import be.swsb.fiazard.ordering.topping.ToppingResource;
 
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
 import com.mongodb.DB;
@@ -47,7 +47,7 @@ public class FiazardApp extends Application<FiazardConfig> {
     }
 
 	private void configureManaging(Environment environment, DB db) {
-		environment.jersey().register(new ToppingResourceV1(new ToppingDAO(db)));
+		environment.jersey().register(new ToppingResource(new ToppingDAO(db)));
 	}
 
 	private void configureOrdering(Environment environment, DB db) {

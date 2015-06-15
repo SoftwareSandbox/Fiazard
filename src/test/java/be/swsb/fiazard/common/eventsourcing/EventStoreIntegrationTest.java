@@ -10,11 +10,11 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.managing.bun.Bun;
-import be.swsb.fiazard.managing.condiment.Condiment;
-import be.swsb.fiazard.managing.topping.Topping;
+import be.swsb.fiazard.ordering.bun.Bun;
+import be.swsb.fiazard.ordering.condiment.Condiment;
 import be.swsb.fiazard.ordering.orderplacement.OrderPlaced;
 import be.swsb.fiazard.ordering.orderplacement.Sandwich;
+import be.swsb.fiazard.ordering.topping.Topping;
 
 public class EventStoreIntegrationTest {
 

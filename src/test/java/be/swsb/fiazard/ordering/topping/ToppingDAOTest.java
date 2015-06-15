@@ -1,8 +1,8 @@
-package be.swsb.fiazard.managing.topping;
+package be.swsb.fiazard.ordering.topping;
 
 import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.managing.topping.Topping;
-import be.swsb.fiazard.managing.topping.ToppingDAO;
+import be.swsb.fiazard.ordering.topping.Topping;
+import be.swsb.fiazard.ordering.topping.ToppingDAO;
 
 import org.junit.Before;
 import org.junit.Rule;

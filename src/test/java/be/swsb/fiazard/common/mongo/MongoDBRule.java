@@ -1,8 +1,8 @@
 package be.swsb.fiazard.common.mongo;
 
 
-import be.swsb.fiazard.managing.topping.Topping;
 import be.swsb.fiazard.ordering.domain.product.Product;
+import be.swsb.fiazard.ordering.topping.Topping;
 
 import com.commercehub.dropwizard.mongo.MongoClientFactory;
 import com.google.common.collect.Lists;

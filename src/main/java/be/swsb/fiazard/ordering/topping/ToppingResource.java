@@ -1,4 +1,4 @@
-package be.swsb.fiazard.managing.topping;
+package be.swsb.fiazard.ordering.topping;
 
 import be.swsb.fiazard.common.error.ErrorR;
 
@@ -14,16 +14,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api(value = ToppingResourceV1.TOPPINGS_BASE_URI, description = "Operations about Toppings")
-@Path(ToppingResourceV1.TOPPINGS_BASE_URI)
+@Api(value = ToppingResource.TOPPINGS_BASE_URI, description = "Operations about Toppings")
+@Path(ToppingResource.TOPPINGS_BASE_URI)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ToppingResourceV1 {
-    public static final String TOPPINGS_BASE_URI = "/v1/toppings";
+public class ToppingResource {
+    
+	public static final String TOPPINGS_BASE_URI = "/ordering/topping";
 
     private ToppingDAO dao;
 
-    public ToppingResourceV1(ToppingDAO dao) {
+    public ToppingResource(ToppingDAO dao) {
         this.dao = dao;
     }
 

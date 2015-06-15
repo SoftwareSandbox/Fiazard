@@ -1,4 +1,4 @@
-package be.swsb.fiazard.managing.topping;
+package be.swsb.fiazard.ordering.topping;
 
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
@@ -7,7 +7,7 @@ import org.mongojack.JacksonDBCollection;
 
 import java.util.List;
 
-import static be.swsb.fiazard.managing.topping.Topping.TOPPINGS_COLL_NAME;
+import static be.swsb.fiazard.ordering.topping.Topping.TOPPINGS_COLL_NAME;
 
 public class ToppingDAO {
 

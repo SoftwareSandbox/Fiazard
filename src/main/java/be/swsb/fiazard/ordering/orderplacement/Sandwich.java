@@ -2,9 +2,9 @@ package be.swsb.fiazard.ordering.orderplacement;
 
 import java.util.List;
 
-import be.swsb.fiazard.managing.bun.Bun;
-import be.swsb.fiazard.managing.condiment.Condiment;
-import be.swsb.fiazard.managing.topping.Topping;
+import be.swsb.fiazard.ordering.bun.Bun;
+import be.swsb.fiazard.ordering.condiment.Condiment;
+import be.swsb.fiazard.ordering.topping.Topping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
