@@ -1,26 +1,25 @@
-package be.swsb.fiazard.managing.topping;
+package be.swsb.fiazard.ordering.bun;
 
-import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.common.test.ClientRule;
-import be.swsb.fiazard.main.FiazardApp;
-import be.swsb.fiazard.main.FiazardConfig;
-import be.swsb.fiazard.managing.topping.Topping;
-import be.swsb.fiazard.managing.topping.ToppingResourceV1;
-
-import com.sun.jersey.api.client.ClientResponse;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import io.dropwizard.testing.junit.DropwizardAppRule;
+
+import javax.ws.rs.core.MediaType;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import javax.ws.rs.core.MediaType;
+import be.swsb.fiazard.common.mongo.MongoDBRule;
+import be.swsb.fiazard.common.test.ClientRule;
+import be.swsb.fiazard.main.FiazardApp;
+import be.swsb.fiazard.main.FiazardConfig;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.sun.jersey.api.client.ClientResponse;
 
-public class ToppingResourceV1IntegrationTest {
+public class BunResourceIntegrationTest {
+	
     public static final String BASE_URL = "http://localhost:8080";
+    public static final String BUN_PATH = "/ordering/bun";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -34,15 +33,15 @@ public class ToppingResourceV1IntegrationTest {
 
     @Test
     public void toppingsAreReturnedAsJSON() throws Exception {
-        mongoDBRule.persistTopping(new Topping(null, "Patrick", 4d));
+        mongoDBRule.persist(new Bun(null, "Patrick", 4d));
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
-                .path(ToppingResourceV1.TOPPINGS_BASE_URI)
+                .path(BUN_PATH)
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
 
-        assertThat(clientResponse.getEntity(Topping[].class)).isNotEmpty();
+        assertThat(clientResponse.getEntity(Bun[].class)).isNotEmpty();
     }
 }

@@ -1,4 +1,4 @@
-package be.swsb.fiazard.managing.bun;
+package be.swsb.fiazard.ordering.condiment;
 
 import javax.validation.constraints.NotNull;
 
@@ -9,10 +9,10 @@ import org.mongojack.ObjectId;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@MongoCollection(name = Bun.BUNS_COLL_NAME)
-public class Bun {
+@MongoCollection(name = Condiment.CONDIMENTS_COLL_NAME)
+public class Condiment {
 
-    public static final String BUNS_COLL_NAME = "buns";
+    public static final String CONDIMENTS_COLL_NAME = "condiments";
 
     @NotNull
     private String id;
@@ -27,7 +27,7 @@ public class Bun {
     private double price;
 
     @JsonCreator
-    public Bun(
+    public Condiment(
             @ObjectId @JsonProperty("_id") String id,
             @JsonProperty("name") String name,
             @JsonProperty("price") double price) {

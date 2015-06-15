@@ -1,4 +1,4 @@
-package be.swsb.fiazard.managing.topping;
+package be.swsb.fiazard.ordering.topping;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

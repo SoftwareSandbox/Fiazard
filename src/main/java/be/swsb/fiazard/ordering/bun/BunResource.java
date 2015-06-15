@@ -1,4 +1,4 @@
-package be.swsb.fiazard.managing.topping;
+package be.swsb.fiazard.ordering.bun;
 
 import be.swsb.fiazard.common.error.ErrorR;
 
@@ -14,23 +14,24 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api(value = ToppingResourceV1.TOPPINGS_BASE_URI, description = "Operations about Toppings")
-@Path(ToppingResourceV1.TOPPINGS_BASE_URI)
+@Api(value = BunResource.BUN_PATH, description = "Operations about Buns")
+@Path(BunResource.BUN_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class ToppingResourceV1 {
-    public static final String TOPPINGS_BASE_URI = "/v1/toppings";
+public class BunResource {
+    
+	public static final String BUN_PATH = "/ordering/bun";
 
-    private ToppingDAO dao;
+    private BunDAO dao;
 
-    public ToppingResourceV1(ToppingDAO dao) {
+    public BunResource(BunDAO dao) {
         this.dao = dao;
     }
 
     @GET
     @Timed
     @ApiResponses(value = {
-            @ApiResponse(code = 200, response = Topping[].class, message = ""),
+            @ApiResponse(code = 200, response = Bun[].class, message = ""),
             @ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
     })
     public Response getAll() {
