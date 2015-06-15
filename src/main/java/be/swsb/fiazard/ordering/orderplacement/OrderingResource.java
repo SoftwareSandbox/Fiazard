@@ -16,16 +16,16 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
 
-@Api(value = OrderingResourceV1.ORDERING_BASE_URI, description = "Operations about orders")
-@Path(OrderingResourceV1.ORDERING_BASE_URI)
+@Api(value = OrderingResource.ORDERING_BASE_URI, description = "Operations about orders")
+@Path(OrderingResource.ORDERING_BASE_URI)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class OrderingResourceV1 {
+public class OrderingResource {
 
-    public static final String ORDERING_BASE_URI = "/v1/ordering";
+    public static final String ORDERING_BASE_URI = "/ordering";
     private EventStore eventStore;
 
-    public OrderingResourceV1(EventStore eventStore){
+    public OrderingResource(EventStore eventStore){
     	this.eventStore = eventStore;
     }
 
