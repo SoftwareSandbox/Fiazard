@@ -1,16 +1,16 @@
 package be.swsb.fiazard.ordering.domain.category;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.ordering.domain.product.Product;
-import be.swsb.fiazard.ordering.domain.product.ProductBuilderForTests;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import be.swsb.fiazard.common.mongo.MongoDBRule;
+import be.swsb.fiazard.ordering.domain.product.Product;
+import be.swsb.fiazard.ordering.domain.product.ProductBuilderForTests;
 
 public class CategoryDAOTest {
 
@@ -52,7 +52,7 @@ public class CategoryDAOTest {
 	private Product persistProductForCategory(String categoryId, String categoryName) {
 		Category category1 = new CategoryBuilderForTests().withId(categoryId).withName(categoryName).build();
 		Product product = new ProductBuilderForTests().withCategory(category1).build();
-		mongoDBRule.persistProduct(product);
+		mongoDBRule.persist(product);
 		return product;
 	}
 }

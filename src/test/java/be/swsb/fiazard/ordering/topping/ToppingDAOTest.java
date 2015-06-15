@@ -41,7 +41,7 @@ public class ToppingDAOTest {
     }
 
     private void persistTopping(String id, String name, double price) {
-        mongoDBRule.persistTopping(new Topping(id, name, price));
+        mongoDBRule.persist(new Topping(id, name, price));
     }
 
 }

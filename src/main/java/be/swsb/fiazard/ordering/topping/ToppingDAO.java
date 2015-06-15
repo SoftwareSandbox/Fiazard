@@ -18,9 +18,10 @@ public class ToppingDAO {
     }
 
     public List<Topping> findAll() {
-        JacksonDBCollection<Topping, String> products =
-                JacksonDBCollection.wrap(db.getCollection(TOPPINGS_COLL_NAME), Topping.class, String.class);
-
-        return Lists.newArrayList(products.find().iterator());
+        return Lists.newArrayList(collection().find().iterator());
     }
+
+	private JacksonDBCollection<Topping, String> collection() {
+		return JacksonDBCollection.wrap(db.getCollection(TOPPINGS_COLL_NAME), Topping.class, String.class);
+	}
 }

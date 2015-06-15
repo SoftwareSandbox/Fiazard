@@ -1,4 +1,4 @@
-package be.swsb.fiazard.ordering.topping;
+package be.swsb.fiazard.ordering.bun;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import io.dropwizard.testing.junit.DropwizardAppRule;
@@ -16,10 +16,10 @@ import be.swsb.fiazard.main.FiazardConfig;
 
 import com.sun.jersey.api.client.ClientResponse;
 
-public class ToppingResourceIntegrationTest {
+public class BunResourceIntegrationTest {
 	
     public static final String BASE_URL = "http://localhost:8080";
-    public static final String TOPPING_PATH = "/ordering/topping";
+    public static final String BUN_PATH = "/ordering/bun";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -33,15 +33,15 @@ public class ToppingResourceIntegrationTest {
 
     @Test
     public void toppingsAreReturnedAsJSON() throws Exception {
-        mongoDBRule.persist(new Topping(null, "Patrick", 4d));
+        mongoDBRule.persist(new Bun(null, "Patrick", 4d));
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
-                .path(TOPPING_PATH)
+                .path(BUN_PATH)
                 .type(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
 
-        assertThat(clientResponse.getEntity(Topping[].class)).isNotEmpty();
+        assertThat(clientResponse.getEntity(Bun[].class)).isNotEmpty();
     }
 }
