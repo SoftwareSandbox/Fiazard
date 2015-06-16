@@ -1,5 +1,10 @@
 package be.swsb.fiazard.ordering.condiment;
 
+import javax.validation.constraints.NotNull;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
@@ -65,5 +70,20 @@ public class Condiment {
 
     public String getImage() {
         return image;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	return EqualsBuilder.reflectionEquals(this, obj);
+    }
+    
+    @Override
+    public int hashCode() {
+    	return HashCodeBuilder.reflectionHashCode(this);
+    }
+    
+    @Override
+    public String toString() {
+    	return ToStringBuilder.reflectionToString(this);
     }
 }

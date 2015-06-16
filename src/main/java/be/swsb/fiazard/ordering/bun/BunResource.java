@@ -48,4 +48,16 @@ public class BunResource {
         eventStore.store(new BunLockedEvent(bun));
         return Response.ok().build();
     }
+    
+    @POST
+    @Path("/unlock")
+    @Timed
+    @ApiResponses(value = {
+    		@ApiResponse(code = 200, response = Void.class, message = ""),
+    		@ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
+    })
+    public Response unlock(Bun bun) {
+    	eventStore.store(new BunUnlockedEvent(bun));
+    	return Response.ok().build();
+    }
 }

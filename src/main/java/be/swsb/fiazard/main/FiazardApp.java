@@ -48,13 +48,13 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.getObjectMapper().registerModule(MODULE);
     }
 
-    private void configureOrdering(Environment environment, DB db) {
-        EventStore eventStore = new EventStore(db);
-        environment.jersey().register(new OrderingResource(eventStore));
-        environment.jersey().register(new BunResource(new BunDAO(db), eventStore));
-        environment.jersey().register(new ToppingResource(new ToppingDAO(db)));
-        environment.jersey().register(new CondimentResource(new CondimentDAO(db)));
-    }
+	private void configureOrdering(Environment environment, DB db) {
+		EventStore eventStore = new EventStore(db);
+		environment.jersey().register(new OrderingResource(eventStore));
+		environment.jersey().register(new BunResource(new BunDAO(db), eventStore));
+		environment.jersey().register(new ToppingResource(new ToppingDAO(db), eventStore));
+		environment.jersey().register(new CondimentResource(new CondimentDAO(db), eventStore));
+	}
 
     //TODO move to a MongoDB Module
     private DB configureMongo(FiazardConfig config, Environment environment) throws UnknownHostException {

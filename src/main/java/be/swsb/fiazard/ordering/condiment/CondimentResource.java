@@ -8,10 +8,19 @@ import com.wordnik.swagger.annotations.ApiResponses;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import be.swsb.fiazard.common.error.ErrorR;
+import be.swsb.fiazard.common.eventsourcing.EventStore;
+
+import com.codahale.metrics.annotation.Timed;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Api(value = CondimentResource.CONDIMENT_PATH, description = "Operations about Condiments")
 @Path(CondimentResource.CONDIMENT_PATH)
@@ -23,8 +32,11 @@ public class CondimentResource {
 
     private CondimentDAO dao;
 
-    public CondimentResource(CondimentDAO dao) {
+	private EventStore eventStore;
+
+    public CondimentResource(CondimentDAO dao, EventStore eventStore) {
         this.dao = dao;
+		this.eventStore = eventStore;
     }
 
     @GET
@@ -35,5 +47,29 @@ public class CondimentResource {
     })
     public Response getAll() {
         return Response.ok(dao.findAll(), MediaType.APPLICATION_JSON_TYPE).build();
+    }
+    
+    @POST
+    @Path("/lock")
+    @Timed
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, response = Void.class, message = ""),
+            @ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
+    })
+    public Response lock(Condiment condiment) {
+    	eventStore.store(new CondimentLockedEvent(condiment));
+    	return Response.ok().build();
+    }
+    
+    @POST
+    @Path("/unlock")
+    @Timed
+    @ApiResponses(value = {
+    		@ApiResponse(code = 200, response = Void.class, message = ""),
+    		@ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
+    })
+    public Response unlock(Condiment condiment) {
+    	eventStore.store(new CondimentUnlockedEvent(condiment));
+    	return Response.ok().build();
     }
 }

@@ -23,6 +23,7 @@ public class BunResourceIntegrationTest {
     private static final String BASE_URL = "http://localhost:8080";
     private static final String BUN_PATH = "/ordering/bun";
     private static final String LOCK_BUN_PATH = "/ordering/bun/lock";
+    private static final String UNLOCK_BUN_PATH = "/ordering/bun/unlock";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -77,5 +78,29 @@ public class BunResourceIntegrationTest {
         assertThat(bunLockedEvent.getId()).isNotNull();
         assertThat(bunLockedEvent.getTimestamp()).isNotNull();
     }
+
+    @Test
+    public void unlock_BunUnlockedEventIsStored() throws Exception {
+        Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
+
+        ClientResponse clientResponse = clientRule.getClient()
+                .resource(BASE_URL)
+                .path(UNLOCK_BUN_PATH)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .entity(bun)
+                .post(ClientResponse.class);
+
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+
+        List<Event> events = eventStore.findAll();
+        assertThat(events).hasSize(1);
+
+        BunUnlockedEvent bunUnlockedEvent = (BunUnlockedEvent) events.get(0);
+        assertThat(bunUnlockedEvent.getBun()).isEqualTo(bun);
+        assertThat(bunUnlockedEvent.getId()).isNotNull();
+        assertThat(bunUnlockedEvent.getTimestamp()).isNotNull();
+    }
+
 
 }
