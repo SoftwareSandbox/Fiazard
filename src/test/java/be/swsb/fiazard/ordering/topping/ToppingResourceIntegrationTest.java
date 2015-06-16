@@ -1,26 +1,22 @@
 package be.swsb.fiazard.ordering.topping;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import be.swsb.fiazard.common.eventsourcing.Event;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
+import be.swsb.fiazard.common.mongo.MongoDBRule;
+import be.swsb.fiazard.common.test.ClientRule;
+import be.swsb.fiazard.main.FiazardApp;
+import be.swsb.fiazard.main.FiazardConfig;
+import com.sun.jersey.api.client.ClientResponse;
 import io.dropwizard.testing.junit.DropwizardAppRule;
-
-import javax.ws.rs.core.MediaType;
-
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.common.test.ClientRule;
-import be.swsb.fiazard.main.FiazardApp;
-import be.swsb.fiazard.main.FiazardConfig;
-
-import com.sun.jersey.api.client.ClientResponse;
-
+import javax.ws.rs.core.MediaType;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ToppingResourceIntegrationTest {
 	
@@ -61,7 +57,7 @@ public class ToppingResourceIntegrationTest {
     }
 
     @Test
-    public void lock_BunLockedEventIsStored() throws Exception {
+    public void lock_ToppingLockedEventIsStored() throws Exception {
         Topping topping = new Topping("id", "someTopping", 4);
 
         ClientResponse clientResponse = clientRule.getClient()
@@ -84,7 +80,7 @@ public class ToppingResourceIntegrationTest {
     }
 
     @Test
-    public void unlock_BunUnlockedEventIsStored() throws Exception {
+    public void unlock_ToppingUnlockedEventIsStored() throws Exception {
         Topping topping = new Topping("id", "someTopping", 4);
 
         ClientResponse clientResponse = clientRule.getClient()

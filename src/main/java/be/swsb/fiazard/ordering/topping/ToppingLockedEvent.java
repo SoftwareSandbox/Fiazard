@@ -1,7 +1,6 @@
 package be.swsb.fiazard.ordering.topping;
 
 import be.swsb.fiazard.common.eventsourcing.Event;
-import be.swsb.fiazard.ordering.bun.Bun;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.mongojack.ObjectId;
