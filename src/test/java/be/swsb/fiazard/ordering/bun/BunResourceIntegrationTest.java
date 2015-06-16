@@ -1,25 +1,36 @@
 package be.swsb.fiazard.ordering.bun;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import io.dropwizard.testing.junit.DropwizardAppRule;
 
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.StatusType;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.protocol.HTTP;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
+import be.swsb.fiazard.common.eventsourcing.Event;
+import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
+import be.swsb.fiazard.ordering.orderplacement.OrderPlaced;
 
 import com.sun.jersey.api.client.ClientResponse;
 
 public class BunResourceIntegrationTest {
 	
-    public static final String BASE_URL = "http://localhost:8080";
-    public static final String BUN_PATH = "/ordering/bun";
+	private static final String BASE_URL = "http://localhost:8080";
+    private static final String BUN_PATH = "/ordering/bun";
+    private static final String LOCK_BUN_PATH = "/ordering/bun/lock";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -31,8 +42,15 @@ public class BunResourceIntegrationTest {
     @Rule
     public ClientRule clientRule = new ClientRule();
 
+    private EventStore eventStore;
+
+    @Before
+    public void setUp() {
+    	eventStore = new EventStore(mongoDBRule.getDB());
+    }
+    
     @Test
-    public void toppingsAreReturnedAsJSON() throws Exception {
+    public void getAll_ReturnsBunsAsJSON() throws Exception {
         mongoDBRule.persist(new Bun(null, "Patrick", 4d));
 
         ClientResponse clientResponse = clientRule.getClient()
@@ -44,4 +62,28 @@ public class BunResourceIntegrationTest {
 
         assertThat(clientResponse.getEntity(Bun[].class)).isNotEmpty();
     }
+    
+    @Test
+    public void lock_BunLockedEventIsStored() throws Exception {
+    	Bun bun = new Bun("id", "someBun", 4);
+    	
+    	ClientResponse clientResponse = clientRule.getClient()
+    			.resource(BASE_URL)
+    			.path(LOCK_BUN_PATH)
+    			.type(MediaType.APPLICATION_JSON_TYPE)
+    			.accept(MediaType.APPLICATION_JSON_TYPE)
+    			.entity(bun)
+    			.post(ClientResponse.class);
+    	
+    	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+    	
+		List<Event> events = eventStore.findAll();
+        assertThat(events).hasSize(1);
+        
+        BunLockedEvent bunLockedEvent = (BunLockedEvent) events.get(0);
+        assertThat(bunLockedEvent.getBun()).isEqualTo(bun);
+        assertThat(bunLockedEvent.getId()).isNotNull();
+        assertThat(bunLockedEvent.getTimestamp()).isNotNull();
+	}
+    
 }

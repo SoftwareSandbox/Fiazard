@@ -3,10 +3,12 @@ package be.swsb.fiazard.ordering.domain.category;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.mongojack.JacksonDBCollection;
+
 import be.swsb.fiazard.ordering.domain.product.Product;
+
 import com.google.common.collect.Lists;
 import com.mongodb.DB;
-import org.mongojack.JacksonDBCollection;
 
 public class CategoryDAO {
 

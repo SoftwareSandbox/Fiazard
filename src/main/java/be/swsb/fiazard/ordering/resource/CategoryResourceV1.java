@@ -11,11 +11,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import be.swsb.fiazard.ordering.domain.category.CategoryDAO;
+import org.eclipse.jetty.http.HttpStatus;
+
 import be.swsb.fiazard.common.Id;
 import be.swsb.fiazard.common.error.ErrorR;
+import be.swsb.fiazard.ordering.domain.category.CategoryDAO;
 import be.swsb.fiazard.ordering.representation.category.CategoryR;
-import org.eclipse.jetty.http.HttpStatus;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;

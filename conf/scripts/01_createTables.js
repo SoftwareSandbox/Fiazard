@@ -20,3 +20,7 @@ testdb.createCollection('toppings');
 /* Condiments */
 db.createCollection('condiments');
 testdb.createCollection('condiments');
+
+/* Events */
+db.createCollection('events');
+testdb.createCollection('events');
