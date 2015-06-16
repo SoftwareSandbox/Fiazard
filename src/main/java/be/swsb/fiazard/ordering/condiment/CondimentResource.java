@@ -72,4 +72,16 @@ public class CondimentResource {
     	eventStore.store(new CondimentUnlockedEvent(condiment));
     	return Response.ok().build();
     }
+
+    @POST
+    @Path("/exclude")
+    @Timed
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, response = Void.class, message = ""),
+            @ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
+    })
+    public Response exclude(Condiment condiment) {
+        eventStore.store(new CondimentExcludeEvent(condiment));
+        return Response.ok().build();
+    }
 }

@@ -24,6 +24,7 @@ public class ToppingResourceIntegrationTest {
     public static final String TOPPING_PATH = "/ordering/topping";
     private static final String LOCK_TOPPING_PATH = "/ordering/topping/lock";
     private static final String UNLOCK_TOPPING_PATH = "/ordering/topping/unlock";
+    private static final String EXCLUDE_TOPPING_PATH = "/ordering/topping/exclude";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -100,5 +101,28 @@ public class ToppingResourceIntegrationTest {
         assertThat(toppingUnlockedEvent.getTopping()).isEqualTo(topping);
         assertThat(toppingUnlockedEvent.getId()).isNotNull();
         assertThat(toppingUnlockedEvent.getTimestamp()).isNotNull();
+    }
+
+    @Test
+    public void exclude_ToppingExcludeEventStored() {
+        Topping topping = new Topping("id", "someTopping", 4, "image", "imageType");
+
+        ClientResponse clientResponse = clientRule.getClient()
+                .resource(BASE_URL)
+                .path(EXCLUDE_TOPPING_PATH)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .entity(topping)
+                .post(ClientResponse.class);
+
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+
+        List<Event> events = eventStore.findAll();
+        assertThat(events).hasSize(1);
+
+        ToppingExcludeEvent event = (ToppingExcludeEvent)events.get(0);
+        assertThat(event.getTopping()).isEqualTo(topping);
+        assertThat(event.getId()).isNotNull();
+        assertThat(event.getTimestamp()).isNotNull();
     }
 }

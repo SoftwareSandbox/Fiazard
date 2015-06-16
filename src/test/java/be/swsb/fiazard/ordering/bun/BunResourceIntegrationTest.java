@@ -24,6 +24,7 @@ public class BunResourceIntegrationTest {
     private static final String BUN_PATH = "/ordering/bun";
     private static final String LOCK_BUN_PATH = "/ordering/bun/lock";
     private static final String UNLOCK_BUN_PATH = "/ordering/bun/unlock";
+    private static final String EXCLUDE_BUN_PATH = "/ordering/bun/exclude";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -39,9 +40,9 @@ public class BunResourceIntegrationTest {
 
     @Before
     public void setUp() {
-        eventStore = new EventStore(mongoDBRule.getDB());
+    	eventStore = new EventStore(mongoDBRule.getDB());
     }
-
+    
     @Test
     public void getAll_ReturnsBunsAsJSON() throws Exception {
         mongoDBRule.persist(new Bun(null, "Patrick", 4d, "image", "imageType"));
@@ -55,7 +56,7 @@ public class BunResourceIntegrationTest {
 
         assertThat(clientResponse.getEntity(Bun[].class)).isNotEmpty();
     }
-
+    
     @Test
     public void lock_BunLockedEventIsStored() throws Exception {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
@@ -77,8 +78,8 @@ public class BunResourceIntegrationTest {
         assertThat(bunLockedEvent.getBun()).isEqualTo(bun);
         assertThat(bunLockedEvent.getId()).isNotNull();
         assertThat(bunLockedEvent.getTimestamp()).isNotNull();
-    }
-
+	}
+    
     @Test
     public void unlock_BunUnlockedEventIsStored() throws Exception {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
@@ -102,5 +103,26 @@ public class BunResourceIntegrationTest {
         assertThat(bunUnlockedEvent.getTimestamp()).isNotNull();
     }
 
+    @Test
+    public void exclude_BunExcludeEventStored() {
+        Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
 
+        ClientResponse clientResponse = clientRule.getClient()
+                .resource(BASE_URL)
+                .path(EXCLUDE_BUN_PATH)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .entity(bun)
+                .post(ClientResponse.class);
+
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+
+        List<Event> events = eventStore.findAll();
+        assertThat(events).hasSize(1);
+
+        BunExcludeEvent event = (BunExcludeEvent)events.get(0);
+        assertThat(event.getBun()).isEqualTo(bun);
+        assertThat(event.getId()).isNotNull();
+        assertThat(event.getTimestamp()).isNotNull();
+    }
 }
