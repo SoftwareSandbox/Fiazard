@@ -2,8 +2,7 @@ package be.swsb.fiazard.common.error;
 
 public enum AppErrorCode {
     ILLEGAL_ID("1", 200),
-    UNAUTHORIZED("2", 403),
-    ;
+    UNAUTHORIZED("2", 403),;
 
     private String errorCode;
     private int statusCode;

@@ -19,7 +19,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ToppingResourceIntegrationTest {
-	
+
     public static final String BASE_URL = "http://localhost:8080";
     public static final String TOPPING_PATH = "/ordering/topping";
     private static final String LOCK_TOPPING_PATH = "/ordering/topping/lock";
@@ -45,7 +45,7 @@ public class ToppingResourceIntegrationTest {
 
     @Test
     public void toppingsAreReturnedAsJSON() throws Exception {
-        mongoDBRule.persist(new Topping(null, "Patrick", 4d));
+        mongoDBRule.persist(new Topping(null, "Patrick", 4d, "image", "imageType"));
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
@@ -59,7 +59,7 @@ public class ToppingResourceIntegrationTest {
 
     @Test
     public void lock_ToppingLockedEventIsStored() throws Exception {
-        Topping topping = new Topping("id", "someTopping", 4);
+        Topping topping = new Topping("id", "someTopping", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
@@ -82,7 +82,7 @@ public class ToppingResourceIntegrationTest {
 
     @Test
     public void unlock_ToppingUnlockedEventIsStored() throws Exception {
-        Topping topping = new Topping("id", "someTopping", 4);
+        Topping topping = new Topping("id", "someTopping", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
@@ -105,7 +105,7 @@ public class ToppingResourceIntegrationTest {
 
     @Test
     public void exclude_ToppingExcludeEventStored() {
-        Topping topping = new Topping("id", "someTopping", 4);
+        Topping topping = new Topping("id", "someTopping", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)

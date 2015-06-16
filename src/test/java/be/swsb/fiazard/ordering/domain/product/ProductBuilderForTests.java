@@ -18,7 +18,7 @@ public class ProductBuilderForTests {
     private List<String> composition = COMPOSITION;
     private List<String> sauces = SAUCES;
 
-    public Product build(){
+    public Product build() {
         return new Product(id, category, name, composition, sauces);
     }
 

@@ -1,10 +1,9 @@
 package be.swsb.fiazard.common.exceptions;
 
-import java.util.List;
-
 import be.swsb.fiazard.common.error.AppErrorCode;
-
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public class FiazardExceptionBuilder {
 
@@ -13,7 +12,7 @@ public class FiazardExceptionBuilder {
     private String message;
     private List<String> fields;
 
-    public static FiazardExceptionBuilder someFiazardExceptionBuilder(){
+    public static FiazardExceptionBuilder someFiazardExceptionBuilder() {
         return new FiazardExceptionBuilder()
                 .withStatus(400)
                 .withAppError(AppErrorCode.ILLEGAL_ID)
@@ -21,7 +20,7 @@ public class FiazardExceptionBuilder {
                 .withFields("field1", "field2");
     }
 
-    public static FiazardException someFiazardException(){
+    public static FiazardException someFiazardException() {
         return someFiazardExceptionBuilder().build();
     }
 
@@ -33,6 +32,7 @@ public class FiazardExceptionBuilder {
         this.status = status;
         return this;
     }
+
     public FiazardExceptionBuilder withAppError(AppErrorCode appErrorCode) {
         this.appErrorCode = appErrorCode;
         return this;
@@ -48,7 +48,7 @@ public class FiazardExceptionBuilder {
         return this;
     }
 
-    public class DummyFiazardException extends FiazardException{
+    public class DummyFiazardException extends FiazardException {
         private static final long serialVersionUID = -9119892999746544720L;
 
         private final Iterable<String> fields;

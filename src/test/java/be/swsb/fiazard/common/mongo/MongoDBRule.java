@@ -1,21 +1,20 @@
 package be.swsb.fiazard.common.mongo;
 
 
-import java.net.UnknownHostException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
-import org.mongojack.JacksonDBCollection;
-import org.mongojack.MongoCollection;
-
 import com.commercehub.dropwizard.mongo.MongoClientFactory;
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.MongoClientURI;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.MongoCollection;
+
+import java.net.UnknownHostException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MongoDBRule extends TestWatcher {
 
@@ -45,19 +44,19 @@ public class MongoDBRule extends TestWatcher {
     }
 
     public <T> void persist(T persistableObject) {
-		collectionFor(persistableObject).save(persistableObject);
-	}
+        collectionFor(persistableObject).save(persistableObject);
+    }
 
-	@SuppressWarnings("unchecked")
-	private <T> JacksonDBCollection<T, String> collectionFor(T persistableObject) {
-		return (JacksonDBCollection<T, String>) JacksonDBCollection.wrap(db.getCollection(collectionNameFor(persistableObject)), persistableObject.getClass(), String.class);
-	}
-	
-	private String collectionNameFor(Object obj) {
-		return obj.getClass().getAnnotation(MongoCollection.class).name();
-	}
+    @SuppressWarnings("unchecked")
+    private <T> JacksonDBCollection<T, String> collectionFor(T persistableObject) {
+        return (JacksonDBCollection<T, String>) JacksonDBCollection.wrap(db.getCollection(collectionNameFor(persistableObject)), persistableObject.getClass(), String.class);
+    }
 
-	@Override
+    private String collectionNameFor(Object obj) {
+        return obj.getClass().getAnnotation(MongoCollection.class).name();
+    }
+
+    @Override
     protected void starting(Description description) {
         super.starting(description);
         emptyAllMongoCollections();

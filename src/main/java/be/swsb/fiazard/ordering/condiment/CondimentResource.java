@@ -1,5 +1,11 @@
 package be.swsb.fiazard.ordering.condiment;
 
+import be.swsb.fiazard.common.error.ErrorR;
+import com.codahale.metrics.annotation.Timed;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -21,8 +27,8 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CondimentResource {
-    
-	public static final String CONDIMENT_PATH = "/ordering/condiment";
+
+    public static final String CONDIMENT_PATH = "/ordering/condiment";
 
     private CondimentDAO dao;
 

@@ -1,26 +1,20 @@
 package be.swsb.fiazard.ordering.resource;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import be.swsb.fiazard.common.Id;
 import be.swsb.fiazard.common.error.ErrorR;
 import be.swsb.fiazard.ordering.representation.product.ProductR;
-
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiResponse;
 import com.wordnik.swagger.annotations.ApiResponses;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(value = ProductResourceV1.PRODUCTS_BASE_URI, description = "Operations about Products")
 @Path(ProductResourceV1.PRODUCTS_BASE_URI)
@@ -63,10 +57,10 @@ public class ProductResourceV1 {
     @Timed
     @ApiResponses(value = {
             @ApiResponse(code = 200, response = ProductR[].class, message = ""),
-            @ApiResponse(code = 403, response = ErrorR.class, message="Unauthorized")
+            @ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
     })
-    public Response getByCategoryId(@QueryParam(value = "categoryId")String categoryId){
-        if (Strings.isNullOrEmpty(categoryId)){
+    public Response getByCategoryId(@QueryParam(value = "categoryId") String categoryId) {
+        if (Strings.isNullOrEmpty(categoryId)) {
             return Response.ok(
                     allProducts,
                     MediaType.APPLICATION_JSON_TYPE)

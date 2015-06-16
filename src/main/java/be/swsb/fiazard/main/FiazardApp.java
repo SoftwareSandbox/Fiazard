@@ -1,12 +1,5 @@
 package be.swsb.fiazard.main;
 
-import static be.swsb.fiazard.util.representation.FiazardJacksonModule.MODULE;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-
-import java.net.UnknownHostException;
-
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
@@ -21,9 +14,15 @@ import be.swsb.fiazard.ordering.resource.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.resource.ProductResourceV1;
 import be.swsb.fiazard.ordering.topping.ToppingDAO;
 import be.swsb.fiazard.ordering.topping.ToppingResource;
-
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
 import com.mongodb.DB;
+import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+
+import java.net.UnknownHostException;
+
+import static be.swsb.fiazard.util.representation.FiazardJacksonModule.MODULE;
 
 public class FiazardApp extends Application<FiazardConfig> {
 

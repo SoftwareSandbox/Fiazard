@@ -1,5 +1,10 @@
 package be.swsb.fiazard.ordering.condiment;
 
+import be.swsb.fiazard.common.mongo.MongoDBRule;
+import be.swsb.fiazard.common.test.ClientRule;
+import be.swsb.fiazard.main.FiazardApp;
+import be.swsb.fiazard.main.FiazardConfig;
+import com.sun.jersey.api.client.ClientResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import be.swsb.fiazard.ordering.bun.Bun;
@@ -21,8 +26,9 @@ import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
+import javax.ws.rs.core.MediaType;
 
-import com.sun.jersey.api.client.ClientResponse;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CondimentResourceIntegrationTest {
 	
@@ -31,6 +37,7 @@ public class CondimentResourceIntegrationTest {
     private static final String LOCK_CONDIMENT_PATH = "/ordering/condiment/lock";
     private static final String UNLOCK_CONDIMENT_PATH = "/ordering/condiment/unlock";
     private static final String EXCLUDE_CONDIMENT_PATH = "/ordering/condiment/exclude";
+
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -51,7 +58,7 @@ public class CondimentResourceIntegrationTest {
     
     @Test
     public void toppingsAreReturnedAsJSON() throws Exception {
-        mongoDBRule.persist(new Condiment(null, "Patrick", 4d));
+        mongoDBRule.persist(new Condiment(null, "Patrick", 4d, "image", "imageType"));
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
@@ -66,7 +73,7 @@ public class CondimentResourceIntegrationTest {
 
     @Test
     public void lock_CondimentLockedEventIsStored() throws Exception {
-    	Condiment condiment = new Condiment("id", "someCondiment", 4);
+    	Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
     	
     	ClientResponse clientResponse = clientRule.getClient()
     			.resource(BASE_URL)
@@ -89,7 +96,7 @@ public class CondimentResourceIntegrationTest {
     
     @Test
     public void unlock_CondimentUnlockedEventIsStored() throws Exception {
-    	Condiment condiment = new Condiment("id", "someCondiment", 4);
+    	Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
     	
     	ClientResponse clientResponse = clientRule.getClient()
     			.resource(BASE_URL)
@@ -112,7 +119,7 @@ public class CondimentResourceIntegrationTest {
 
     @Test
     public void exclude_CondimentExcludeEventStored() {
-        Condiment condiment = new Condiment("id", "someCondiment", 4);
+        Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)

@@ -1,8 +1,8 @@
 package be.swsb.fiazard.common.test;
 
-import java.io.File;
-
 import com.google.common.io.Resources;
+
+import java.io.File;
 
 public class ResourceHelper {
     public static String resourceFilePath(final String resourceClassPathLocation) {

@@ -1,12 +1,11 @@
 package be.swsb.fiazard.common;
 
 
+import be.swsb.fiazard.common.exceptions.IllegalIdFiazardException;
+import com.google.common.base.Strings;
+
 import java.io.Serializable;
 import java.util.UUID;
-
-import be.swsb.fiazard.common.exceptions.IllegalIdFiazardException;
-
-import com.google.common.base.Strings;
 
 public class Id implements Serializable {
 

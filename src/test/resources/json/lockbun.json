@@ -1,4 +1,5 @@
-POST http://localhost:8080/ordering/bun/lock
+POST http: //localhost:8080/ordering/bun/lock
 Content-Type: application/json
 POST_BODY:
-{"name":"White","price":0.2,"id":"557fe63aff06e6d1465e80c7"}
+{"name": "White", "price": 0.2, "id": "557fe63aff06e6d1465e80c7"
+}

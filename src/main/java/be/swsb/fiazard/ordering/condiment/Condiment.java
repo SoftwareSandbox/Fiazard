@@ -5,12 +5,13 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 import org.mongojack.MongoCollection;
 import org.mongojack.ObjectId;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotNull;
 
 @MongoCollection(name = Condiment.CONDIMENTS_COLL_NAME)
 public class Condiment {
@@ -29,14 +30,26 @@ public class Condiment {
     @NotNull
     private double price;
 
+    @JsonProperty
+    @NotNull
+    private String image;
+
+    @JsonProperty
+    @NotNull
+    private String imageType;
+
     @JsonCreator
     public Condiment(
             @ObjectId @JsonProperty("_id") String id,
             @JsonProperty("name") String name,
-            @JsonProperty("price") double price) {
+            @JsonProperty("price") double price,
+            @JsonProperty("image") String image,
+            @JsonProperty("imageType") String imageType) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.image = image;
+        this.imageType = imageType;
     }
 
     public String getId() {
@@ -49,6 +62,14 @@ public class Condiment {
 
     public double getPrice() {
         return price;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public String getImage() {
+        return image;
     }
     
     @Override

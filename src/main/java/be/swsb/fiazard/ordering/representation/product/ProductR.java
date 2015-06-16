@@ -1,12 +1,11 @@
 package be.swsb.fiazard.ordering.representation.product;
 
-import java.util.List;
-
 import be.swsb.fiazard.common.Id;
 import be.swsb.fiazard.common.Representation;
-
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public class ProductR implements Representation {
     private Id id;
@@ -15,7 +14,8 @@ public class ProductR implements Representation {
     private List<String> composition;
     private List<String> sauces;
 
-    private ProductR(){}
+    private ProductR() {
+    }
 
     public String getId() {
         return Id.asString(id);
@@ -63,11 +63,11 @@ public class ProductR implements Representation {
         List<String> composition;
         List<String> sauces;
 
-        public ProductRBuilder(){
+        public ProductRBuilder() {
             id = Id.random();
         }
 
-        public ProductR build(){
+        public ProductR build() {
             ProductR product = new ProductR();
             product.id = id;
             product.categoryId = categoryId;

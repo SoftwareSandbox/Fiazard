@@ -1,39 +1,38 @@
 package be.swsb.fiazard.util.representation;
 
-import static org.mockito.Mockito.verify;
-
-import java.time.DayOfWeek;
-
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import java.time.DayOfWeek;
+
+import static org.mockito.Mockito.verify;
 
 public class DayOfWeekSerializerTest {
-	private static final DayOfWeek DAY_OF_WEEK = DayOfWeek.MONDAY;
-	
-	@Mock
-	private JsonGenerator generatorMock;
-	@Mock
-	private SerializerProvider serializerProviderMock;
+    private static final DayOfWeek DAY_OF_WEEK = DayOfWeek.MONDAY;
 
-	private DayOfWeekSerializer serializer;
+    @Mock
+    private JsonGenerator generatorMock;
+    @Mock
+    private SerializerProvider serializerProviderMock;
 
-	@Before
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-		
-		serializer = new DayOfWeekSerializer();
-	}
+    private DayOfWeekSerializer serializer;
 
-	@Test
-	public void serialize_UsesValueFromDayOfWeek() throws Exception {
-		serializer.serialize(DAY_OF_WEEK, generatorMock, serializerProviderMock);
-		
-		verify(generatorMock).writeNumber(DAY_OF_WEEK.getValue());
-	}
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+
+        serializer = new DayOfWeekSerializer();
+    }
+
+    @Test
+    public void serialize_UsesValueFromDayOfWeek() throws Exception {
+        serializer.serialize(DAY_OF_WEEK, generatorMock, serializerProviderMock);
+
+        verify(generatorMock).writeNumber(DAY_OF_WEEK.getValue());
+    }
 
 }
