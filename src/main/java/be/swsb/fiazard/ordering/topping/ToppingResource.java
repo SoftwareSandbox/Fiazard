@@ -61,4 +61,16 @@ public class ToppingResource {
         eventStore.store(new ToppingUnlockedEvent(topping));
         return Response.ok().build();
     }
+
+    @POST
+    @Path("/exclude")
+    @Timed
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, response = Void.class, message = ""),
+            @ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
+    })
+    public Response exclude(Topping topping) {
+        eventStore.store(new ToppingExcludeEvent(topping));
+        return Response.ok().build();
+    }
 }

@@ -1,6 +1,9 @@
 package be.swsb.fiazard.ordering.condiment;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import be.swsb.fiazard.ordering.bun.Bun;
+import be.swsb.fiazard.ordering.bun.BunExcludeEvent;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 
 import java.util.List;
@@ -27,6 +30,7 @@ public class CondimentResourceIntegrationTest {
     private static final String CONDIMENT_PATH = "/ordering/condiment";
     private static final String LOCK_CONDIMENT_PATH = "/ordering/condiment/lock";
     private static final String UNLOCK_CONDIMENT_PATH = "/ordering/condiment/unlock";
+    private static final String EXCLUDE_CONDIMENT_PATH = "/ordering/condiment/exclude";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -104,5 +108,28 @@ public class CondimentResourceIntegrationTest {
     	assertThat(condimentUnlockedEvent.getCondiment()).isEqualTo(condiment);
     	assertThat(condimentUnlockedEvent.getId()).isNotNull();
     	assertThat(condimentUnlockedEvent.getTimestamp()).isNotNull();
+    }
+
+    @Test
+    public void exclude_CondimentExcludeEventStored() {
+        Condiment condiment = new Condiment("id", "someCondiment", 4);
+
+        ClientResponse clientResponse = clientRule.getClient()
+                .resource(BASE_URL)
+                .path(EXCLUDE_CONDIMENT_PATH)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .entity(condiment)
+                .post(ClientResponse.class);
+
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+
+        List<Event> events = eventStore.findAll();
+        assertThat(events).hasSize(1);
+
+        CondimentExcludeEvent event = (CondimentExcludeEvent)events.get(0);
+        assertThat(event.getCondiment()).isEqualTo(condiment);
+        assertThat(event.getId()).isNotNull();
+        assertThat(event.getTimestamp()).isNotNull();
     }
 }

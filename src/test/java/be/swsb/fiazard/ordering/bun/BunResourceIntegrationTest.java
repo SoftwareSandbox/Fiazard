@@ -27,6 +27,7 @@ public class BunResourceIntegrationTest {
     private static final String BUN_PATH = "/ordering/bun";
     private static final String LOCK_BUN_PATH = "/ordering/bun/lock";
     private static final String UNLOCK_BUN_PATH = "/ordering/bun/unlock";
+    private static final String EXCLUDE_BUN_PATH = "/ordering/bun/exclude";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -103,6 +104,29 @@ public class BunResourceIntegrationTest {
     	assertThat(bunUnlockedEvent.getBun()).isEqualTo(bun);
     	assertThat(bunUnlockedEvent.getId()).isNotNull();
     	assertThat(bunUnlockedEvent.getTimestamp()).isNotNull();
+    }
+
+    @Test
+    public void exclude_BunExcludeEventStored() {
+        Bun bun = new Bun("id", "someBun", 4);
+
+        ClientResponse clientResponse = clientRule.getClient()
+                .resource(BASE_URL)
+                .path(EXCLUDE_BUN_PATH)
+                .type(MediaType.APPLICATION_JSON_TYPE)
+                .accept(MediaType.APPLICATION_JSON_TYPE)
+                .entity(bun)
+                .post(ClientResponse.class);
+
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+
+        List<Event> events = eventStore.findAll();
+        assertThat(events).hasSize(1);
+
+        BunExcludeEvent event = (BunExcludeEvent)events.get(0);
+        assertThat(event.getBun()).isEqualTo(bun);
+        assertThat(event.getId()).isNotNull();
+        assertThat(event.getTimestamp()).isNotNull();
     }
     
 }
