@@ -1,8 +1,8 @@
 package be.swsb.fiazard.common.error;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
+
+import java.util.List;
 
 public class ErrorRBuilderForTests {
 
@@ -11,9 +11,10 @@ public class ErrorRBuilderForTests {
     private List<String> fields;
     private int status;
 
-    public ErrorRBuilderForTests(){}
+    public ErrorRBuilderForTests() {
+    }
 
-    public ErrorR build(){
+    public ErrorR build() {
         return new ErrorR(status, errorCode, message, fields);
     }
 

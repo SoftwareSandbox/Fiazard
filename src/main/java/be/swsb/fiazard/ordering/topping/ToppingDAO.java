@@ -1,13 +1,12 @@
 package be.swsb.fiazard.ordering.topping;
 
-import static be.swsb.fiazard.ordering.topping.Topping.TOPPINGS_COLL_NAME;
+import com.google.common.collect.Lists;
+import com.mongodb.DB;
+import org.mongojack.JacksonDBCollection;
 
 import java.util.List;
 
-import org.mongojack.JacksonDBCollection;
-
-import com.google.common.collect.Lists;
-import com.mongodb.DB;
+import static be.swsb.fiazard.ordering.topping.Topping.TOPPINGS_COLL_NAME;
 
 public class ToppingDAO {
 
@@ -21,7 +20,7 @@ public class ToppingDAO {
         return Lists.newArrayList(collection().find().iterator());
     }
 
-	private JacksonDBCollection<Topping, String> collection() {
-		return JacksonDBCollection.wrap(db.getCollection(TOPPINGS_COLL_NAME), Topping.class, String.class);
-	}
+    private JacksonDBCollection<Topping, String> collection() {
+        return JacksonDBCollection.wrap(db.getCollection(TOPPINGS_COLL_NAME), Topping.class, String.class);
+    }
 }

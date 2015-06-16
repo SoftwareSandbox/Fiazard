@@ -1,18 +1,5 @@
 package be.swsb.fiazard.ordering.orderplacement;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.ws.rs.core.MediaType;
-
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
 import be.swsb.fiazard.common.Identifiable;
 import be.swsb.fiazard.common.eventsourcing.Event;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
@@ -20,11 +7,21 @@ import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-
 import com.sun.jersey.api.client.ClientResponse;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderingResourceIntegrationTest {
-	
+
     private static final String BASE_URL = "http://localhost:8080";
     private static final String ORDERING_BASE_URI = "/ordering";
 
@@ -37,17 +34,17 @@ public class OrderingResourceIntegrationTest {
 
     @Rule
     public ClientRule clientRule = new ClientRule();
-    
+
     private EventStore eventStore;
 
     @Before
     public void setUp() {
-    	eventStore = new EventStore(mongoDBRule.getDB());
+        eventStore = new EventStore(mongoDBRule.getDB());
     }
-    
+
     @Test
     public void toppingsAreReturnedAsJSON() throws Exception {
-    	PlaceOrder placeOrder = new PlaceOrder(new ArrayList<Sandwich>());
+        PlaceOrder placeOrder = new PlaceOrder(new ArrayList<Sandwich>());
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)
                 .path(ORDERING_BASE_URI + "/placeorder")
@@ -58,15 +55,15 @@ public class OrderingResourceIntegrationTest {
 
         Identifiable id = clientResponse.getEntity(Identifiable.class);
         assertThat(id.getId()).isNotNull();
-        
+
         assertOrderPlacedEventPersisted(id.getId());
     }
 
-	private void assertOrderPlacedEventPersisted(String orderId) {
-		List<Event> events = eventStore.findAll();
+    private void assertOrderPlacedEventPersisted(String orderId) {
+        List<Event> events = eventStore.findAll();
         assertThat(events).hasSize(1);
         OrderPlaced orderPlaced = (OrderPlaced) events.get(0);
         assertThat(orderPlaced.getOrderId()).isEqualTo(orderId);
-	}
-    
+    }
+
 }

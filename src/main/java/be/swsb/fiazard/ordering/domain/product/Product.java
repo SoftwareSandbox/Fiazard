@@ -1,14 +1,12 @@
 package be.swsb.fiazard.ordering.domain.product;
 
-import java.util.List;
-
+import be.swsb.fiazard.ordering.domain.category.Category;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.mongojack.MongoCollection;
 import org.mongojack.ObjectId;
 
-import be.swsb.fiazard.ordering.domain.category.Category;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 @MongoCollection(name = Product.PRODUCTS_COLL_NAME)
 public class Product {

@@ -1,12 +1,11 @@
 package be.swsb.fiazard.ordering.domain.category;
 
-import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 import org.mongojack.ObjectId;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotNull;
 
 public class Category {
 

@@ -43,7 +43,7 @@ dependencies {
     // This is due to dropwizard using 2.3.3 Jackson and mongojack attemtping to use
     // the 2.2.3 jackson-databind. Excluding the databing drom the monogjack and adding
     // the following dependency fixes the situation.
-    compile (
+    compile(
             'io.dropwizard:dropwizard-core:' + dropwizardVersion,
             'io.dropwizard:dropwizard-auth:' + dropwizardVersion,
             'io.dropwizard:dropwizard-migrations:' + dropwizardVersion,
@@ -55,7 +55,7 @@ dependencies {
             "com.commercehub.dropwizard:dropwizard-mongo:" + dropwizardMongoVersion
     )
 
-    testCompile (
+    testCompile(
             'junit:junit:' + junitVersion,
             'org.assertj:assertj-core:' + assertJVersion,
             'io.dropwizard:dropwizard-testing:' + dropwizardVersion,
@@ -67,12 +67,12 @@ jar {
     manifest {
         attributes "Implementation-Title": "Gradle Quickstart"
         attributes "Implementation-Version": version
-        attributes "Main-Class" : mainClassName
+        attributes "Main-Class": mainClassName
     }
- 
+
     // remove the security files (from mail.jar / activation.jar) so that the jar will be executable.
     doFirst {
-        from (configurations.runtime.resolve().collect { it.isDirectory() ? it : zipTree(it) }) {
+        from(configurations.runtime.resolve().collect { it.isDirectory() ? it : zipTree(it) }) {
             exclude 'META-INF/MANIFEST.MF'
             exclude 'META-INF/*.SF'
             exclude 'META-INF/*.DSA'
@@ -86,8 +86,8 @@ task wrapper(type: Wrapper) {
 }
 
 task stage {
-  dependsOn assemble
-  // Do not remove this task, it needs to be present for the deploy on Heroku.
+    dependsOn assemble
+    // Do not remove this task, it needs to be present for the deploy on Heroku.
 }
 
 task startAppDev(type: JavaExec, dependsOn: assemble) {

@@ -1,7 +1,6 @@
 package be.swsb.fiazard.common.exceptions;
 
 import be.swsb.fiazard.common.error.AppErrorCode;
-
 import com.google.common.collect.Lists;
 
 public class IllegalIdFiazardException extends FiazardException {

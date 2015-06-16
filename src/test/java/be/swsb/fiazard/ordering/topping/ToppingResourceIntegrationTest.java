@@ -1,23 +1,21 @@
 package be.swsb.fiazard.ordering.topping;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-
-import javax.ws.rs.core.MediaType;
-
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
 import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-
 import com.sun.jersey.api.client.ClientResponse;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import javax.ws.rs.core.MediaType;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ToppingResourceIntegrationTest {
-	
+
     public static final String BASE_URL = "http://localhost:8080";
     public static final String TOPPING_PATH = "/ordering/topping";
 
@@ -33,7 +31,7 @@ public class ToppingResourceIntegrationTest {
 
     @Test
     public void toppingsAreReturnedAsJSON() throws Exception {
-        mongoDBRule.persist(new Topping(null, "Patrick", 4d));
+        mongoDBRule.persist(new Topping(null, "Patrick", 4d, "image", "imageType"));
 
         ClientResponse clientResponse = clientRule.getClient()
                 .resource(BASE_URL)

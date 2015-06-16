@@ -1,12 +1,5 @@
 package be.swsb.fiazard.main;
 
-import static be.swsb.fiazard.util.representation.FiazardJacksonModule.MODULE;
-import io.dropwizard.Application;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-
-import java.net.UnknownHostException;
-
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
@@ -21,9 +14,15 @@ import be.swsb.fiazard.ordering.resource.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.resource.ProductResourceV1;
 import be.swsb.fiazard.ordering.topping.ToppingDAO;
 import be.swsb.fiazard.ordering.topping.ToppingResource;
-
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
 import com.mongodb.DB;
+import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+
+import java.net.UnknownHostException;
+
+import static be.swsb.fiazard.util.representation.FiazardJacksonModule.MODULE;
 
 public class FiazardApp extends Application<FiazardConfig> {
 
@@ -49,13 +48,13 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.getObjectMapper().registerModule(MODULE);
     }
 
-	private void configureOrdering(Environment environment, DB db) {
-		EventStore eventStore = new EventStore(db);
-		environment.jersey().register(new OrderingResource(eventStore));
-		environment.jersey().register(new BunResource(new BunDAO(db), eventStore));
-		environment.jersey().register(new ToppingResource(new ToppingDAO(db)));
-		environment.jersey().register(new CondimentResource(new CondimentDAO(db)));
-	}
+    private void configureOrdering(Environment environment, DB db) {
+        EventStore eventStore = new EventStore(db);
+        environment.jersey().register(new OrderingResource(eventStore));
+        environment.jersey().register(new BunResource(new BunDAO(db), eventStore));
+        environment.jersey().register(new ToppingResource(new ToppingDAO(db)));
+        environment.jersey().register(new CondimentResource(new CondimentDAO(db)));
+    }
 
     //TODO move to a MongoDB Module
     private DB configureMongo(FiazardConfig config, Environment environment) throws UnknownHostException {
