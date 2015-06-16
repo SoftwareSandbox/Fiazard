@@ -31,7 +31,8 @@ There's no need to download and install Gradle, use the gradlewrapper (gradlew i
 
 ### Running your Dropwizard Application locally
 
-Make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
+Simply run 'gradlew startAppDev'.
+Or make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
 
 ##Pick up backlog items
 1. Pick up a backlog item at [waffle.io](https://waffle.io/softwaresandbox/fiazard) and assign it to yourself
