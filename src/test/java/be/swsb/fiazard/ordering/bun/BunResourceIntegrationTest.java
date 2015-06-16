@@ -1,16 +1,12 @@
 package be.swsb.fiazard.ordering.bun;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import io.dropwizard.testing.junit.DropwizardAppRule;
 
 import java.util.List;
 
-import io.dropwizard.testing.junit.DropwizardAppRule;
-
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.StatusType;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.protocol.HTTP;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -22,7 +18,6 @@ import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-import be.swsb.fiazard.ordering.orderplacement.OrderPlaced;
 
 import com.sun.jersey.api.client.ClientResponse;
 
@@ -31,6 +26,7 @@ public class BunResourceIntegrationTest {
 	private static final String BASE_URL = "http://localhost:8080";
     private static final String BUN_PATH = "/ordering/bun";
     private static final String LOCK_BUN_PATH = "/ordering/bun/lock";
+    private static final String UNLOCK_BUN_PATH = "/ordering/bun/unlock";
 
     @ClassRule
     public static final DropwizardAppRule<FiazardConfig> appRule =
@@ -85,5 +81,28 @@ public class BunResourceIntegrationTest {
         assertThat(bunLockedEvent.getId()).isNotNull();
         assertThat(bunLockedEvent.getTimestamp()).isNotNull();
 	}
+    
+    @Test
+    public void unlock_BunUnlockedEventIsStored() throws Exception {
+    	Bun bun = new Bun("id", "someBun", 4);
+    	
+    	ClientResponse clientResponse = clientRule.getClient()
+    			.resource(BASE_URL)
+    			.path(UNLOCK_BUN_PATH)
+    			.type(MediaType.APPLICATION_JSON_TYPE)
+    			.accept(MediaType.APPLICATION_JSON_TYPE)
+    			.entity(bun)
+    			.post(ClientResponse.class);
+    	
+    	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+    	
+    	List<Event> events = eventStore.findAll();
+    	assertThat(events).hasSize(1);
+    	
+    	BunUnlockedEvent bunUnlockedEvent = (BunUnlockedEvent) events.get(0);
+    	assertThat(bunUnlockedEvent.getBun()).isEqualTo(bun);
+    	assertThat(bunUnlockedEvent.getId()).isNotNull();
+    	assertThat(bunUnlockedEvent.getTimestamp()).isNotNull();
+    }
     
 }
