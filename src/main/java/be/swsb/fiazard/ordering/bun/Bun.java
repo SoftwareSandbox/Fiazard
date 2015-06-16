@@ -2,6 +2,7 @@ package be.swsb.fiazard.ordering.bun;
 
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.mongojack.MongoCollection;
 import org.mongojack.ObjectId;
@@ -46,5 +47,10 @@ public class Bun {
 
     public double getPrice() {
         return price;
+    }
+    
+    @Override
+    public String toString() {
+    	return ToStringBuilder.reflectionToString(this);
     }
 }

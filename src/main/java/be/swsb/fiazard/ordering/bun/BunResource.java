@@ -1,6 +1,7 @@
 package be.swsb.fiazard.ordering.bun;
 
 import be.swsb.fiazard.common.error.ErrorR;
+import be.swsb.fiazard.ordering.topping.Topping;
 
 import com.codahale.metrics.annotation.Timed;
 import com.wordnik.swagger.annotations.Api;
@@ -9,6 +10,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -36,5 +38,17 @@ public class BunResource {
     })
     public Response getAll() {
         return Response.ok(dao.findAll(), MediaType.APPLICATION_JSON_TYPE).build();
+    }
+    
+    @POST
+    @Path("/lock")
+    @Timed
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, response = Void.class, message = ""),
+            @ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
+    })
+    public Response lock(Bun bun) {
+    	System.out.println(bun);
+    	return Response.ok().build();
     }
 }
