@@ -52,7 +52,7 @@ public class FiazardApp extends Application<FiazardConfig> {
 	private void configureOrdering(Environment environment, DB db) {
 		EventStore eventStore = new EventStore(db);
 		environment.jersey().register(new OrderingResource(eventStore));
-		environment.jersey().register(new BunResource(new BunDAO(db)));
+		environment.jersey().register(new BunResource(new BunDAO(db), eventStore));
 		environment.jersey().register(new ToppingResource(new ToppingDAO(db)));
 		environment.jersey().register(new CondimentResource(new CondimentDAO(db)));
 	}

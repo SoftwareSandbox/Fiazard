@@ -1,6 +1,7 @@
 package be.swsb.fiazard.ordering.bun;
 
 import be.swsb.fiazard.common.error.ErrorR;
+import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.ordering.topping.Topping;
 
 import com.codahale.metrics.annotation.Timed;
@@ -25,9 +26,11 @@ public class BunResource {
 	public static final String BUN_PATH = "/ordering/bun";
 
     private BunDAO dao;
+    private EventStore eventStore;
 
-    public BunResource(BunDAO dao) {
+    public BunResource(BunDAO dao, EventStore eventStore) {
         this.dao = dao;
+		this.eventStore = eventStore;
     }
 
     @GET
@@ -48,7 +51,7 @@ public class BunResource {
             @ApiResponse(code = 403, response = ErrorR.class, message = "Unauthorized")
     })
     public Response lock(Bun bun) {
-    	System.out.println(bun);
+    	eventStore.store(new BunLockedEvent(bun));
     	return Response.ok().build();
     }
 }
