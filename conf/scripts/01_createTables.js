@@ -9,6 +9,14 @@ testdb.createCollection('products');
 db.createCollection('openinghours');
 testdb.createCollection('openinghours');
 
+/* Buns */
+db.createCollection('buns');
+testdb.createCollection('buns');
+
 /* Toppings */
 db.createCollection('toppings');
 testdb.createCollection('toppings');
+
+/* Condiments */
+db.createCollection('condiments');
+testdb.createCollection('condiments');

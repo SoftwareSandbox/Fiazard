@@ -60,6 +60,25 @@ db.products.insert({
     "price": 3
 });
 
+/* Buns */
+db.buns.remove({});
+db.buns.insert({
+    "name": "White",
+    "price": 0.20
+});
+db.buns.insert({
+    "name": "Ciabatta",
+    "price": 0.35
+});
+db.buns.insert({
+    "name": "Wholegrain",
+    "price": 0.35
+});
+db.buns.insert({
+    "name": "Rye",
+    "price": 0.20
+});
+
 /* Toppings */
 db.toppings.remove({});
 db.toppings.insert({
@@ -77,4 +96,35 @@ db.toppings.insert({
 db.toppings.insert({
     "name": "Iceberg Salad",
     "price": 0.05
+});
+db.toppings.insert({
+    "name": "Pickles",
+    "price": 0.10
+});
+db.toppings.insert({
+    "name": "Tomatoes",
+    "price": 0.10
+});
+db.toppings.insert({
+    "name": "Walnuts",
+    "price": 0.15
+});
+
+/* Condiments */
+db.condiments.remove({});
+db.condiments.insert({
+    "name": "Mayonaise",
+    "price": 0.10
+});
+db.condiments.insert({
+    "name": "Ketchup",
+    "price": 0.10
+});
+db.condiments.insert({
+    "name": "Honey",
+    "price": 0.20
+});
+db.condiments.insert({
+    "name": "Relish",
+    "price": 0.20
 });
