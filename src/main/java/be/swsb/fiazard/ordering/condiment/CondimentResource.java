@@ -1,18 +1,18 @@
 package be.swsb.fiazard.ordering.condiment;
 
-import be.swsb.fiazard.common.error.ErrorR;
-
-import com.codahale.metrics.annotation.Timed;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import be.swsb.fiazard.common.error.ErrorR;
+
+import com.codahale.metrics.annotation.Timed;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiResponse;
+import com.wordnik.swagger.annotations.ApiResponses;
 
 @Api(value = CondimentResource.CONDIMENT_PATH, description = "Operations about Condiments")
 @Path(CondimentResource.CONDIMENT_PATH)

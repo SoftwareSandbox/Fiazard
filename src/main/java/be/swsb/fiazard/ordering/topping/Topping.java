@@ -1,12 +1,13 @@
 package be.swsb.fiazard.ordering.topping;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.validator.constraints.Length;
 import org.mongojack.MongoCollection;
 import org.mongojack.ObjectId;
 
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @MongoCollection(name = Topping.TOPPINGS_COLL_NAME)
 public class Topping {

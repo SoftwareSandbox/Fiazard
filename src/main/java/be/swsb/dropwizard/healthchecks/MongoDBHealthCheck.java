@@ -1,14 +1,14 @@
 package be.swsb.dropwizard.healthchecks;
 
-import com.codahale.metrics.health.HealthCheck;
-import com.google.common.base.Joiner;
-import com.mongodb.DB;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
+import com.codahale.metrics.health.HealthCheck;
+import com.google.common.base.Joiner;
+import com.mongodb.DB;
 
 //TODO move to a MongoDB Module
 public class MongoDBHealthCheck extends HealthCheck {
