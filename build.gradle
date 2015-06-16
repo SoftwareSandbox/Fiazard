@@ -87,4 +87,10 @@ task wrapper(type: Wrapper) {
 
 task stage {
   dependsOn assemble
+  // Do not remove this task, it needs to be present for the deploy on Heroku.
+}
+
+task startAppDev(type: JavaExec, dependsOn: assemble) {
+    main = '-jar'
+    args = [jar.archivePath, 'server', 'src/main/resources/dev.yml']
 }
