@@ -17,6 +17,7 @@ public class EventStore {
 
     public void store(Event event) {
         dbCollection().save(event);
+        //TODO Issue #48: publish event to a queue, via a Publisher that makes the abstraction to the queue implementation
     }
 
     public List<Event> findAll() {
