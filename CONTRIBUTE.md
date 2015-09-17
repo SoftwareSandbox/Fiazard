@@ -1,7 +1,6 @@
 #How to contribute
 
 ## Setting up your environment
-
 Fork [this repo](https://github.com/SoftwareSandbox/Fiazard/) into your own account, e.g. `git@github.com:MyGithubAccount/Fiazard.git` and clone your forked repo locally:  
  ```
  git clone https://github.com/MyGithubAccount/Fiazard --recursive
@@ -16,7 +15,6 @@ Open up a shell, navigate to the vagrant dir and type `vagrant up`. This will do
 After installing [Robomongo](http://robomongo.org/), add a connection to `10.11.12.13:27017`.
 
 ### On Ubuntu
-
 Download Vagrant through https://www.vagrantup.com/downloads.html because `apt-get install vagrant` installs an older version.
 
 You'll have to download oracle's Java 8 since openjdk still has no package out yet:
@@ -30,9 +28,11 @@ $ sudo apt-get install oracle-java8-set-default
 There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
 
 ### Running your Dropwizard Application locally
-
-Simply run 'gradlew startAppDev'.
-Or make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
+Simply run 
+ ```
+ gradlew startAppDev
+ ```
+or make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
 
 ##Pick up backlog items
 1. Pick up a backlog item at [waffle.io](https://waffle.io/softwaresandbox/fiazard) and assign it to yourself
@@ -57,3 +57,12 @@ Or make a target in your IDE that runs `FiazardApp.java` with arguments `server 
 Always suffix Representation classes (java classes that will be transformed into JSON by Jackson) with an R.
 
 `OpeningHour.java` becomes `OpeningHourR.java`
+
+## Usage of /resources/json/*.json files
+If you're not yet using [SublimeText3](http://www.sublimetext.com/3), shame on you. Buy and download it now.
+
+1. Install [Package Control](https://sublime.wbond.net/installation#st3).
+2. Install [HttpRequester](https://github.com/braindamageinc/SublimeHttpRequester) in Sublime: `Ctrl+Shift+P`, `Install`, Http Requester.
+3. Make sure your FiazardApp is running.
+4. Open a .json file in Sublime, e.g. [category.json](src/test/resources/json/categories.json).
+5. Press `Ctrl+Alt+R`
