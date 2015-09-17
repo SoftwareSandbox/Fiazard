@@ -29,5 +29,5 @@ We'll eventually get continuous feedback thanks to
 [Gradle](http://www.gradle.org/) **build(s)** to run our tests, of which some might use
 the [rest-scenarios](https://github.com/cegeka/rest-scenarios) framework to make some readable **scenario tests**.
 
-## Contrinuting
+## Contributing
 Check [this important info](CONTRIBUTE.md) if you're interested in Contributing.
