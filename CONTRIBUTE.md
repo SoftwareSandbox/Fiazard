@@ -2,10 +2,10 @@
 
 ## Setting up your environment
 Fork [this repo](https://github.com/SoftwareSandbox/Fiazard/) into your own account, e.g. `git@github.com:MyGithubAccount/Fiazard.git` and clone your forked repo locally:  
- ```
- git clone https://github.com/MyGithubAccount/Fiazard --recursive
- git remote add swsb https://github.com/SoftwareSandbox/Fiazard
- ```  
+	```
+	git clone https://github.com/MyGithubAccount/Fiazard --recursive
+	git remote add swsb https://github.com/SoftwareSandbox/Fiazard
+	```  
 This will also clone the repo in the vagrant folder, which will set up your MongoDB environment.
 
 Install [Vagrant](http://vagrantup.com) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
@@ -18,20 +18,20 @@ After installing [Robomongo](http://robomongo.org/), add a connection to `10.11.
 Download Vagrant through https://www.vagrantup.com/downloads.html because `apt-get install vagrant` installs an older version.
 
 You'll have to download oracle's Java 8 since openjdk still has no package out yet:
-```ssh
-$ sudo add-apt-repository ppa:webupd8team/java
-$ sudo apt-get update
-$ sudo apt-get install oracle-java8-installer
-$ sudo apt-get install oracle-java8-set-default
-```
+	```ssh
+	sudo add-apt-repository ppa:webupd8team/java
+	sudo apt-get update
+	sudo apt-get install oracle-java8-installer
+	sudo apt-get install oracle-java8-set-default
+	```
 
 There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
 
 ### Running your Dropwizard Application locally
 Simply run 
- ```
- gradlew startAppDev
- ```
+	```
+	gradlew startAppDev
+	```
 or make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
 
 ##Pick up backlog items
