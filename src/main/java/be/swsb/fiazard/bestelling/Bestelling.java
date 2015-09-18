@@ -18,13 +18,16 @@ class Bestelling extends AbstractAggregate implements Aggregate {
 		
 		checkArgument(isNotBlank(naamBesteller));
 
-		DomainEvent event = new NieuweBestellingGeplaatstEvent(aggregateId, naamBesteller);
+		DomainEvent event = new NieuweBestellingGeplaatstEvent(aggregateId, getNextVersion(), naamBesteller);
 		addUnsavedEvent(event);
 		applyEvent(event);
 	}
 
 	@Override
 	protected void applyEvent(DomainEvent event) {
+		// TODO jozef+bktid: template method! + dubbelcheck versie
+		alignVersion(event);
+		
 		// TODO jozef+bktid: iets mooiers dan instanceof vinden...
 		if (event instanceof NieuweBestellingGeplaatstEvent) {
 			initialize((NieuweBestellingGeplaatstEvent) event);

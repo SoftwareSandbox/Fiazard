@@ -6,7 +6,5 @@ public interface Aggregate {
 	
 	AggregateId getAggregateId();
 
-	void addUnsavedEvent(DomainEvent event);
-		
 	List<DomainEvent> getUnsavedEvents();
 }

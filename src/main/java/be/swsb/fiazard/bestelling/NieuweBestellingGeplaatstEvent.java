@@ -8,13 +8,15 @@ import be.swsb.fiazard.ddd.DomainEvent;
 public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 	
 	private AggregateId aggregateId;
+	private int version;
 	private String naamBesteller;
 	
-	public NieuweBestellingGeplaatstEvent(AggregateId aggregateId, String naamBesteller) {
+	public NieuweBestellingGeplaatstEvent(AggregateId aggregateId, int version, String naamBesteller) {
 		checkArgument(aggregateId != null);
 		checkArgument(isNotBlank(naamBesteller));
 		
 		this.aggregateId = aggregateId;
+		this.version = version;
 		this.naamBesteller = naamBesteller;
 	}
 	
@@ -29,8 +31,7 @@ public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 	
 	@Override
 	public int getVersion() {
-		// TODO jozef+bktid: buts wa moeten we hier doen???
-		throw new UnsupportedOperationException();
+		return version;
 	}
 	
 }
