@@ -16,12 +16,12 @@ public abstract class AbstractAggregate implements Aggregate {
 	
 	private Map<Class<? extends DomainEvent>, ReplayEventStrategy> eventReplayStrategies = Maps.newHashMap();
 
-	protected AbstractAggregate(List<DomainEvent> savedEvents) {
-		checkArgument(savedEvents != null);
+	protected AbstractAggregate(List<DomainEvent> eventsToReplay) {
+		checkArgument(eventsToReplay != null);
 
 		registerEventReplayStrategies();
 		
-		savedEvents.forEach(this::applyEventAndAlignVersions);
+		eventsToReplay.forEach(this::alignVersionAndReplayEvent);
 	}
 
 	protected abstract void registerEventReplayStrategies();
@@ -30,7 +30,7 @@ public abstract class AbstractAggregate implements Aggregate {
 		eventReplayStrategies.put(domainEventClass, strategy);
 	}
 
-	private final void applyEventAndAlignVersions(DomainEvent event) {
+	private final void alignVersionAndReplayEvent(DomainEvent event) {
 		alignVersion(event);
 		eventReplayStrategies.get(event.getClass()).replay(event);
 	}
@@ -46,7 +46,7 @@ public abstract class AbstractAggregate implements Aggregate {
 
 	protected void recordNewEvent(DomainEvent event) {
 		unsavedEvents.add(event);
-		applyEventAndAlignVersions(event);
+		alignVersionAndReplayEvent(event);
 	}
 
 	@Override
@@ -61,6 +61,10 @@ public abstract class AbstractAggregate implements Aggregate {
 
 	protected int getNextVersion() {
 		return version + 1;
+	}
+	
+	public int getVersionBeforeReplayingUnsavedEvents(){
+		return version -  unsavedEvents.size(); 
 	}
 
 }

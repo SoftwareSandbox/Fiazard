@@ -1,10 +1,16 @@
 package be.swsb.fiazard.bestelling;
 
+import be.swsb.fiazard.eventstore.AggregateRepository;
+
 public class PlaatsBestellingCommandHandler {
 
-	public void handleCommand(PlaatsBestellingCommand command) {
-		// TODO jozef+bktid: implement me
-		throw new UnsupportedOperationException();
+	private BestellingFactory bestellingFactory;
+	
+	private AggregateRepository aggregateRepository;
+	
+	public void handleCommand(PlaatsBestellingCommand command) {		
+		Bestelling nieuweBestelling = bestellingFactory.maakNieuwBestellingAan(command);	
+		aggregateRepository.saveAggregate(nieuweBestelling);
 	}
 
 }

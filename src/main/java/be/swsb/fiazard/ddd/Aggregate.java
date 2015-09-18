@@ -7,4 +7,6 @@ public interface Aggregate {
 	AggregateId getAggregateId();
 
 	List<DomainEvent> getUnsavedEvents();
+
+	int getVersionBeforeReplayingUnsavedEvents();
 }
