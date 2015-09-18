@@ -1,37 +1,47 @@
 package be.swsb.fiazard.ddd;
 
-import be.swsb.fiazard.common.eventsourcing.Event;
+import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 
 public abstract class AbstractAggregate implements Aggregate {
 
-    private AggregateId aggregateId;
-    private List<Event> unsavedEvents;
-    private int version;
+	private AggregateId aggregateId;
+	private List<DomainEvent> unsavedEvents;
+	private int version = 0;
 
-    protected AbstractAggregate(AggregateId aggregateId, List<Event> savedEvents) {
-        this.aggregateId = aggregateId;
-        savedEvents.forEach(this::applyEvent);
-        // TODO: dit is momenteel de makkelijkst mogelijke implementatie, beter zou zijn om het event te pakken
-        // met het hoogste versienummer
-        this.version = savedEvents.size();
-    }
+	protected AbstractAggregate(List<DomainEvent> savedEvents) {
+		checkArgument(savedEvents != null);
 
-    protected abstract void applyEvent(Event event);
+		savedEvents.forEach(this::applyEvent);
+	}
 
+	protected abstract void applyEvent(DomainEvent event);
 
-    @Override
-    public AggregateId getAggregateId() {
-        return aggregateId;
-    }
+	protected void setAggregateId(AggregateId aggregateId) {
+		this.aggregateId = aggregateId;
+	}
 
-    @Override
-    public List<Event> getUnsavedEvents() {
-        return unsavedEvents;
-    }
+	@Override
+	public AggregateId getAggregateId() {
+		return aggregateId;
+	}
 
-    public int getVersion() {
-        return version;
-    }
+	protected void addUnsavedEvent(DomainEvent event) {
+		unsavedEvents.add(event);
+	}
+
+	@Override
+	public List<DomainEvent> getUnsavedEvents() {
+		return unsavedEvents;
+	}
+
+	protected void alignVersion(DomainEvent event) {
+		this.version = event.getVersion();
+	}
+
+	protected int getNextVersion() {
+		return version + 1;
+	}
+
 }

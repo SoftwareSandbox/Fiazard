@@ -5,8 +5,6 @@ public interface DomainEvent {
 
 	AggregateId getAggregateId();
 
-	void play(Aggregate aggregate);
-	
 	int getVersion();
 
 }

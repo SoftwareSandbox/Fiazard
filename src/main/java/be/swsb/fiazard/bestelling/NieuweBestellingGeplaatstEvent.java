@@ -2,20 +2,21 @@ package be.swsb.fiazard.bestelling;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
-import be.swsb.fiazard.ddd.Aggregate;
 import be.swsb.fiazard.ddd.AggregateId;
 import be.swsb.fiazard.ddd.DomainEvent;
 
 public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 	
 	private AggregateId aggregateId;
+	private int version;
 	private String naamBesteller;
 	
-	public NieuweBestellingGeplaatstEvent(AggregateId aggregateId, String naamBesteller) {
+	public NieuweBestellingGeplaatstEvent(AggregateId aggregateId, int version, String naamBesteller) {
 		checkArgument(aggregateId != null);
 		checkArgument(isNotBlank(naamBesteller));
 		
 		this.aggregateId = aggregateId;
+		this.version = version;
 		this.naamBesteller = naamBesteller;
 	}
 	
@@ -29,16 +30,8 @@ public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 	}
 	
 	@Override
-	public void play(Aggregate aggregate) {
-		// TODO jozef+bktid: generics nodig of OK om te casten?
-		Bestelling bestelling = (Bestelling) aggregate;
-		bestelling.initialize(aggregateId, naamBesteller);
-	}
-	
-	@Override
 	public int getVersion() {
-		// TODO jozef+bktid: buts wa moeten we hier doen???
-		throw new UnsupportedOperationException();
+		return version;
 	}
 	
 }
