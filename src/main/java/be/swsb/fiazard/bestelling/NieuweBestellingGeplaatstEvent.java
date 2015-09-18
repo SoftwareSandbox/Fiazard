@@ -2,6 +2,7 @@ package be.swsb.fiazard.bestelling;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
+import be.swsb.fiazard.ddd.Aggregate;
 import be.swsb.fiazard.ddd.AggregateId;
 import be.swsb.fiazard.ddd.DomainEvent;
 
@@ -25,6 +26,13 @@ public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 
 	String getNaamBesteller() {
 		return naamBesteller;
+	}
+	
+	@Override
+	public void play(Aggregate aggregate) {
+		// TODO jozef+bktid: generics nodig of OK om te casten?
+		Bestelling bestelling = (Bestelling) aggregate;
+		bestelling.initialize(aggregateId, naamBesteller);
 	}
 	
 	@Override

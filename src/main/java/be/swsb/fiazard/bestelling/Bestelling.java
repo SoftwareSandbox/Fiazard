@@ -16,38 +16,43 @@ class Bestelling implements Aggregate {
 
 	private String naamBesteller;
 	private AggregateId aggregateId;
-	
+
 	private List<DomainEvent> newEvents = new ArrayList<>();
 
 	Bestelling(AggregateId aggregateId, String naamBesteller) {
 		checkArgument(aggregateId != null);
 		checkArgument(isNotBlank(naamBesteller));
 
-		DomainEvent event = new NieuweBestellingGeplaatstEvent(aggregateId, naamBesteller);
+		DomainEvent event = new NieuweBestellingGeplaatstEvent(aggregateId,
+				naamBesteller);
 		newEvents.add(event);
-		
-		playEvents(Lists.<DomainEvent>newArrayList(event));
+
+		playEvents(Lists.<DomainEvent> newArrayList(event));
 	}
-	
+
 	Bestelling(List<DomainEvent> events) {
 		playEvents(events);
 	}
-	
+
+	// TODO jozef+bktid: java 8 streams
 	private void playEvents(List<DomainEvent> events) {
-		// TODO jozef+bktid: apply events
-		throw new UnsupportedOperationException();
-		
-		// this.aggregateId = aggregateId;
-		//this.naamBesteller = naamBesteller;
+		for (DomainEvent domainEvent : events) {
+			domainEvent.play(this);
+		}
 	}
-	
+
 	@Override
 	public AggregateId getAggregateId() {
 		return aggregateId;
 	}
-	
+
 	String getNaamBesteller() {
 		return naamBesteller;
 	}
-	
+
+	void initialize(AggregateId aggregateId, String naamBesteller) {
+		this.aggregateId = aggregateId;
+		this.naamBesteller = naamBesteller;
+	}
+
 }
