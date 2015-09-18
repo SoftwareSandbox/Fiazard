@@ -43,9 +43,11 @@ public abstract class AbstractAggregate implements Aggregate {
 		return aggregateId;
 	}
 
+	// TODO verwarrend: we zeggen record, maar we doen replay
 	protected void recordNewEvent(DomainEvent event) {
 		unsavedEvents.add(event);
 		versioning = versioning.newEventRecorded(event);
+		// TODO verwarrend: we zeggen replay, maar we doen eigenlijk play
 		replayEvent(event);
 	}
 

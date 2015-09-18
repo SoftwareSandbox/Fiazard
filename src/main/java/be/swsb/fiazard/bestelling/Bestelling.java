@@ -26,6 +26,7 @@ class Bestelling extends AbstractAggregate implements Aggregate {
 		registerSingleEventReplayStrategy(NieuweBestellingGeplaatstEvent.class, this::initialize);
 	}
 
+	// TODO higher order functions (sch3lp?)...
 	private void initialize(DomainEvent event) {
 		NieuweBestellingGeplaatstEvent nieuweBestellingGeplaatstEvent = (NieuweBestellingGeplaatstEvent) event;
 		setAggregateId(nieuweBestellingGeplaatstEvent.getAggregateId());
