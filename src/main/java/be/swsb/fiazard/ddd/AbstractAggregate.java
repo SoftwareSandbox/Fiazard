@@ -3,20 +3,37 @@ package be.swsb.fiazard.ddd;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
+import java.util.Map;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 
 public abstract class AbstractAggregate implements Aggregate {
 
 	private AggregateId aggregateId;
 	private List<DomainEvent> unsavedEvents;
 	private int version = 0;
+	
+	private Map<Class<? extends DomainEvent>, ReplayEventStrategy> eventReplayStrategies = Maps.newHashMap();
 
-	protected AbstractAggregate(List<DomainEvent> savedEvents) {
-		checkArgument(savedEvents != null);
+	protected AbstractAggregate(List<DomainEvent> eventsToReplay) {
+		checkArgument(eventsToReplay != null);
 
-		savedEvents.forEach(this::applyEvent);
+		registerEventReplayStrategies();
+		
+		eventsToReplay.forEach(this::alignVersionAndReplayEvent);
 	}
 
-	protected abstract void applyEvent(DomainEvent event);
+	protected abstract void registerEventReplayStrategies();
+	
+	protected final void registerSingleEventReplayStrategy(Class<? extends DomainEvent> domainEventClass, ReplayEventStrategy strategy) {
+		eventReplayStrategies.put(domainEventClass, strategy);
+	}
+
+	private final void alignVersionAndReplayEvent(DomainEvent event) {
+		alignVersion(event);
+		eventReplayStrategies.get(event.getClass()).replay(event);
+	}
 
 	protected void setAggregateId(AggregateId aggregateId) {
 		this.aggregateId = aggregateId;
@@ -27,8 +44,9 @@ public abstract class AbstractAggregate implements Aggregate {
 		return aggregateId;
 	}
 
-	protected void addUnsavedEvent(DomainEvent event) {
+	protected void recordNewEvent(DomainEvent event) {
 		unsavedEvents.add(event);
+		alignVersionAndReplayEvent(event);
 	}
 
 	@Override
@@ -37,11 +55,16 @@ public abstract class AbstractAggregate implements Aggregate {
 	}
 
 	protected void alignVersion(DomainEvent event) {
+		Preconditions.checkState(event.getVersion() == getNextVersion());
 		this.version = event.getVersion();
 	}
 
 	protected int getNextVersion() {
 		return version + 1;
+	}
+	
+	public int getVersionBeforeReplayingUnsavedEvents(){
+		return version -  unsavedEvents.size(); 
 	}
 
 }
