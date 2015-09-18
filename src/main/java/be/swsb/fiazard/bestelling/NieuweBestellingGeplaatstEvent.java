@@ -1,20 +1,36 @@
 package be.swsb.fiazard.bestelling;
 
-import org.apache.commons.lang.StringUtils;
+import static com.google.common.base.Preconditions.checkArgument;
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+import be.swsb.fiazard.ddd.AggregateId;
+import be.swsb.fiazard.ddd.DomainEvent;
 
-import com.google.common.base.Preconditions;
-
-public class NieuweBestellingGeplaatstEvent {
+public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 	
+	private AggregateId aggregateId;
 	private String naamBesteller;
 	
-	public NieuweBestellingGeplaatstEvent(String naamBesteller) {
-		Preconditions.checkArgument(StringUtils.isNotBlank(naamBesteller));
+	public NieuweBestellingGeplaatstEvent(AggregateId aggregateId, String naamBesteller) {
+		checkArgument(aggregateId != null);
+		checkArgument(isNotBlank(naamBesteller));
+		
+		this.aggregateId = aggregateId;
 		this.naamBesteller = naamBesteller;
 	}
 	
+	@Override
+	public AggregateId getAggregateId() {
+		return aggregateId;
+	}
+
 	String getNaamBesteller() {
 		return naamBesteller;
+	}
+	
+	@Override
+	public int getVersion() {
+		// TODO jozef+bktid: buts wa moeten we hier doen???
+		throw new UnsupportedOperationException();
 	}
 	
 }
