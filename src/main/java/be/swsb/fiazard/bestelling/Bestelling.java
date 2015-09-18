@@ -2,57 +2,42 @@ package be.swsb.fiazard.bestelling;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.common.collect.Lists;
-
+import be.swsb.fiazard.ddd.AbstractAggregate;
 import be.swsb.fiazard.ddd.Aggregate;
 import be.swsb.fiazard.ddd.AggregateId;
 import be.swsb.fiazard.ddd.DomainEvent;
 
-class Bestelling implements Aggregate {
+import com.google.common.collect.Lists;
+
+class Bestelling extends AbstractAggregate implements Aggregate {
 
 	private String naamBesteller;
-	private AggregateId aggregateId;
-
-	private List<DomainEvent> newEvents = new ArrayList<>();
 
 	Bestelling(AggregateId aggregateId, String naamBesteller) {
-		checkArgument(aggregateId != null);
+		super(Lists.newArrayList());
+		
 		checkArgument(isNotBlank(naamBesteller));
 
-		DomainEvent event = new NieuweBestellingGeplaatstEvent(aggregateId,
-				naamBesteller);
-		newEvents.add(event);
-
-		playEvents(Lists.<DomainEvent> newArrayList(event));
-	}
-
-	Bestelling(List<DomainEvent> events) {
-		playEvents(events);
-	}
-
-	// TODO jozef+bktid: java 8 streams
-	private void playEvents(List<DomainEvent> events) {
-		for (DomainEvent domainEvent : events) {
-			domainEvent.play(this);
-		}
+		DomainEvent event = new NieuweBestellingGeplaatstEvent(aggregateId, naamBesteller);
+		addUnsavedEvent(event);
+		applyEvent(event);
 	}
 
 	@Override
-	public AggregateId getAggregateId() {
-		return aggregateId;
+	protected void applyEvent(DomainEvent event) {
+		// TODO jozef+bktid: iets mooiers dan instanceof vinden...
+		if (event instanceof NieuweBestellingGeplaatstEvent) {
+			initialize((NieuweBestellingGeplaatstEvent) event);
+		}
+	}
+	
+	private void initialize(NieuweBestellingGeplaatstEvent event) {
+		setAggregateId(event.getAggregateId());
+		this.naamBesteller = event.getNaamBesteller();
 	}
 
 	String getNaamBesteller() {
 		return naamBesteller;
-	}
-
-	void initialize(AggregateId aggregateId, String naamBesteller) {
-		this.aggregateId = aggregateId;
-		this.naamBesteller = naamBesteller;
 	}
 
 }
