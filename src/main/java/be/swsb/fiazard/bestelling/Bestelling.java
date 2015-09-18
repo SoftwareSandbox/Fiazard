@@ -6,7 +6,7 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.util.Lists;
+import com.google.common.collect.Lists;
 
 import be.swsb.fiazard.ddd.Aggregate;
 import be.swsb.fiazard.ddd.AggregateId;
