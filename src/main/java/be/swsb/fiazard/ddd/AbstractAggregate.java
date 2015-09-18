@@ -5,9 +5,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import java.util.List;
 import java.util.Map;
 
-import org.assertj.core.util.Maps;
-
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 
 public abstract class AbstractAggregate implements Aggregate {
 
