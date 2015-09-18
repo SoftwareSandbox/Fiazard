@@ -23,16 +23,14 @@ class Bestelling extends AbstractAggregate implements Aggregate {
 	}
 
 	@Override
-	protected void replaySingleEventOnAggregate(DomainEvent event) {
-		// TODO jozef+bktid: iets mooiers dan instanceof vinden...
-		if (event instanceof NieuweBestellingGeplaatstEvent) {
-			initialize((NieuweBestellingGeplaatstEvent) event);
-		}
+	protected void registerEventReplayStrategies() {
+		registerSingleEventReplayStrategy(NieuweBestellingGeplaatstEvent.class, this::initialize);
 	}
 
-	private void initialize(NieuweBestellingGeplaatstEvent event) {
-		setAggregateId(event.getAggregateId());
-		this.naamBesteller = event.getNaamBesteller();
+	private void initialize(DomainEvent event) {
+		NieuweBestellingGeplaatstEvent nieuweBestellingGeplaatstEvent = (NieuweBestellingGeplaatstEvent) event;
+		setAggregateId(nieuweBestellingGeplaatstEvent.getAggregateId());
+		this.naamBesteller = nieuweBestellingGeplaatstEvent.getNaamBesteller();
 	}
 
 	String getNaamBesteller() {
