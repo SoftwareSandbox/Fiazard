@@ -1,4 +1,4 @@
-package be.swsb.fiazard.event;
+package be.swsb.fiazard.ddd;
 
 import static org.apache.commons.lang.builder.ToStringStyle.SIMPLE_STYLE;
 

@@ -2,7 +2,7 @@ package be.swsb.fiazard.bestelling;
 
 import com.google.common.base.Preconditions;
 
-import be.swsb.fiazard.event.AggregateIdGenerator;
+import be.swsb.fiazard.ddd.AggregateIdGenerator;
 
 class BestellingFactory {
 	

@@ -1,4 +1,4 @@
-package be.swsb.fiazard.event;
+package be.swsb.fiazard.ddd;
 
 public class AggregateIdGenerator {
 	
