@@ -8,32 +8,38 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mongojack.MongoCollection;
 import org.mongojack.ObjectId;
 
+import javax.validation.constraints.NotNull;
+
 @MongoCollection(name = KlaarTeMakenBroodje.KLAAR_TE_MAKEN_BROODJES_COLL_NAME)
 public class KlaarTeMakenBroodje {
     public static final String KLAAR_TE_MAKEN_BROODJES_COLL_NAME = "klaartemakenbroodjes";
 
-    @ObjectId
-    @JsonProperty
+    @NotNull
     private String id;
-    @JsonProperty
+    @JsonProperty("idBestelling")
     private AggregateId idBestelling;
-    @JsonProperty
-    private int versieBestelling;
+    @JsonProperty("naam")
+    private String naam;
 
     public KlaarTeMakenBroodje(@JsonProperty("_id")String id,
                                @JsonProperty("idBestelling")AggregateId idBestelling,
-                               @JsonProperty("versieBestelling")int versieBestelling) {
+                               @JsonProperty("naam") String naam
+                               ) {
         this.id = id;
         this.idBestelling = idBestelling;
-        this.versieBestelling = versieBestelling;
+        this.naam = naam;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public AggregateId getIdBestelling() {
         return idBestelling;
     }
 
-    public int getVersieBestelling() {
-        return versieBestelling;
+    public String getNaam() {
+        return naam;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package be.swsb.fiazard.common.mongo;
 
 
+import be.swsb.fiazard.util.representation.FiazardJacksonModule;
 import com.commercehub.dropwizard.mongo.MongoClientFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -10,6 +12,7 @@ import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.MongoCollection;
+import org.mongojack.internal.MongoJackModule;
 
 import java.net.UnknownHostException;
 import java.util.List;
@@ -22,6 +25,8 @@ public class MongoDBRule extends TestWatcher {
 
     private DB db;
     private List<String> mongoDBReservedColls = Lists.newArrayList("system.indexes");
+    private boolean cleanUpDataAtEnd = true;
+    private boolean loggingOn = false;
 
     public static MongoDBRule create() {
         try {
@@ -39,6 +44,21 @@ public class MongoDBRule extends TestWatcher {
         db = mongoClientFactory.build().getDB(dbName);
     }
 
+    public MongoDBRule withoutCleaningUpDataAtEnd() {
+        this.cleanUpDataAtEnd = false;
+        return this;
+    }
+
+    public MongoDBRule withCleaningUpDataAtEnd() {
+        this.cleanUpDataAtEnd = true;
+        return this;
+    }
+
+    public MongoDBRule withLoggingOn() {
+        this.loggingOn = true;
+        return this;
+    }
+
     public DB getDB() {
         return db;
     }
@@ -49,7 +69,9 @@ public class MongoDBRule extends TestWatcher {
 
     @SuppressWarnings("unchecked")
     private <T> JacksonDBCollection<T, String> collectionFor(T persistableObject) {
-        return (JacksonDBCollection<T, String>) JacksonDBCollection.wrap(db.getCollection(collectionNameFor(persistableObject)), persistableObject.getClass(), String.class);
+        ObjectMapper objectMapper = MongoJackModule.configure(new ObjectMapper());
+        objectMapper.registerModule(FiazardJacksonModule.MODULE);
+        return (JacksonDBCollection<T, String>) JacksonDBCollection.wrap(db.getCollection(collectionNameFor(persistableObject)), persistableObject.getClass(), String.class, objectMapper);
     }
 
     private String collectionNameFor(Object obj) {
@@ -65,7 +87,9 @@ public class MongoDBRule extends TestWatcher {
     @Override
     protected void finished(Description description) {
         super.finished(description);
-//        emptyAllMongoCollections();
+        if (cleanUpDataAtEnd) {
+            emptyAllMongoCollections();
+        }
     }
 
     private void emptyAllMongoCollections() {
@@ -74,12 +98,13 @@ public class MongoDBRule extends TestWatcher {
                 .filter(collName -> !mongoDBReservedColls.contains(collName))
                 .forEach(collName -> {
                     recreate(collName);
-//                    logger.log(Level.INFO, "deleted {0} docs of collection {1}", new Object[]{result.getN(), collName});
                 });
     }
 
     private void recreate(String collName) {
-        logger.log(Level.INFO, "attempting recreation of {0}", collName);
+        if (loggingOn) {
+            logger.log(Level.INFO, "attempting recreation of {0}", collName);
+        }
         db.getCollection(collName).drop();
         db.createCollection(collName, new BasicDBObject("capped", true).append("size", 1048576));
     }
