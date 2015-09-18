@@ -8,4 +8,8 @@ public class PlaatsBestellingCommand {
 		this.naamBesteller = naamBesteller;
 	}
 	
+	String getNaamBesteller() {
+		return naamBesteller;
+	}
+	
 }
