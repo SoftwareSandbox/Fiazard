@@ -15,25 +15,21 @@ class Bestelling extends AbstractAggregate implements Aggregate {
 
 	Bestelling(AggregateId aggregateId, String naamBesteller) {
 		super(Lists.newArrayList());
-		
+
 		checkArgument(isNotBlank(naamBesteller));
 
-		DomainEvent event = new NieuweBestellingGeplaatstEvent(aggregateId, getNextVersion(), naamBesteller);
-		addUnsavedEvent(event);
-		applyEvent(event);
+		recordNewEvent(new NieuweBestellingGeplaatstEvent(aggregateId,
+				getNextVersion(), naamBesteller));
 	}
 
 	@Override
-	protected void applyEvent(DomainEvent event) {
-		// TODO jozef+bktid: template method! + dubbelcheck versie
-		alignVersion(event);
-		
+	protected void replaySingleEventOnAggregate(DomainEvent event) {
 		// TODO jozef+bktid: iets mooiers dan instanceof vinden...
 		if (event instanceof NieuweBestellingGeplaatstEvent) {
 			initialize((NieuweBestellingGeplaatstEvent) event);
 		}
 	}
-	
+
 	private void initialize(NieuweBestellingGeplaatstEvent event) {
 		setAggregateId(event.getAggregateId());
 		this.naamBesteller = event.getNaamBesteller();

@@ -4,6 +4,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 
+import com.google.common.base.Preconditions;
+
 public abstract class AbstractAggregate implements Aggregate {
 
 	private AggregateId aggregateId;
@@ -13,10 +15,15 @@ public abstract class AbstractAggregate implements Aggregate {
 	protected AbstractAggregate(List<DomainEvent> savedEvents) {
 		checkArgument(savedEvents != null);
 
-		savedEvents.forEach(this::applyEvent);
+		savedEvents.forEach(this::applyEventAndAlignVersions);
 	}
 
-	protected abstract void applyEvent(DomainEvent event);
+	private final void applyEventAndAlignVersions(DomainEvent event) {
+		alignVersion(event);
+		replaySingleEventOnAggregate(event);
+	}
+
+	protected abstract void replaySingleEventOnAggregate(DomainEvent event);
 
 	protected void setAggregateId(AggregateId aggregateId) {
 		this.aggregateId = aggregateId;
@@ -27,8 +34,9 @@ public abstract class AbstractAggregate implements Aggregate {
 		return aggregateId;
 	}
 
-	protected void addUnsavedEvent(DomainEvent event) {
+	protected void recordNewEvent(DomainEvent event) {
 		unsavedEvents.add(event);
+		applyEventAndAlignVersions(event);
 	}
 
 	@Override
@@ -37,6 +45,7 @@ public abstract class AbstractAggregate implements Aggregate {
 	}
 
 	protected void alignVersion(DomainEvent event) {
+		Preconditions.checkState(event.getVersion() == getNextVersion());
 		this.version = event.getVersion();
 	}
 
