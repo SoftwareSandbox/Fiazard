@@ -4,7 +4,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import org.assertj.core.util.Maps;
 
@@ -16,7 +15,7 @@ public abstract class AbstractAggregate implements Aggregate {
 	private List<DomainEvent> unsavedEvents;
 	private int version = 0;
 	
-	private Map<Class<? extends DomainEvent>, Consumer<DomainEvent>> eventReplayStrategies = Maps.newHashMap();
+	private Map<Class<? extends DomainEvent>, ReplayEventStrategy> eventReplayStrategies = Maps.newHashMap();
 
 	protected AbstractAggregate(List<DomainEvent> savedEvents) {
 		checkArgument(savedEvents != null);
@@ -28,13 +27,13 @@ public abstract class AbstractAggregate implements Aggregate {
 
 	protected abstract void registerEventReplayStrategies();
 	
-	protected final void registerSingleEventReplayStrategy(Class<? extends DomainEvent> domainEventClass, Consumer<DomainEvent> consumer) {
-		eventReplayStrategies.put(domainEventClass, consumer);
+	protected final void registerSingleEventReplayStrategy(Class<? extends DomainEvent> domainEventClass, ReplayEventStrategy strategy) {
+		eventReplayStrategies.put(domainEventClass, strategy);
 	}
 
 	private final void applyEventAndAlignVersions(DomainEvent event) {
 		alignVersion(event);
-		eventReplayStrategies.get(event.getClass()).accept(event);
+		eventReplayStrategies.get(event.getClass()).replay(event);
 	}
 
 	protected void setAggregateId(AggregateId aggregateId) {
