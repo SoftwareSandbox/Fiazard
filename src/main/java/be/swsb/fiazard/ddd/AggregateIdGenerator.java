@@ -1,9 +1,10 @@
 package be.swsb.fiazard.ddd;
 
+import java.util.UUID;
+
 public class AggregateIdGenerator {
 	
 	public AggregateId generate() {
-		// TODO jooones+butskri: implement me
-		throw new UnsupportedOperationException();
+		return new AggregateId(UUID.randomUUID().toString());
 	}
 }
