@@ -2,9 +2,10 @@ package be.swsb.fiazard.bestelling;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
+import be.swsb.fiazard.event.Aggregate;
 import be.swsb.fiazard.event.AggregateId;
 
-class Bestelling {
+class Bestelling implements Aggregate {
 
 	private String naamBesteller;
 	private AggregateId aggregateId;
@@ -17,7 +18,8 @@ class Bestelling {
 		this.naamBesteller = naamBesteller;		
 	}
 	
-	AggregateId getAggregateId() {
+	@Override
+	public AggregateId getAggregateId() {
 		return aggregateId;
 	}
 	
