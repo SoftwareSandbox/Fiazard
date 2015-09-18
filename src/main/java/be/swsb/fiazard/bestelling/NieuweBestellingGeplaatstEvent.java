@@ -29,7 +29,7 @@ public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 	
 	@Override
 	public int getVersion() {
-		// TODO buts wa moeten we hier doen???
+		// TODO jozef+bktid: buts wa moeten we hier doen???
 		throw new UnsupportedOperationException();
 	}
 	

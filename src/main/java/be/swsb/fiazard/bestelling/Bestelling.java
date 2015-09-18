@@ -34,7 +34,7 @@ class Bestelling implements Aggregate {
 	}
 	
 	private void playEvents(List<DomainEvent> events) {
-		// TODO apply events
+		// TODO jozef+bktid: apply events
 		throw new UnsupportedOperationException();
 		
 		// this.aggregateId = aggregateId;
