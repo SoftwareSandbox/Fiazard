@@ -13,10 +13,12 @@ public class AggregateId {
 		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 	
+	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this);
 	};
 	
+	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, SIMPLE_STYLE);
 	};

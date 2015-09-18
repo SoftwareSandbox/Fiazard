@@ -8,5 +8,5 @@ public interface Aggregate {
 
 	List<DomainEvent> getUnsavedEvents();
 
-	int getVersionBeforeReplayingUnsavedEvents();
+	int getAggregateVersionAfterReconstruction();
 }

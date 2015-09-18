@@ -18,8 +18,7 @@ class Bestelling extends AbstractAggregate implements Aggregate {
 
 		checkArgument(isNotBlank(naamBesteller));
 
-		recordNewEvent(new NieuweBestellingGeplaatstEvent(aggregateId,
-				getNextVersion(), naamBesteller));
+		recordNewEvent(new NieuweBestellingGeplaatstEvent(aggregateId, getNextEventVersion(), naamBesteller));
 	}
 
 	@Override

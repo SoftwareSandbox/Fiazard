@@ -5,14 +5,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 public abstract class AbstractAggregate implements Aggregate {
 
 	private AggregateId aggregateId;
 	private List<DomainEvent> unsavedEvents;
-	private int version = 0;
+	private Versioning versioning;
 	
 	private Map<Class<? extends DomainEvent>, ReplayEventStrategy> eventReplayStrategies = Maps.newHashMap();
 
@@ -21,7 +20,8 @@ public abstract class AbstractAggregate implements Aggregate {
 
 		registerEventReplayStrategies();
 		
-		eventsToReplay.forEach(this::alignVersionAndReplayEvent);
+		eventsToReplay.forEach(this::replayEvent);
+		versioning = Versioning.initVersioningAfterAggregateReconstruction(eventsToReplay.size());
 	}
 
 	protected abstract void registerEventReplayStrategies();
@@ -30,8 +30,7 @@ public abstract class AbstractAggregate implements Aggregate {
 		eventReplayStrategies.put(domainEventClass, strategy);
 	}
 
-	private final void alignVersionAndReplayEvent(DomainEvent event) {
-		alignVersion(event);
+	private final void replayEvent(DomainEvent event) {
 		eventReplayStrategies.get(event.getClass()).replay(event);
 	}
 
@@ -46,25 +45,21 @@ public abstract class AbstractAggregate implements Aggregate {
 
 	protected void recordNewEvent(DomainEvent event) {
 		unsavedEvents.add(event);
-		alignVersionAndReplayEvent(event);
+		versioning = versioning.newEventRecorded(event);
+		replayEvent(event);
 	}
 
 	@Override
 	public List<DomainEvent> getUnsavedEvents() {
 		return unsavedEvents;
 	}
-
-	protected void alignVersion(DomainEvent event) {
-		Preconditions.checkState(event.getVersion() == getNextVersion());
-		this.version = event.getVersion();
-	}
-
-	protected int getNextVersion() {
-		return version + 1;
+	
+	public int getNextEventVersion() {
+		return versioning.getNextEventVersion(); 
 	}
 	
-	public int getVersionBeforeReplayingUnsavedEvents(){
-		return version -  unsavedEvents.size(); 
-	}
+	public int getAggregateVersionAfterReconstruction() {
+		return versioning.getAggregateVersionAfterReconstruction();
+	};
 
 }
