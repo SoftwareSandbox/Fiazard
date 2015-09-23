@@ -7,4 +7,6 @@ public interface DomainEvent {
 
 	int getVersion();
 
+	String getEventType();
+
 }

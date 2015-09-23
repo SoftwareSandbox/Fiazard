@@ -33,5 +33,10 @@ public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 	public int getVersion() {
 		return version;
 	}
-	
+
+	@Override
+	public String getEventType() {
+		return "NieuweBestellingGeplaatst";
+	}
+
 }

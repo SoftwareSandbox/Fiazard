@@ -7,7 +7,7 @@ import be.swsb.fiazard.ddd.AggregateIdGenerator;
 class BestellingFactory {
 	
 	// TODO jozef+bktid: deze injecteren! hoe?
-	private AggregateIdGenerator aggregateIdGenerator;
+	private AggregateIdGenerator aggregateIdGenerator = new AggregateIdGenerator();
 	
 	public BestellingFactory(AggregateIdGenerator aggregateIdGenerator) {
 		Preconditions.checkArgument(aggregateIdGenerator != null);

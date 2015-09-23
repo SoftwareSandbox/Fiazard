@@ -15,6 +15,7 @@ public class EventStore {
         this.db = db;
     }
 
+    //TODO sch3lp: delete this class + possible events collection in mongodb setup or something
     public void store(Event event) {
         dbCollection().save(event);
         //TODO Issue #48: publish event to a queue, via a Publisher that makes the abstraction to the queue implementation

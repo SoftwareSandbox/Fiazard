@@ -1,8 +1,11 @@
 package be.swsb.fiazard.main;
 
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
+import be.swsb.fiazard.bestelling.BestellingFactory;
+import be.swsb.fiazard.bestelling.BestellingResource;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
+import be.swsb.fiazard.eventstore.AggregateRepository;
 import be.swsb.fiazard.ordering.bun.BunDAO;
 import be.swsb.fiazard.ordering.bun.BunResource;
 import be.swsb.fiazard.ordering.condiment.CondimentDAO;
@@ -44,6 +47,8 @@ public class FiazardApp extends Application<FiazardConfig> {
         environment.jersey().register(new ProductResourceV1());
         environment.jersey().register(new OpeningHourResourceV1());
         configureOrdering(environment, db);
+
+        environment.jersey().register(new BestellingResource(new BestellingFactory(), new AggregateRepository()));
 
         environment.getObjectMapper().registerModule(MODULE);
     }

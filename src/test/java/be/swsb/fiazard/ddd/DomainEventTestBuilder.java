@@ -69,6 +69,11 @@ public class DomainEventTestBuilder {
         public int getVersion() {
             return version;
         }
+
+        @Override
+        public String getEventType() {
+            return "DumbaDomainEvent";
+        }
     }
 
     public static class DumboEventTestBuilder extends DomainEventTestBuilder{
@@ -124,6 +129,11 @@ public class DomainEventTestBuilder {
         @Override
         public int getVersion() {
             return version;
+        }
+
+        @Override
+        public String getEventType() {
+            return "DumboDomainEvent";
         }
     }
 }
