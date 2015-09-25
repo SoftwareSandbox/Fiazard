@@ -13,6 +13,10 @@ public class FiazardConfig extends Configuration {
     @NotNull
     private MongoClientFactory mongo;
 
+    @Valid
+    @NotNull
+    private String eventStoreStreamURL;
+
     @JsonProperty
     public MongoClientFactory getMongo() {
         return mongo;
@@ -21,5 +25,10 @@ public class FiazardConfig extends Configuration {
     @JsonProperty
     public void setMongo(MongoClientFactory mongo) {
         this.mongo = mongo;
+    }
+
+    @JsonProperty
+    public String getEventStoreStreamURL() {
+        return eventStoreStreamURL;
     }
 }
