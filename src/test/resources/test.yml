@@ -23,6 +23,8 @@ mongo:
   uri: mongodb://localhost:27017/?maxPoolSize=50&maxIdleTimeMS=300000
   dbName: fiazard-test
 
+eventStoreStreamURL: http://localhost:2113/streams/fiazard
+
 # Logging settings.
 logging:
 

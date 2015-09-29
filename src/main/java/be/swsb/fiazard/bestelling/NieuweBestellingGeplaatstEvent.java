@@ -4,14 +4,17 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import be.swsb.fiazard.ddd.AggregateId;
 import be.swsb.fiazard.ddd.DomainEvent;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NieuweBestellingGeplaatstEvent implements DomainEvent {
-	
+
+	@JsonProperty
 	private AggregateId aggregateId;
 	private int version;
 	private String naamBesteller;
 	
-	public NieuweBestellingGeplaatstEvent(AggregateId aggregateId, int version, String naamBesteller) {
+	public NieuweBestellingGeplaatstEvent(@JsonProperty AggregateId aggregateId, int version, String naamBesteller) {
 		checkArgument(aggregateId != null);
 		checkArgument(isNotBlank(naamBesteller));
 		
@@ -19,7 +22,7 @@ public class NieuweBestellingGeplaatstEvent implements DomainEvent {
 		this.version = version;
 		this.naamBesteller = naamBesteller;
 	}
-	
+
 	@Override
 	public AggregateId getAggregateId() {
 		return aggregateId;

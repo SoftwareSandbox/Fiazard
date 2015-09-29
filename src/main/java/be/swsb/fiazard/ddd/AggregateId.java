@@ -2,11 +2,13 @@ package be.swsb.fiazard.ddd;
 
 import static org.apache.commons.lang.builder.ToStringStyle.SIMPLE_STYLE;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AggregateId {
 
 	private String value;
