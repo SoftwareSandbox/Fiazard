@@ -14,9 +14,9 @@ public class AtomEvent {
     private String eventType;
     private Object payload;
 
-    public AtomEvent(String stream, Object payload) {
+    public AtomEvent(String eventType, Object payload) {
         this.uuid = UUID.randomUUID();
-        this.eventType = stream;
+        this.eventType = eventType;
         this.payload = payload;
     }
 

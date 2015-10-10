@@ -2,6 +2,7 @@ package be.swsb.fiazard.ddd;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import com.google.common.collect.Maps;
 public abstract class AbstractAggregate implements Aggregate {
 
 	private AggregateId aggregateId;
-	private List<DomainEvent> unsavedEvents;
+	private List<DomainEvent> unsavedEvents = new ArrayList<>();
 	private Versioning versioning;
 	
 	private Map<Class<? extends DomainEvent>, ReplayEventStrategy> eventReplayStrategies = Maps.newHashMap();

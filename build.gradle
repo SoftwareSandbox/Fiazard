@@ -54,8 +54,9 @@ dependencies {
             "org.mongodb:mongo-java-driver:$mongoDBJavaDriverVersion",
             "org.mongojack:mongojack:$mongoJackVersion",
             "com.commercehub.dropwizard:dropwizard-mongo:$dropwizardMongoVersion",
-            "org.glassfish.jersey.core:jersey-client:$jerseyClientVersion",
-            "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyClientVersion"
+            'com.sun.jersey:jersey-client:1.18.1'
+//            "org.glassfish.jersey.core:jersey-client:$jerseyClientVersion",
+//            "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyClientVersion"
     )
 
     testCompile(
