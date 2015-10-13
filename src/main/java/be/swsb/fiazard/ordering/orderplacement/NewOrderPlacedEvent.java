@@ -1,4 +1,4 @@
-package be.swsb.fiazard.bestelling;
+package be.swsb.fiazard.ordering.orderplacement;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang.StringUtils.isNotBlank;

@@ -1,4 +1,4 @@
-package be.swsb.fiazard.bestelling;
+package be.swsb.fiazard.ordering.orderplacement;
 
 import be.swsb.fiazard.eventstore.AggregateRepository;
 

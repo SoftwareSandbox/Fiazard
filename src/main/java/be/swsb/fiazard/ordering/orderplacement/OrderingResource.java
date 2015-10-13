@@ -2,7 +2,7 @@ package be.swsb.fiazard.ordering.orderplacement;
 
 import be.swsb.fiazard.common.Identifiable;
 import be.swsb.fiazard.common.error.ErrorR;
-import be.swsb.fiazard.common.eventsourcing.EventStore;
+import be.swsb.fiazard.eventstore.AggregateRepository;
 import com.codahale.metrics.annotation.Timed;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiResponse;
@@ -21,14 +21,15 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class OrderingResource {
 
-    public static final String ORDERING_BASE_URI = "/ordering";
-    private EventStore eventStore;
+    public static final String ORDERING_BASE_URI = "/bestelleuh";
+    private OrderFactory orderFactory;
+    private AggregateRepository aggregateRepo;
 
-    public OrderingResource(EventStore eventStore) {
-        this.eventStore = eventStore;
+    public OrderingResource(OrderFactory orderFactory, AggregateRepository aggregateRepo) {
+        this.orderFactory = orderFactory;
+        this.aggregateRepo = aggregateRepo;
     }
 
-    // TODO status 202 teruggeven + id
     @POST
     @Timed
     @ApiResponses(value = {
@@ -38,7 +39,7 @@ public class OrderingResource {
     @Path("/placeorder")
     public Response placeOrder(PlaceOrder placeOrder) {
         Identifiable identifiable = Identifiable.randomId();
-        eventStore.store(new OrderPlaced(identifiable.getId(), placeOrder.getSandwiches()));
+        new PlaceOrderCommandHandler(orderFactory, aggregateRepo).handleCommand(new PlaceOrderCommand(placeOrder.getSandwiches().get(0).getLabel()));
         return Response.ok(identifiable).build();
     }
 

@@ -1,7 +1,7 @@
 package be.swsb.fiazard.main;
 
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
-import be.swsb.fiazard.bestelling.OrderingBundle;
+import be.swsb.fiazard.ordering.orderplacement.OrderingBundle;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
 import be.swsb.fiazard.ordering.bun.BunDAO;
@@ -9,7 +9,6 @@ import be.swsb.fiazard.ordering.bun.BunResource;
 import be.swsb.fiazard.ordering.condiment.CondimentDAO;
 import be.swsb.fiazard.ordering.condiment.CondimentResource;
 import be.swsb.fiazard.ordering.domain.category.CategoryDAO;
-import be.swsb.fiazard.ordering.orderplacement.OrderingResource;
 import be.swsb.fiazard.ordering.resource.CategoryResourceV1;
 import be.swsb.fiazard.ordering.resource.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.resource.ProductResourceV1;
