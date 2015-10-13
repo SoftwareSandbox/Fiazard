@@ -1,19 +1,20 @@
 package be.swsb.fiazard.ordering.orderplacement;
 
-import java.util.List;
-
 public class PlaceOrder {
 
-    private List<Sandwich> sandwiches;
+    private String sandwich;
 
-    public PlaceOrder() {
+    public PlaceOrder(){}
+
+    public PlaceOrder(String sandwich) {
+        this.sandwich = sandwich;
     }
 
-    public PlaceOrder(List<Sandwich> sandwiches) {
-        this.sandwiches = sandwiches;
+    public String getSandwich() {
+        return sandwich;
     }
 
-    public List<Sandwich> getSandwiches() {
-        return sandwiches;
+    public void setSandwich(String sandwich) {
+        this.sandwich = sandwich;
     }
 }

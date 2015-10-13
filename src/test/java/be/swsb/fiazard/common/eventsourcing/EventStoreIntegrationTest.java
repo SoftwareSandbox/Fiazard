@@ -1,17 +1,9 @@
 package be.swsb.fiazard.common.eventsourcing;
 
 import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.ordering.bun.Bun;
-import be.swsb.fiazard.ordering.condiment.Condiment;
-import be.swsb.fiazard.ordering.orderplacement.OrderPlaced;
-import be.swsb.fiazard.ordering.orderplacement.Sandwich;
-import be.swsb.fiazard.ordering.topping.Topping;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,18 +17,6 @@ public class EventStoreIntegrationTest {
     @Before
     public void setUp() {
         eventStore = new EventStore(mongoDBRule.getDB());
-    }
-
-    @Test
-    public void orderPlacedEventCanBeStored() {
-        OrderPlaced event = new OrderPlaced(ORDER_ID, Arrays.asList(randomSandwich(), randomSandwich()));
-        eventStore.store(event);
-
-        List<Event> events = eventStore.findAll();
-        assertThat(events).hasSize(1);
-        OrderPlaced foundEvent = (OrderPlaced) events.get(0);
-        assertThat(foundEvent.getOrderId()).isEqualTo(ORDER_ID);
-        assertThat(foundEvent.getSandwiches()).hasSize(2);
     }
 
     @Test
@@ -84,22 +64,6 @@ public class EventStoreIntegrationTest {
         TrialEvent foundEvent = (TrialEvent) eventStore.findAll().get(0);
         assertThat(foundEvent.fieldAnnotatedWithJsonPropertyWithoutGetter).isNotNull();
         assertThat(foundEvent.fieldAnnotatedWithJsonPropertyWithoutGetter).isEqualTo(event.fieldAnnotatedWithJsonPropertyWithoutGetter);
-    }
-
-    private Sandwich randomSandwich() {
-        return new Sandwich("someLabel", randomBun(), Arrays.asList(randomTopping()), Arrays.asList(randomCondiment()));
-    }
-
-    private Condiment randomCondiment() {
-        return new Condiment("condimentId", "condimentName", 18.89, "image", "imageType");
-    }
-
-    private Topping randomTopping() {
-        return new Topping("toppingId", "toppingName", 15.89, "image", "imageType");
-    }
-
-    private Bun randomBun() {
-        return new Bun("5", "someName", 15.25, "image", "imageType");
     }
 
 }
