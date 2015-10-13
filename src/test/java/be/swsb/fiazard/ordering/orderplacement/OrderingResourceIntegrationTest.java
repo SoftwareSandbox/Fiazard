@@ -49,7 +49,7 @@ public class OrderingResourceIntegrationTest {
     }
 
     private void assertOrderPlacedEventPersisted(String orderId) {
-        //TODO sch3lp: figure out a way to integrationtest with eventstore on travis?
+        //TODO sch3lp: figure out a way to integrationtest with eventstore on travis? Issue #55
     }
 
 }

@@ -6,7 +6,6 @@ import be.swsb.fiazard.ddd.AggregateIdGenerator;
 
 class OrderFactory {
 	
-	// TODO jozef+bktid: deze injecteren! hoe?
 	private AggregateIdGenerator aggregateIdGenerator = new AggregateIdGenerator();
 	
 	public OrderFactory(AggregateIdGenerator aggregateIdGenerator) {
