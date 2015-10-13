@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class OrderingResource {
 
-    public static final String ORDERING_BASE_URI = "/bestelleuh";
+    public static final String ORDERING_BASE_URI = "/ordering";
     private OrderFactory orderFactory;
     private AggregateRepository aggregateRepo;
 
@@ -39,7 +39,7 @@ public class OrderingResource {
     @Path("/placeorder")
     public Response placeOrder(PlaceOrder placeOrder) {
         Identifiable identifiable = Identifiable.randomId();
-        new PlaceOrderCommandHandler(orderFactory, aggregateRepo).handleCommand(new PlaceOrderCommand(placeOrder.getSandwiches().get(0).getLabel()));
+        new PlaceOrderCommandHandler(orderFactory, aggregateRepo).handleCommand(new PlaceOrderCommand(placeOrder.getSandwich()));
         return Response.ok(identifiable).build();
     }
 
