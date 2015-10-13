@@ -1,7 +1,7 @@
 package be.swsb.fiazard.main;
 
 import be.swsb.dropwizard.healthchecks.MongoDBHealthCheck;
-import be.swsb.fiazard.bestelling.BestellingBundle;
+import be.swsb.fiazard.bestelling.OrderingBundle;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.exceptions.FiazardExceptionToJSONMapper;
 import be.swsb.fiazard.ordering.bun.BunDAO;
@@ -34,7 +34,7 @@ public class FiazardApp extends Application<FiazardConfig> {
 
     @Override
     public void initialize(Bootstrap<FiazardConfig> bootstrap) {
-        bootstrap.addBundle(new BestellingBundle());
+        bootstrap.addBundle(new OrderingBundle());
     }
 
     @Override

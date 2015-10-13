@@ -11,16 +11,16 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 
-public class BestellingBundle implements ConfiguredBundle<FiazardConfig> {
+public class OrderingBundle implements ConfiguredBundle<FiazardConfig> {
 
     @Override
     public void run(FiazardConfig configuration, Environment environment) throws Exception {
         String eventStoreStream = configuration.getEventStoreStreamURL();
         EventStore eventStore = new EventStoreImpl(new AtomPoster(eventStoreStream));
-        BestellingFactory bestellingFactory = new BestellingFactory(new AggregateIdGenerator());
+        OrderFactory orderFactory = new OrderFactory(new AggregateIdGenerator());
         AggregateRepository aggregateRepo = new AggregateRepository(eventStore);
 
-        environment.jersey().register(new BestellingResource(bestellingFactory, aggregateRepo));
+        environment.jersey().register(new OrderingResource(orderFactory, aggregateRepo));
     }
 
     @Override

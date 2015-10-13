@@ -2,9 +2,7 @@ package be.swsb.fiazard.bestelling;
 
 import be.swsb.fiazard.common.Identifiable;
 import be.swsb.fiazard.common.error.ErrorR;
-import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.eventstore.AggregateRepository;
-import be.swsb.fiazard.ordering.orderplacement.OrderPlaced;
 import be.swsb.fiazard.ordering.orderplacement.PlaceOrder;
 import com.codahale.metrics.annotation.Timed;
 import com.wordnik.swagger.annotations.Api;
@@ -18,18 +16,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api(value = BestellingResource.ORDERING_BASE_URI, description = "Operations about orders")
-@Path(BestellingResource.ORDERING_BASE_URI)
+@Api(value = OrderingResource.ORDERING_BASE_URI, description = "Operations about orders")
+@Path(OrderingResource.ORDERING_BASE_URI)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class BestellingResource {
+public class OrderingResource {
 
     public static final String ORDERING_BASE_URI = "/bestelleuh";
-    private BestellingFactory bestellingFactory;
+    private OrderFactory orderFactory;
     private AggregateRepository aggregateRepo;
 
-    public BestellingResource(BestellingFactory bestellingFactory, AggregateRepository aggregateRepo) {
-        this.bestellingFactory = bestellingFactory;
+    public OrderingResource(OrderFactory orderFactory, AggregateRepository aggregateRepo) {
+        this.orderFactory = orderFactory;
         this.aggregateRepo = aggregateRepo;
     }
 
@@ -40,9 +38,9 @@ public class BestellingResource {
             @ApiResponse(code = 403, response = ErrorR.class, message = "Error while placing order")
     })
     @Path("/placeorder")
-    public Response plaatsBestelling(PlaceOrder placeOrder) {
+    public Response placeOrder(PlaceOrder placeOrder) {
         Identifiable identifiable = Identifiable.randomId();
-        new PlaatsBestellingCommandHandler(bestellingFactory, aggregateRepo).handleCommand(new PlaatsBestellingCommand(placeOrder.getSandwiches().get(0).getLabel()));
+        new PlaceOrderCommandHandler(orderFactory, aggregateRepo).handleCommand(new PlaceOrderCommand(placeOrder.getSandwiches().get(0).getLabel()));
         return Response.ok(identifiable).build();
     }
 
