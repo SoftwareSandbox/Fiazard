@@ -1,4 +1,4 @@
-package be.swsb.fiazard.ordering.representation.openinghour;
+package be.swsb.fiazard.ordering.openinghours;
 
 import be.swsb.fiazard.common.Id;
 import be.swsb.fiazard.common.Representation;
