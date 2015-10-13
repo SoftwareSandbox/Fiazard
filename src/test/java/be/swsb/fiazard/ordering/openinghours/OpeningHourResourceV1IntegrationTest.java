@@ -1,9 +1,8 @@
-package be.swsb.fiazard.ordering.resource;
+package be.swsb.fiazard.ordering.openinghours;
 
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-import be.swsb.fiazard.ordering.representation.openinghour.OpeningHourR;
 import com.sun.jersey.api.client.ClientResponse;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.junit.ClassRule;

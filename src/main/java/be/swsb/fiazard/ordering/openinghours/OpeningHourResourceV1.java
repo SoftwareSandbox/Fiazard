@@ -1,8 +1,6 @@
-package be.swsb.fiazard.ordering.resource;
+package be.swsb.fiazard.ordering.openinghours;
 
 import be.swsb.fiazard.common.error.ErrorR;
-import be.swsb.fiazard.ordering.representation.openinghour.OpenPeriodR;
-import be.swsb.fiazard.ordering.representation.openinghour.OpeningHourR;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;
 import com.wordnik.swagger.annotations.Api;
