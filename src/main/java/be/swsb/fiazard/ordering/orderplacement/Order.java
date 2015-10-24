@@ -26,7 +26,6 @@ class Order extends AbstractAggregate implements Aggregate {
 		registerSingleEventReplayStrategy(NewOrderPlacedEvent.class, this::initialize);
 	}
 
-	// TODO higher order functions (sch3lp?)...
 	private void initialize(DomainEvent event) {
 		NewOrderPlacedEvent newOrderPlacedEvent = (NewOrderPlacedEvent) event;
 		setAggregateId(newOrderPlacedEvent.getAggregateId());

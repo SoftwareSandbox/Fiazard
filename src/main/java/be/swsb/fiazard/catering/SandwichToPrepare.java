@@ -6,40 +6,38 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mongojack.MongoCollection;
-import org.mongojack.ObjectId;
 
 import javax.validation.constraints.NotNull;
 
-@MongoCollection(name = KlaarTeMakenBroodje.KLAAR_TE_MAKEN_BROODJES_COLL_NAME)
-public class KlaarTeMakenBroodje {
-    public static final String KLAAR_TE_MAKEN_BROODJES_COLL_NAME = "klaartemakenbroodjes";
+@MongoCollection(name = SandwichToPrepare.SANDWICH_TO_PREPARE_COLL_NAME)
+public class SandwichToPrepare {
+    public static final String SANDWICH_TO_PREPARE_COLL_NAME = "sandwichestoprepare";
 
     @NotNull
     private String id;
-    @JsonProperty("idBestelling")
-    private AggregateId idBestelling;
-    @JsonProperty("naam")
-    private String naam;
+    @JsonProperty("idOrder")
+    private AggregateId idOrder;
+    @JsonProperty("name")
+    private String name;
 
-    public KlaarTeMakenBroodje(@JsonProperty("_id")String id,
-                               @JsonProperty("idBestelling")AggregateId idBestelling,
-                               @JsonProperty("naam") String naam
-                               ) {
+    public SandwichToPrepare(@JsonProperty("_id") String id,
+                             @JsonProperty("idOrder") AggregateId idOrder,
+                             @JsonProperty("name") String name) {
         this.id = id;
-        this.idBestelling = idBestelling;
-        this.naam = naam;
+        this.idOrder = idOrder;
+        this.name = name;
     }
 
     public String getId() {
         return id;
     }
 
-    public AggregateId getIdBestelling() {
-        return idBestelling;
+    public AggregateId getIdOrder() {
+        return idOrder;
     }
 
-    public String getNaam() {
-        return naam;
+    public String getName() {
+        return name;
     }
 
     @Override
