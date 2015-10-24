@@ -25,6 +25,14 @@ sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java8-set-default
 ```
 
+## EventStore
+Install [EventStore](http://geteventstore.com) if you're on Windows.
+
+Pull the [adbrowne/eventstore](https://hub.docker.com/r/adbrowne/eventstore/) docker container and run it with
+```ssh
+sudo docker run -d -p 2113:2113 -p 1113:1113 adbrowne/eventstore
+```
+## Gradle
 There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
 
 ### Running your Dropwizard Application locally
