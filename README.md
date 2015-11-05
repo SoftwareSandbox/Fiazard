@@ -6,7 +6,10 @@
 So you'll find the C4 diagrams in here, alongside our motivations for certain architectural choices.
 
 ## Context
+![Context Diagram](ContextDiagram.jpg)
 
 ## Container
+![Container Diagram](ContainerDiagram.jpg)
 
 ## Component
+![Component Diagram](IMG_6851.JPG)
