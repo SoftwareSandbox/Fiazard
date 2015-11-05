@@ -30,6 +30,7 @@ project.ext {
     mongoJackVersion = '2.1.0'
     dropwizardMongoVersion = '2.0.0'
     jerseyClientVersion = '2.21'
+    abderaVersion = '1.1.3'
 }
 
 repositories {
@@ -45,6 +46,8 @@ dependencies {
     // the 2.2.3 jackson-databind. Excluding the databing drom the monogjack and adding
     // the following dependency fixes the situation.
     compile(
+            "org.apache.abdera:abdera-core:$abderaVersion",
+            "org.apache.abdera:abdera-parser:$abderaVersion",
             "io.dropwizard:dropwizard-core:$dropwizardVersion",
             "io.dropwizard:dropwizard-auth:$dropwizardVersion",
             "io.dropwizard:dropwizard-migrations:$dropwizardVersion",
