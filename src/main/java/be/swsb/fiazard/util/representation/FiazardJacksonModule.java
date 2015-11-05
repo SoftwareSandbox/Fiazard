@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class FiazardJacksonModule {
@@ -16,6 +17,8 @@ public class FiazardJacksonModule {
             .addSerializer(LocalTime.class, new LocalTimeSerializer())
             .addDeserializer(LocalTime.class, new LocalTimeDeserializer())
             .addSerializer(AggregateId.class, new AggregateIdSerializer())
-            .addDeserializer(AggregateId.class, new AggregateIdDeserializer());
+            .addDeserializer(AggregateId.class, new AggregateIdDeserializer())
+            .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer())
+            .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
 
 }
