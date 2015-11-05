@@ -35,10 +35,11 @@ Pull the [adbrowne/eventstore](https://hub.docker.com/r/adbrowne/eventstore/) do
 sudo docker run -d -p 2113:2113 -p 1113:1113 adbrowne/eventstore
 ```
 Access the Web UI via [http://localhost:2113/web/index.html](http://localhost:2113/web/index.html).
-On Windows, you'll have to replace 'localhost' with the IP address of the VirtualBox Machine that Docker runs in.
-Check your Docker terminal for the correct IP.
+To make this work on Windows, you'll have to setup port-forwarding on the VirtualBox machine.
+In VirtualBox Manager, right click 'default', then choose 'Instellingen', 'Netwerk', 'Poortdoorverwijzing'.
+Add one rule for TCP, 127.0.0.1, 1113, 1113 and one rule for TCP, 127.0.0.1, 2113, 2113.
 
-Alternatively, on Windows, you can install [EventStore](http://geteventstore.com) natively without using Docker.
+Alternatively, on Windows, if you don't want to use Docker, you can install [EventStore](http://geteventstore.com) natively. However, if we're going to customize a docker container for event store, you might get into trouble...
 
 ## Gradle
 There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
