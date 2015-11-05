@@ -26,12 +26,20 @@ sudo apt-get install oracle-java8-set-default
 ```
 
 ## EventStore
-Install [EventStore](http://geteventstore.com) if you're on Windows.
+
+Install [Docker](https://www.docker.com/) on Ubuntu, or [DockerToolbox](https://www.docker.com/docker-toolbox) on Windows.
+DockerToolbox will start Docker inside a VirtualBox machine. Make sure you have a recent (5.0.3 or up) VirtualBox installation. Otherwhise, you might get an IP conflict between Windows and Docker-machine.
 
 Pull the [adbrowne/eventstore](https://hub.docker.com/r/adbrowne/eventstore/) docker container and run it with
 ```ssh
 sudo docker run -d -p 2113:2113 -p 1113:1113 adbrowne/eventstore
 ```
+Access the Web UI via [http://localhost:2113/web/index.html](http://localhost:2113/web/index.html).
+On Windows, you'll have to replace 'localhost' with the IP address of the VirtualBox Machine that Docker runs in.
+Check your Docker terminal for the correct IP.
+
+Alternatively, on Windows, you can install [EventStore](http://geteventstore.com) natively without using Docker.
+
 ## Gradle
 There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
 
