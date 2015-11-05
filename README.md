@@ -1,33 +1,12 @@
-Fiazard
-=======
+# Fiazards Architecture Handbook
 
-Learning project in which we try to make our sandwich ordering site better. This is the backend project, providing RESTful webservices with DropWizard to the [FiAngulartje frontend](https://github.com/SoftwareSandbox/FiAngulartje).
+## Introduction
+[Simon Brown](http://www.codingthearchitecture.com/authors/sbrown/) mentioned in his Coding the Architecture course the idea of an Architecture Handbook.
 
-[![Build Status](https://travis-ci.org/SoftwareSandbox/Fiazard.svg?branch=master)](https://travis-ci.org/SoftwareSandbox/Fiazard)
+So you'll find the C4 diagrams in here, alongside our motivations for certain architectural choices.
 
-[![Stories in Ready](https://badge.waffle.io/softwaresandbox/fiazard.svg?label=ready&title=Ready)](http://waffle.io/softwaresandbox/fiazard)
-[![Stories in Ready](https://badge.waffle.io/softwaresandbox/fiazard.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/softwaresandbox/fiazard)
+## Context
 
-[![Throughput Graph](https://graphs.waffle.io/softwaresandbox/fiazard/throughput.svg)](https://waffle.io/softwaresandbox/fiazard/metrics)
+## Container
 
-## Tech Stack
-[Dropwizard 0.7.x](http://dropwizard.io/), in combination with 
-[Guice](https://github.com/HubSpot/dropwizard-guice) for **Dependency Injection**, and
-[Swagger](http://swagger.io/) for **API docs**, and
-[JDBI](http://jdbi.org/) as the "**ORM**" to our relational db should we use one, with 
-MySQL/Postgres/MongoDB/... (TBD) for **persistency**, 
-which will all be set up/provisioned using
-[Vagrant](https://www.vagrantup.com/)/[Docker](https://www.docker.com/)/... (TBD) for **provisioning**/Infrastructure as code.
-
-We'll eventually handle **authentication and authorization** using
-[Apache Shiro](http://shiro.apache.org/) with the [Dropwizard Plugin](https://github.com/silb/dropwizard-shiro), with
-[StormPath](https://stormpath.com/) as our **User & Access Management** backend.
-
-
-We'll eventually get continuous feedback thanks to
-[TravisCI](https://travis-ci.org/)/[Codeship](http://codeship.io/) (TBD) as our **Continuous Integration**, which will trigger
-[Gradle](http://www.gradle.org/) **build(s)** to run our tests, of which some might use
-the [rest-scenarios](https://github.com/cegeka/rest-scenarios) framework to make some readable **scenario tests**.
-
-## Contributing
-Check [this important info](CONTRIBUTE.md) if you're interested in Contributing.
+## Component
