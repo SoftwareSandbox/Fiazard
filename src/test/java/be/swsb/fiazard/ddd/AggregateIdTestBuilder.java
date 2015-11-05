@@ -12,6 +12,10 @@ public class AggregateIdTestBuilder {
         return new AggregateIdTestBuilder().withId(id).build();
     }
 
+    public static AggregateId randomId() {
+        return new AggregateIdGenerator().generate();
+    }
+
     private AggregateIdTestBuilder() {
     }
 
