@@ -63,12 +63,12 @@ public class ToppingResourceIntegrationTest {
     public void lock_ToppingLockedEventIsStored() throws Exception {
         Topping topping = new Topping("id", "someTopping", 4, "image", "imageType");
 
-        ClientResponse clientResponse = clientRule.getClient()
+        Response clientResponse = clientRule.getClient()
                 .target(BASE_URL)
                 .path(LOCK_TOPPING_PATH)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(topping), ClientResponse.class);
+                .post(Entity.json(topping));
 
         assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
@@ -85,12 +85,12 @@ public class ToppingResourceIntegrationTest {
     public void unlock_ToppingUnlockedEventIsStored() throws Exception {
         Topping topping = new Topping("id", "someTopping", 4, "image", "imageType");
 
-        ClientResponse clientResponse = clientRule.getClient()
+        Response clientResponse = clientRule.getClient()
                 .target(BASE_URL)
                 .path(UNLOCK_TOPPING_PATH)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(topping), ClientResponse.class);
+                .post(Entity.json(topping));
 
         assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
@@ -107,12 +107,12 @@ public class ToppingResourceIntegrationTest {
     public void exclude_ToppingExcludeEventStored() {
         Topping topping = new Topping("id", "someTopping", 4, "image", "imageType");
 
-        ClientResponse clientResponse = clientRule.getClient()
+        Response clientResponse = clientRule.getClient()
                 .target(BASE_URL)
                 .path(EXCLUDE_TOPPING_PATH)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(topping), ClientResponse.class);
+                .post(Entity.json(topping));
 
         assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 

@@ -65,12 +65,12 @@ public class CondimentResourceIntegrationTest {
     public void lock_CondimentLockedEventIsStored() throws Exception {
     	Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
     	
-    	ClientResponse clientResponse = clientRule.getClient()
+    	Response clientResponse = clientRule.getClient()
     			.target(BASE_URL)
     			.path(LOCK_CONDIMENT_PATH)
     			.request(MediaType.APPLICATION_JSON_TYPE)
     			.accept(MediaType.APPLICATION_JSON_TYPE)
-    			.post(Entity.json(condiment),ClientResponse.class);
+    			.post(Entity.json(condiment));
     	
     	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
     	
@@ -87,12 +87,12 @@ public class CondimentResourceIntegrationTest {
     public void unlock_CondimentUnlockedEventIsStored() throws Exception {
     	Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
     	
-    	ClientResponse clientResponse = clientRule.getClient()
+    	Response clientResponse = clientRule.getClient()
     			.target(BASE_URL)
     			.path(UNLOCK_CONDIMENT_PATH)
     			.request(MediaType.APPLICATION_JSON_TYPE)
     			.accept(MediaType.APPLICATION_JSON_TYPE)
-    			.post(Entity.json(condiment), ClientResponse.class);
+    			.post(Entity.json(condiment));
     	
     	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
     	
@@ -109,12 +109,12 @@ public class CondimentResourceIntegrationTest {
     public void exclude_CondimentExcludeEventStored() {
         Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
 
-        ClientResponse clientResponse = clientRule.getClient()
+        Response clientResponse = clientRule.getClient()
                 .target(BASE_URL)
                 .path(EXCLUDE_CONDIMENT_PATH)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(condiment), ClientResponse.class);
+                .post(Entity.json(condiment));
 
         assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 

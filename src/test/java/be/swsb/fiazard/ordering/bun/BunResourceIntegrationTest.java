@@ -63,12 +63,12 @@ public class BunResourceIntegrationTest {
     public void lock_BunLockedEventIsStored() throws Exception {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
 
-        ClientResponse clientResponse = clientRule.getClient()
+        Response clientResponse = clientRule.getClient()
                 .target(BASE_URL)
                 .path(LOCK_BUN_PATH)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(bun), ClientResponse.class);
+                .post(Entity.json(bun));
 
         assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
@@ -85,12 +85,12 @@ public class BunResourceIntegrationTest {
     public void unlock_BunUnlockedEventIsStored() throws Exception {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
 
-        ClientResponse clientResponse = clientRule.getClient()
+        Response clientResponse = clientRule.getClient()
                 .target(BASE_URL)
                 .path(UNLOCK_BUN_PATH)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(bun), ClientResponse.class);
+                .post(Entity.json(bun));
 
         assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
@@ -107,12 +107,12 @@ public class BunResourceIntegrationTest {
     public void exclude_BunExcludeEventStored() {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
 
-        ClientResponse clientResponse = clientRule.getClient()
+        Response clientResponse = clientRule.getClient()
                 .target(BASE_URL)
                 .path(EXCLUDE_BUN_PATH)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .post(Entity.json(bun), ClientResponse.class);
+                .post(Entity.json(bun));
 
         assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
