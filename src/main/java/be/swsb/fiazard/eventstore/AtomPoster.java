@@ -1,23 +1,18 @@
 package be.swsb.fiazard.eventstore;
 
+import javax.ws.rs.core.MediaType;
+
+import com.google.common.base.Preconditions;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.LoggingFilter;
-
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 public class AtomPoster {
-    //TODO sch3lp: make configurable (as Dropwizard module/provider?)
-    public static final String FIAZARD_STREAM = "http://localhost:2113/streams/fiazard";
 
     private WebResource webResource;
 
     public AtomPoster(String stream) {
-        if (stream == null){
-            stream = FIAZARD_STREAM;
-        }
+    	Preconditions.checkNotNull(stream);
 
         Client jerseyClient = new Client();
 //        uncomment to see your request in sysout

@@ -2,11 +2,14 @@ package be.swsb.fiazard.ddd;
 
 import static org.apache.commons.lang.builder.ToStringStyle.SIMPLE_STYLE;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.UUID;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AggregateId {
@@ -36,5 +39,9 @@ public class AggregateId {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, SIMPLE_STYLE);
 	};
-	
+
+	public static AggregateId generate() {
+		return new AggregateId(UUID.randomUUID().toString());
+	}
+
 }
