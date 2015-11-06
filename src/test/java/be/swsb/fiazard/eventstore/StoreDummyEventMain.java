@@ -1,14 +1,16 @@
 package be.swsb.fiazard.eventstore;
 
+import java.util.Arrays;
+
 import be.swsb.fiazard.ddd.AggregateId;
 import be.swsb.fiazard.ddd.AggregateIdGenerator;
 import be.swsb.fiazard.ddd.DomainEvent;
 import be.swsb.fiazard.ddd.DomainEventTestBuilder;
 
-import java.util.Arrays;
-
 public class StoreDummyEventMain {
 
+	public static final String FIAZARD_STREAM = "http://localhost:2113/streams/fiazard";
+	
     public static void main(String[] args) {
         DomainEvent event = createDummyEvent();
         store(event);
@@ -20,6 +22,6 @@ public class StoreDummyEventMain {
     }
 
     private static void store(DomainEvent event) {
-        new EventStoreImpl(new AtomPoster(null)).store(event.getAggregateId(), Arrays.asList(event), 0);
+        new EventStoreImpl(new AtomPoster(FIAZARD_STREAM)).store(event.getAggregateId(), Arrays.asList(event), 0);
     }
 }
