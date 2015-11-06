@@ -1,16 +1,15 @@
 package be.swsb.fiazard.ordering.preparation;
 
-import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.Bundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import be.swsb.fiazard.main.FiazardConfig;
 import be.swsb.fiazard.main.MongoBundle;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.DB;
 
 
-public class OrderPreparationBundle implements ConfiguredBundle<FiazardConfig> {
+public class OrderPreparationBundle implements Bundle {
 
     private MongoBundle mongoBundle;
 
@@ -23,7 +22,7 @@ public class OrderPreparationBundle implements ConfiguredBundle<FiazardConfig> {
     }
 
     @Override
-    public void run(FiazardConfig configuration, Environment environment) throws Exception {
+    public void run(Environment environment) {
         OrderItemToBePreparedViewModelDAO orderItemToBePreparedViewModelDAO = new OrderItemToBePreparedViewModelDAO(db(), objectMapper());
         
 		environment.jersey().register(new OrderItemToBePreparedViewModelResource(orderItemToBePreparedViewModelDAO));
