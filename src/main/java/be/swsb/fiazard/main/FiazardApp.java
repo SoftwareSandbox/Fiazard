@@ -2,7 +2,6 @@ package be.swsb.fiazard.main;
 
 import static be.swsb.fiazard.util.representation.FiazardJacksonModule.MODULE;
 import io.dropwizard.Application;
-import io.dropwizard.Bundle;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -34,12 +33,7 @@ public class FiazardApp extends Application<FiazardConfig> {
 		return bundle;
 	}
 
-	private <T extends Bundle> T registerBundle(Bootstrap<FiazardConfig> bootstrap, T bundle) {
-        bootstrap.addBundle(bundle);
-		return bundle;
-	}
-
-	@Override
+    @Override
     public void run(FiazardConfig config, Environment environment) throws Exception {
         configureJersey(environment);
     }

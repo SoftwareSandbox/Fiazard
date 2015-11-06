@@ -1,12 +1,13 @@
 package be.swsb.fiazard.ordering.orderplacement;
 
-import io.dropwizard.Bundle;
+import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import be.swsb.fiazard.eventstore.EventStoreBundle;
+import be.swsb.fiazard.main.FiazardConfig;
 
 
-public class OrderPlacementBundle implements Bundle {
+public class OrderPlacementBundle implements ConfiguredBundle<FiazardConfig> {
 
     private EventStoreBundle eventStoreBundle;
 
@@ -19,7 +20,7 @@ public class OrderPlacementBundle implements Bundle {
     }
 
     @Override
-    public void run(Environment environment) {
+    public void run(FiazardConfig configuration, Environment environment) throws Exception {
         environment.jersey().register(new OrderingResource(new OrderFactory(), eventStoreBundle.getAggregateRepository()));
     }
 
