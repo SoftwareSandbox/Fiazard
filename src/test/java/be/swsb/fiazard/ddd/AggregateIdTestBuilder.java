@@ -13,7 +13,7 @@ public class AggregateIdTestBuilder {
     }
 
     public static AggregateId randomId() {
-        return AggregateId.generate();
+        return new AggregateIdGenerator().generate();
     }
 
     private AggregateIdTestBuilder() {

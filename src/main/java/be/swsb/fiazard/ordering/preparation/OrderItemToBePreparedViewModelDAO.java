@@ -1,26 +1,25 @@
 package be.swsb.fiazard.ordering.preparation;
 
-import static be.swsb.fiazard.ordering.preparation.OrderItemToBePreparedViewModel.ORDER_ITEM_TO_BEPREPARED_COLLECTION_NAME;
+import be.swsb.fiazard.util.representation.FiazardJacksonModule;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
+import com.mongodb.DB;
+import org.mongojack.DBCursor;
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.internal.MongoJackModule;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import org.mongojack.DBCursor;
-import org.mongojack.JacksonDBCollection;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
-import com.mongodb.DB;
+import static be.swsb.fiazard.ordering.preparation.OrderItemToBePreparedViewModel.ORDER_ITEM_TO_BEPREPARED_COLLECTION_NAME;
 
 public class OrderItemToBePreparedViewModelDAO {
 
     private DB db;
-	private ObjectMapper objectMapper;
 
-    public OrderItemToBePreparedViewModelDAO(DB db, ObjectMapper objectMapper) {
+    public OrderItemToBePreparedViewModelDAO(DB db) {
         this.db = db;
-		this.objectMapper = objectMapper;
     }
 
     public List<OrderItemToBePreparedViewModel> find(LocalDateTime dateFrom, LocalDateTime dateUntil) {
@@ -39,6 +38,8 @@ public class OrderItemToBePreparedViewModelDAO {
     }
 
     private JacksonDBCollection<OrderItemToBePreparedViewModel, String> collection() {
+        ObjectMapper objectMapper = MongoJackModule.configure(new ObjectMapper());
+        objectMapper.registerModule(FiazardJacksonModule.MODULE);
 		return JacksonDBCollection.wrap(db.getCollection(ORDER_ITEM_TO_BEPREPARED_COLLECTION_NAME), OrderItemToBePreparedViewModel.class, String.class, objectMapper);
 	}
 

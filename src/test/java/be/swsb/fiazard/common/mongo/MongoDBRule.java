@@ -24,7 +24,6 @@ public class MongoDBRule extends TestWatcher {
     private static Logger logger = Logger.getLogger(MongoDBRule.class.getName());
 
     private DB db;
-    private ObjectMapper objectMapper;
     private List<String> mongoDBReservedColls = Lists.newArrayList("system.indexes");
     private boolean cleanUpDataAtEnd = true;
     private boolean loggingOn = false;
@@ -43,8 +42,6 @@ public class MongoDBRule extends TestWatcher {
         mongoClientFactory.setDbName(dbName);
         mongoClientFactory.setUri(new MongoClientURI("mongodb://localhost:27017/?maxPoolSize=50&maxIdleTimeMS=300000"));
         db = mongoClientFactory.build().getDB(dbName);
-        objectMapper = MongoJackModule.configure(new ObjectMapper());
-        objectMapper.registerModule(FiazardJacksonModule.MODULE);
     }
 
     public MongoDBRule withoutCleaningUpDataAtEnd() {
@@ -65,10 +62,6 @@ public class MongoDBRule extends TestWatcher {
     public DB getDB() {
         return db;
     }
-    
-    public ObjectMapper getObjectMapper() {
-		return objectMapper;
-	}
 
     public <T> void persist(T persistableObject) {
         collectionFor(persistableObject).save(persistableObject);
@@ -82,6 +75,8 @@ public class MongoDBRule extends TestWatcher {
 
     @SuppressWarnings("unchecked")
     private <T> JacksonDBCollection<T, String> collectionFor(T persistableObject) {
+        ObjectMapper objectMapper = MongoJackModule.configure(new ObjectMapper());
+        objectMapper.registerModule(FiazardJacksonModule.MODULE);
         return (JacksonDBCollection<T, String>) JacksonDBCollection.wrap(db.getCollection(collectionNameFor(persistableObject)), persistableObject.getClass(), String.class, objectMapper);
     }
 
