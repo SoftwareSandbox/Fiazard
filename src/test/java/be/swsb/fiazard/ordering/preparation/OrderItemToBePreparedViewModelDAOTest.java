@@ -26,7 +26,7 @@ public class OrderItemToBePreparedViewModelDAOTest {
 
     @Before
     public void setUp() {
-        dao = new OrderItemToBePreparedViewModelDAO(mongoDBRule.getDB(), mongoDBRule.getObjectMapper());
+        dao = new OrderItemToBePreparedViewModelDAO(mongoDBRule.getDB());
     }
 
     @Test
