@@ -56,8 +56,6 @@ dependencies {
             "io.dropwizard:dropwizard-migrations:$dropwizardVersion",
             "com.google.guava:guava:$guavaVersion",
             "org.apache.commons:commons-lang3:3.4",
-            "io.swagger:swagger-jaxrs:$swaggerVersion",
-            "io.swagger:swagger-annotations:$swaggerVersion",
             "org.mongodb:mongo-java-driver:$mongoDBJavaDriverVersion",
             "org.mongojack:mongojack:$mongoJackVersion",
             "com.commercehub.dropwizard:dropwizard-mongo:$dropwizardMongoVersion",
@@ -67,6 +65,14 @@ dependencies {
             "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyClientVersion",
             "org.jboss.resteasy:resteasy-atom-provider:3.0.11.Final"
     )
+    compile("io.swagger:swagger-jaxrs:$swaggerVersion")
+    {
+        exclude group: 'javax.ws.rs', module: 'jsr311-api'
+    }
+    compile("io.swagger:swagger-annotations:$swaggerVersion")
+    {
+        exclude group: 'javax.ws.rs', module: 'jsr311-api'
+    }
 
     testCompile(
             "junit:junit:$junitVersion",
