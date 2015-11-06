@@ -11,5 +11,4 @@ class OrderFactory {
 		return new Order(AggregateId.generate(), placeOrderCommand.getCustomerName());
 	}
 	
-	
 }
