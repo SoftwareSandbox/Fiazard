@@ -25,6 +25,23 @@ sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java8-set-default
 ```
 
+## EventStore
+
+Install [Docker](https://www.docker.com/) on Ubuntu, or [DockerToolbox](https://www.docker.com/docker-toolbox) on Windows.
+DockerToolbox will start Docker inside a VirtualBox machine. Make sure you have a recent (5.0.3 or up) VirtualBox installation. Otherwhise, you might get an IP conflict between Windows and Docker-machine.
+
+Pull the [adbrowne/eventstore](https://hub.docker.com/r/adbrowne/eventstore/) docker container and run it with
+```ssh
+sudo docker run -d -p 2113:2113 -p 1113:1113 adbrowne/eventstore
+```
+Access the Web UI via [http://localhost:2113/web/index.html](http://localhost:2113/web/index.html).
+To make this work on Windows, you'll have to setup port-forwarding on the VirtualBox machine.
+In VirtualBox Manager, right click 'default', then choose 'Instellingen', 'Netwerk', 'Poortdoorverwijzing'.
+Add one rule for TCP, 127.0.0.1, 1113, 1113 and one rule for TCP, 127.0.0.1, 2113, 2113.
+
+Alternatively, on Windows, if you don't want to use Docker, you can install [EventStore](http://geteventstore.com) natively. However, if we're going to customize a docker container for event store, you might get into trouble...
+
+## Gradle
 There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
 
 ### Running your Dropwizard Application locally
