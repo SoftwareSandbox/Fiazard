@@ -9,6 +9,8 @@ import be.swsb.fiazard.ordering.condiment.CondimentDAO;
 import be.swsb.fiazard.ordering.condiment.CondimentResource;
 import be.swsb.fiazard.ordering.openinghours.OpeningHourResourceV1;
 import be.swsb.fiazard.ordering.orderplacement.OrderingBundle;
+import be.swsb.fiazard.ordering.preparation.OrderItemToBePreparedViewModelDAO;
+import be.swsb.fiazard.ordering.preparation.OrderItemToBePreparedViewModelResource;
 import be.swsb.fiazard.ordering.topping.ToppingDAO;
 import be.swsb.fiazard.ordering.topping.ToppingResource;
 import com.commercehub.dropwizard.mongo.ManagedMongoClient;
@@ -49,6 +51,7 @@ public class FiazardApp extends Application<FiazardConfig> {
 		environment.jersey().register(new BunResource(new BunDAO(db), eventStore));
 		environment.jersey().register(new ToppingResource(new ToppingDAO(db), eventStore));
 		environment.jersey().register(new CondimentResource(new CondimentDAO(db), eventStore));
+        environment.jersey().register(new OrderItemToBePreparedViewModelResource(new OrderItemToBePreparedViewModelDAO(db)));
 	}
 
     //TODO move to a MongoDB Module

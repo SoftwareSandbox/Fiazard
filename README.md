@@ -10,6 +10,9 @@ Learning project in which we try to make our sandwich ordering site better. This
 
 [![Throughput Graph](https://graphs.waffle.io/softwaresandbox/fiazard/throughput.svg)](https://waffle.io/softwaresandbox/fiazard/metrics)
 
+## Architecture Handbook
+[Fiazards Architecture Handbook on GitBook.com](https://www.gitbook.com/book/sch3lp/fiazard-arch-handbook), managed by the [architecture-handbook](https://github.com/SoftwareSandbox/Fiazard/tree/architecture-handbook) branch.
+
 ## Tech Stack
 [Dropwizard 0.7.x](http://dropwizard.io/), in combination with 
 [Guice](https://github.com/HubSpot/dropwizard-guice) for **Dependency Injection**, and

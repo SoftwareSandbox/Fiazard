@@ -36,6 +36,9 @@ project.ext {
 repositories {
     mavenCentral()
     jcenter() // for dropwizard-mongo
+    maven {
+        url "https://github.com/SoftwareSandbox/maven-repo/raw/master"
+    }
 }
 
 dependencies {
@@ -57,7 +60,8 @@ dependencies {
             "org.mongodb:mongo-java-driver:$mongoDBJavaDriverVersion",
             "org.mongojack:mongojack:$mongoJackVersion",
             "com.commercehub.dropwizard:dropwizard-mongo:$dropwizardMongoVersion",
-            'com.sun.jersey:jersey-client:1.18.1'
+            'com.sun.jersey:jersey-client:1.18.1',
+            "be.swsb.atom-feed:atom-feed-core:0.0.1"
 //            "org.glassfish.jersey.core:jersey-client:$jerseyClientVersion",
 //            "org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyClientVersion"
     )
