@@ -1,32 +1,22 @@
 package be.swsb.fiazard.ordering.condiment;
 
-import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.common.test.ClientRule;
-import be.swsb.fiazard.main.FiazardApp;
-import be.swsb.fiazard.main.FiazardConfig;
-import com.sun.jersey.api.client.ClientResponse;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import be.swsb.fiazard.ordering.bun.Bun;
-import be.swsb.fiazard.ordering.bun.BunExcludeEvent;
-import io.dropwizard.testing.junit.DropwizardAppRule;
-
-import java.util.List;
-
-import javax.ws.rs.core.MediaType;
-
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-
 import be.swsb.fiazard.common.eventsourcing.Event;
 import be.swsb.fiazard.common.eventsourcing.EventStore;
 import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
+import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.glassfish.jersey.client.ClientResponse;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -60,14 +50,14 @@ public class CondimentResourceIntegrationTest {
     public void toppingsAreReturnedAsJSON() throws Exception {
         mongoDBRule.persist(new Condiment(null, "Patrick", 4d, "image", "imageType"));
 
-        ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+        Condiment[] condiments = clientRule.getClient()
+                .target(BASE_URL)
                 .path(CONDIMENT_PATH)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .get(ClientResponse.class);
+                .get(Condiment[].class);
 
-        assertThat(clientResponse.getEntity(Condiment[].class)).isNotEmpty();
+        assertThat(condiments).isNotEmpty();
     }
     
 
@@ -76,14 +66,13 @@ public class CondimentResourceIntegrationTest {
     	Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
     	
     	ClientResponse clientResponse = clientRule.getClient()
-    			.resource(BASE_URL)
+    			.target(BASE_URL)
     			.path(LOCK_CONDIMENT_PATH)
-    			.type(MediaType.APPLICATION_JSON_TYPE)
+    			.request(MediaType.APPLICATION_JSON_TYPE)
     			.accept(MediaType.APPLICATION_JSON_TYPE)
-    			.entity(condiment)
-    			.post(ClientResponse.class);
+    			.post(Entity.json(condiment),ClientResponse.class);
     	
-    	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+    	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
     	
 		List<Event> events = eventStore.findAll();
         assertThat(events).hasSize(1);
@@ -99,14 +88,13 @@ public class CondimentResourceIntegrationTest {
     	Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
     	
     	ClientResponse clientResponse = clientRule.getClient()
-    			.resource(BASE_URL)
+    			.target(BASE_URL)
     			.path(UNLOCK_CONDIMENT_PATH)
-    			.type(MediaType.APPLICATION_JSON_TYPE)
+    			.request(MediaType.APPLICATION_JSON_TYPE)
     			.accept(MediaType.APPLICATION_JSON_TYPE)
-    			.entity(condiment)
-    			.post(ClientResponse.class);
+    			.post(Entity.json(condiment), ClientResponse.class);
     	
-    	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+    	assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
     	
     	List<Event> events = eventStore.findAll();
     	assertThat(events).hasSize(1);
@@ -122,14 +110,13 @@ public class CondimentResourceIntegrationTest {
         Condiment condiment = new Condiment("id", "someCondiment", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+                .target(BASE_URL)
                 .path(EXCLUDE_CONDIMENT_PATH)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .entity(condiment)
-                .post(ClientResponse.class);
+                .post(Entity.json(condiment), ClientResponse.class);
 
-        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
         List<Event> events = eventStore.findAll();
         assertThat(events).hasSize(1);

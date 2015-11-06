@@ -3,7 +3,6 @@ package be.swsb.fiazard.ordering.openinghours;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-import com.sun.jersey.api.client.ClientResponse;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -26,13 +25,13 @@ public class OpeningHourResourceV1IntegrationTest {
 
     @Test
     public void openingHoursAreReturnedAsJSON() throws Exception {
-        ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+        OpeningHourR[] clientResponse = clientRule.getClient()
+                .target(BASE_URL)
                 .path(OpeningHourResourceV1.OPENING_HOUR_BASE_URI)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .get(ClientResponse.class);
+                .get(OpeningHourR[].class);
 
-        assertThat(clientResponse.getEntity(OpeningHourR[].class)).isNotEmpty();
+        assertThat(clientResponse).isNotEmpty();
     }
 }

@@ -6,14 +6,16 @@ import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-import com.sun.jersey.api.client.ClientResponse;
 import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.glassfish.jersey.client.ClientResponse;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,14 +49,14 @@ public class BunResourceIntegrationTest {
     public void getAll_ReturnsBunsAsJSON() throws Exception {
         mongoDBRule.persist(new Bun(null, "Patrick", 4d, "image", "imageType"));
 
-        ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+        Bun[] buns = clientRule.getClient()
+                .target(BASE_URL)
                 .path(BUN_PATH)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .get(ClientResponse.class);
+                .get(Bun[].class);
 
-        assertThat(clientResponse.getEntity(Bun[].class)).isNotEmpty();
+        assertThat(buns).isNotEmpty();
     }
     
     @Test
@@ -62,14 +64,13 @@ public class BunResourceIntegrationTest {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+                .target(BASE_URL)
                 .path(LOCK_BUN_PATH)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .entity(bun)
-                .post(ClientResponse.class);
+                .post(Entity.json(bun), ClientResponse.class);
 
-        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
         List<Event> events = eventStore.findAll();
         assertThat(events).hasSize(1);
@@ -85,14 +86,13 @@ public class BunResourceIntegrationTest {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+                .target(BASE_URL)
                 .path(UNLOCK_BUN_PATH)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .entity(bun)
-                .post(ClientResponse.class);
+                .post(Entity.json(bun), ClientResponse.class);
 
-        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
         List<Event> events = eventStore.findAll();
         assertThat(events).hasSize(1);
@@ -108,14 +108,13 @@ public class BunResourceIntegrationTest {
         Bun bun = new Bun("id", "someBun", 4, "image", "imageType");
 
         ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+                .target(BASE_URL)
                 .path(EXCLUDE_BUN_PATH)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .entity(bun)
-                .post(ClientResponse.class);
+                .post(Entity.json(bun), ClientResponse.class);
 
-        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(ClientResponse.Status.OK.getStatusCode());
+        assertThat(clientResponse.getStatusInfo().getStatusCode()).isEqualTo(Response.Status.OK.getStatusCode());
 
         List<Event> events = eventStore.findAll();
         assertThat(events).hasSize(1);
