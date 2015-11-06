@@ -1,21 +1,21 @@
 package be.swsb.fiazard.catering;
 
-import be.swsb.fiazard.common.mongo.MongoDBRule;
-import be.swsb.fiazard.ddd.AggregateId;
-import be.swsb.fiazard.ddd.AggregateIdGenerator;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import be.swsb.fiazard.common.mongo.MongoDBRule;
+import be.swsb.fiazard.ddd.AggregateId;
 
 public class SandwichToPrepareRepositoryIntegrationTest {
 
     private static final String ID1 = "id1";
     private static final String ID2 = "id2";
-    private static final AggregateId ORDER_ID = new AggregateIdGenerator().generate();
+    private static final AggregateId ORDER_ID = AggregateId.generate();
     private static final String NAME1 = "name1";
     private static final String NAME2 = "name2";
 

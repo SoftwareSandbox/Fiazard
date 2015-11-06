@@ -4,6 +4,7 @@ package be.swsb.fiazard.eventstore;
 import org.glassfish.jersey.client.ClientResponse;
 import org.glassfish.jersey.client.JerseyClientBuilder;
 
+import com.google.common.base.Preconditions;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
@@ -16,9 +17,7 @@ public class AtomPoster {
     private WebTarget webResource;
 
     public AtomPoster(String stream) {
-        if (stream == null){
-            stream = FIAZARD_STREAM;
-        }
+    	Preconditions.checkNotNull(stream);
 
         Client jerseyClient = new JerseyClientBuilder().build();
 //        uncomment to see your request in sysout
@@ -26,6 +25,7 @@ public class AtomPoster {
         webResource = jerseyClient.target(stream);
     }
 
+    //TODO sch3lp: dw upgrade to 0.9.x works with jersey-client 2.21, this code won't work anymore then
     public void post(AtomEvent atomEvent) {
         ClientResponse response = webResource
                 .request(MediaType.APPLICATION_JSON_TYPE)
