@@ -29,7 +29,7 @@ project.ext {
     mongoDBJavaDriverVersion = '1.3'
     mongoJackVersion = '2.1.0'
     dropwizardMongoVersion = '2.0.0'
-    jerseyClientVersion = '2.21'
+    jerseyClientVersion = '2.22.1'
     abderaVersion = '1.1.3'
 }
 
