@@ -23,7 +23,7 @@ buildscript {
 project.ext {
     dropwizardVersion = '0.9.1'
     guavaVersion = '18.0'
-    swaggerVersion = '1.3.11'
+    swaggerVersion = '1.5.4'
     junitVersion = '4.12'
     assertJVersion = '1.7.0'
     mongoDBJavaDriverVersion = '1.3'
@@ -55,8 +55,9 @@ dependencies {
             "io.dropwizard:dropwizard-auth:$dropwizardVersion",
             "io.dropwizard:dropwizard-migrations:$dropwizardVersion",
             "com.google.guava:guava:$guavaVersion",
-            "com.wordnik:swagger-jaxrs_2.10:$swaggerVersion",
-            "com.wordnik:swagger-annotations:$swaggerVersion",
+            "org.apache.commons:commons-lang3:3.4",
+            "io.swagger:swagger-jaxrs:$swaggerVersion",
+            "io.swagger:swagger-annotations:$swaggerVersion",
             "org.mongodb:mongo-java-driver:$mongoDBJavaDriverVersion",
             "org.mongojack:mongojack:$mongoJackVersion",
             "com.commercehub.dropwizard:dropwizard-mongo:$dropwizardMongoVersion",

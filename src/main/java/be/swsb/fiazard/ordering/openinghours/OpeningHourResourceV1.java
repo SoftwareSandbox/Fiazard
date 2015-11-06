@@ -3,9 +3,9 @@ package be.swsb.fiazard.ordering.openinghours;
 import be.swsb.fiazard.common.error.ErrorR;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
