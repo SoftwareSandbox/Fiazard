@@ -3,7 +3,6 @@ package be.swsb.fiazard.eventstore;
 import java.util.Arrays;
 
 import be.swsb.fiazard.ddd.AggregateId;
-import be.swsb.fiazard.ddd.AggregateIdGenerator;
 import be.swsb.fiazard.ddd.DomainEvent;
 import be.swsb.fiazard.ddd.DomainEventTestBuilder;
 
@@ -17,8 +16,7 @@ public class StoreDummyEventMain {
     }
 
     private static DomainEvent createDummyEvent() {
-        AggregateId id = new AggregateIdGenerator().generate();
-        return DomainEventTestBuilder.aDumbaEvent().withAggregateId(id).withDumbaString("someDumbaString").build();
+        return DomainEventTestBuilder.aDumbaEvent().withAggregateId(AggregateId.generate()).withDumbaString("someDumbaString").build();
     }
 
     private static void store(DomainEvent event) {
