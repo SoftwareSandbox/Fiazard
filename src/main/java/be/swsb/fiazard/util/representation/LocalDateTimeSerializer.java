@@ -13,7 +13,7 @@ public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
     public void serialize(LocalDateTime value, JsonGenerator jgen,
                           SerializerProvider provider) throws IOException, JsonProcessingException {
 
-        jgen.writeString(LocalDateTimeUtil.FORMATTER.format(value));
+        jgen.writeString(LocalDateTimeUtil.toString(value));
     }
 
 }

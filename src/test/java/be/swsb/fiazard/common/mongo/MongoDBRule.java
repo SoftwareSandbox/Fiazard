@@ -67,6 +67,12 @@ public class MongoDBRule extends TestWatcher {
         collectionFor(persistableObject).save(persistableObject);
     }
 
+    public void persistAll(Object... persistableObjects) {
+        for (Object obj: persistableObjects) {
+            persist(obj);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     private <T> JacksonDBCollection<T, String> collectionFor(T persistableObject) {
         ObjectMapper objectMapper = MongoJackModule.configure(new ObjectMapper());

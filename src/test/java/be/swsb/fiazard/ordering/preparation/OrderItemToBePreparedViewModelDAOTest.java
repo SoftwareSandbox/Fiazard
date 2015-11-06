@@ -33,7 +33,8 @@ public class OrderItemToBePreparedViewModelDAOTest {
     public void findAll() {
         mongoDBRule.persist(new OrderItemToBePreparedViewModel(ID, ORDER_ID, NOW, DESCRIPTION));
 
-        List<OrderItemToBePreparedViewModel> orderItems = dao.findAll();
+        // TODO butskri bktid testen met dates
+        List<OrderItemToBePreparedViewModel> orderItems = dao.find(null, null);
 
         assertThat(orderItems).hasSize(1);
         assertThat(orderItems.get(0).getId()).isEqualTo(ID);
