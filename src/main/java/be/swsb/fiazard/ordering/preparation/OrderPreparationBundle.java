@@ -6,6 +6,9 @@ import io.dropwizard.setup.Environment;
 import be.swsb.fiazard.main.FiazardConfig;
 import be.swsb.fiazard.main.MongoBundle;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.DB;
+
 
 public class OrderPreparationBundle implements ConfiguredBundle<FiazardConfig> {
 
@@ -21,7 +24,17 @@ public class OrderPreparationBundle implements ConfiguredBundle<FiazardConfig> {
 
     @Override
     public void run(FiazardConfig configuration, Environment environment) throws Exception {
-        environment.jersey().register(new OrderItemToBePreparedViewModelResource(new OrderItemToBePreparedViewModelDAO(mongoBundle.getDb())));
+        OrderItemToBePreparedViewModelDAO orderItemToBePreparedViewModelDAO = new OrderItemToBePreparedViewModelDAO(db(), objectMapper());
+        
+		environment.jersey().register(new OrderItemToBePreparedViewModelResource(orderItemToBePreparedViewModelDAO));
     }
+    
+    private DB db() {
+    	return mongoBundle.getDb();
+    }
+    
+	private ObjectMapper objectMapper() {
+		return mongoBundle.getObjectMapper();
+	}
 
 }
