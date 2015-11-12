@@ -1,12 +1,10 @@
-#How to contribute
-
+# How to contribute
 ## Setting up your environment
 Fork [this repo](https://github.com/SoftwareSandbox/Fiazard/) into your own account, e.g. `git@github.com:MyGithubAccount/Fiazard.git` and clone your forked repo locally:  
 ```
-git clone https://github.com/MyGithubAccount/Fiazard --recursive
+git clone https://github.com/MyGithubAccount/Fiazard
 git remote add swsb https://github.com/SoftwareSandbox/Fiazard
 ```  
-This will also clone the repo in the vagrant folder, which will set up your MongoDB environment.
 
 Install [Vagrant](http://vagrantup.com) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 
@@ -18,7 +16,7 @@ After installing [Robomongo](http://robomongo.org/), add a connection to `10.11.
 Download Vagrant through https://www.vagrantup.com/downloads.html because `apt-get install vagrant` installs an older version.
 
 You'll have to download oracle's Java 8 since openjdk still has no package out yet:
-```ssh
+```
 sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java8-installer
@@ -26,12 +24,11 @@ sudo apt-get install oracle-java8-set-default
 ```
 
 ## EventStore
-
 Install [Docker](https://www.docker.com/) on Ubuntu, or [DockerToolbox](https://www.docker.com/docker-toolbox) on Windows.
 DockerToolbox will start Docker inside a VirtualBox machine. Make sure you have a recent (5.0.3 or up) VirtualBox installation. Otherwhise, you might get an IP conflict between Windows and Docker-machine.
 
 Pull the [adbrowne/eventstore](https://hub.docker.com/r/adbrowne/eventstore/) docker container and run it with
-```ssh
+```
 sudo docker run -d -p 2113:2113 -p 1113:1113 adbrowne/eventstore
 ```
 Access the Web UI via [http://localhost:2113/web/index.html](http://localhost:2113/web/index.html).
@@ -51,7 +48,7 @@ gradlew startAppDev
 ```
 or make a target in your IDE that runs `FiazardApp.java` with arguments `server src/main/resources/dev.yml`.
 
-##Pick up backlog items
+## Pick up backlog items
 1. Pick up a backlog item at [waffle.io](https://waffle.io/softwaresandbox/fiazard) and assign it to yourself
 2. Make sure you are in sync with the latest version of the repository:  
   `git pull swsb master`
@@ -70,7 +67,6 @@ or make a target in your IDE that runs `FiazardApp.java` with arguments `server 
   `git push --delete origin feature-branch-{featureId}`
 
 ## Some Conventions
-
 Always suffix Representation classes (java classes that will be transformed into JSON by Jackson) with an R.
 
 `OpeningHour.java` becomes `OpeningHourR.java`
