@@ -8,10 +8,6 @@ git remote add swsb https://github.com/SoftwareSandbox/Fiazard
 
 Install [Vagrant](http://vagrantup.com) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
 
-Open up a shell, navigate to the vagrant dir and type `vagrant up`. This will download an Ubuntu 14.x VM box and install MongoDB Client and Server 2.6. For more info check this [forked repo](https://github.com/Sch3lp/ubuntu1404-mongodb26).
-
-After installing [Robomongo](http://robomongo.org/), add a connection to `10.11.12.13:27017`.
-
 ### On Ubuntu
 Download Vagrant through https://www.vagrantup.com/downloads.html because `apt-get install vagrant` installs an older version.
 
@@ -22,24 +18,19 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 sudo apt-get install oracle-java8-set-default
 ```
+## Vagrant
+Open up a shell, navigate to the vagrant dir and type `vagrant up`. This will set up an environment with MongoDB and EventStore.
 
-## EventStore
-Install [Docker](https://www.docker.com/) on Ubuntu, or [DockerToolbox](https://www.docker.com/docker-toolbox) on Windows.
-DockerToolbox will start Docker inside a VirtualBox machine. Make sure you have a recent (5.0.3 or up) VirtualBox installation. Otherwhise, you might get an IP conflict between Windows and Docker-machine.
+The [Vagrantfile](vagrant/Vagrantfile) downloads an Ubuntu 14.x VM and handles port forwarding. It uses [Docker](https://www.docker.com) to provision the VM with MongoDB and EventStore. This is configured in [docker-compose.yml](vagrant/docker-compose.yml).
 
-Pull the [adbrowne/eventstore](https://hub.docker.com/r/adbrowne/eventstore/) docker container and run it with
-```
-sudo docker run -d -p 2113:2113 -p 1113:1113 adbrowne/eventstore
-```
+### MongoDB
+After installing [Robomongo](http://robomongo.org/), add a connection to `localhost:27017`.
+
+### EventStore
 Access the Web UI via [http://localhost:2113/web/index.html](http://localhost:2113/web/index.html).
-To make this work on Windows, you'll have to setup port-forwarding on the VirtualBox machine.
-In VirtualBox Manager, right click 'default', then choose 'Instellingen', 'Netwerk', 'Poortdoorverwijzing'.
-Add one rule for TCP, 127.0.0.1, 1113, 1113 and one rule for TCP, 127.0.0.1, 2113, 2113.
-
-Alternatively, on Windows, if you don't want to use Docker, you can install [EventStore](http://geteventstore.com) natively. However, if we're going to customize a docker container for event store, you might get into trouble...
 
 ## Gradle
-There's no need to download and install Gradle, use the gradlewrapper (gradlew in the root) to run your builds.
+There's no need to download and install Gradle, use the gradle wrapper (gradlew in the root) to run your builds.
 
 ### Running your Dropwizard Application locally
 Simply run 
