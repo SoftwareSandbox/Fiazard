@@ -1,0 +1,9 @@
+mongo:
+  image: mongo
+  ports:
+    - "0.0.0.0:27017:27017"
+eventstore:
+  image: adbrowne/eventstore
+  ports:
+    - "0.0.0.0:2113:2113"
+    - "0.0.0.0:1113:1113"
