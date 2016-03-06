@@ -1,19 +1,17 @@
 package be.swsb.fiazard.ordering.orderplacement;
 
 import be.swsb.fiazard.common.Identifiable;
-import be.swsb.fiazard.common.eventsourcing.Event;
-import be.swsb.fiazard.common.eventsourcing.EventStore;
-import be.swsb.fiazard.common.mongo.MongoDBRule;
 import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
-import com.sun.jersey.api.client.ClientResponse;
 import io.dropwizard.testing.junit.DropwizardAppRule;
-import org.junit.*;
+import org.junit.ClassRule;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,15 +32,13 @@ public class OrderingResourceIntegrationTest {
     @Ignore("until eventstore can be mocked/integrated")
     public void toppingsAreReturnedAsJSON() throws Exception {
         PlaceOrder placeOrder = new PlaceOrder("snarf");
-        ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
+        Identifiable id = clientRule.getClient()
+                .target(BASE_URL)
                 .path(ORDERING_BASE_URI + "/placeorder")
-                .type(MediaType.APPLICATION_JSON_TYPE)
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .entity(placeOrder)
-                .post(ClientResponse.class);
+                .post(Entity.json(placeOrder), Identifiable.class);
 
-        Identifiable id = clientResponse.getEntity(Identifiable.class);
         assertThat(id.getId()).isNotNull();
 
         assertOrderPlacedEventPersisted(id.getId());

@@ -1,7 +1,7 @@
 package be.swsb.fiazard.ordering.orderplacement;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import be.swsb.fiazard.ddd.AggregateId;
 import be.swsb.fiazard.ddd.DomainEvent;
 import com.fasterxml.jackson.annotation.JsonProperty;

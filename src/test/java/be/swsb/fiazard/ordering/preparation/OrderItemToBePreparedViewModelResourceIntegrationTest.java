@@ -5,16 +5,15 @@ import be.swsb.fiazard.common.test.ClientRule;
 import be.swsb.fiazard.main.FiazardApp;
 import be.swsb.fiazard.main.FiazardConfig;
 import be.swsb.fiazard.util.representation.LocalDateTimeUtil;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.core.util.MultivaluedMapImpl;
 import io.dropwizard.testing.junit.DropwizardAppRule;
+import org.glassfish.jersey.client.JerseyWebTarget;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 import static be.swsb.fiazard.ddd.AggregateIdTestBuilder.randomId;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -76,15 +75,14 @@ public class OrderItemToBePreparedViewModelResourceIntegrationTest {
         assertThat(foundOrderItems).hasSize(2);
     }
 
-    private OrderItemToBePreparedViewModel[] queryForOrderItems(MultivaluedMap<String, String> params) {
-        ClientResponse clientResponse = clientRule.getClient()
-                .resource(BASE_URL)
-                .path(PATH)
-                .queryParams(params)
-                .type(MediaType.APPLICATION_JSON_TYPE)
+    private OrderItemToBePreparedViewModel[] queryForOrderItems(HashMap<String, String> params) {
+        JerseyWebTarget target = clientRule.getClient()
+                .target(BASE_URL)
+                .path(PATH);
+        params.forEach(target::queryParam);
+        return target.request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
-                .get(ClientResponse.class);
-        return clientResponse.getEntity(OrderItemToBePreparedViewModel[].class);
+                .get(OrderItemToBePreparedViewModel[].class);
     }
 
     private OrderItemToBePreparedViewModel orderItemToBePrepared(String id, LocalDateTime dateTime, String description) {
@@ -95,23 +93,23 @@ public class OrderItemToBePreparedViewModelResourceIntegrationTest {
         return LocalDateTime.parse(dateTime, LocalDateTimeUtil.FORMATTER);
     }
 
-    private MultivaluedMap<String, String> queryParams(LocalDateTime dateFrom, LocalDateTime dateUntil) {
-        MultivaluedMapImpl result = new MultivaluedMapImpl();
+    private HashMap<String, String> queryParams(LocalDateTime dateFrom, LocalDateTime dateUntil) {
+        HashMap<String,String> result = new HashMap<>();
         addParamIfNotNull(result, "dateFrom", dateFrom);
         addParamIfNotNull(result, "dateUntil", dateUntil);
         return result;
     }
 
-    private void addParamIfNotNull(MultivaluedMapImpl result, String key, LocalDateTime value) {
+    private void addParamIfNotNull(HashMap<String,String> result, String key, LocalDateTime value) {
         if (value==null) {
             return;
         }
 
-        result.putSingle(key, LocalDateTimeUtil.toString(value));
+        result.put(key, LocalDateTimeUtil.toString(value));
     }
 
-    private MultivaluedMap<String, String> noParams() {
-        return new MultivaluedMapImpl();
+    private HashMap<String, String> noParams() {
+        return new HashMap<>();
     }
 
 }

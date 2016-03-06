@@ -14,13 +14,13 @@ Learning project in which we try to make our sandwich ordering site better. This
 [Fiazards Architecture Handbook on GitBook.com](https://www.gitbook.com/book/sch3lp/fiazard-arch-handbook), managed by the [architecture-handbook](https://github.com/SoftwareSandbox/Fiazard/tree/architecture-handbook) branch.
 
 ## Tech Stack
-[Dropwizard 0.7.x](http://dropwizard.io/), in combination with 
-[Guice](https://github.com/HubSpot/dropwizard-guice) for **Dependency Injection**, and
+[Dropwizard 0.9.x](http://dropwizard.io/), in combination with
 [Swagger](http://swagger.io/) for **API docs**, and
 [JDBI](http://jdbi.org/) as the "**ORM**" to our relational db should we use one, with 
-MySQL/Postgres/MongoDB/... (TBD) for **persistency**, 
+MySQL/Postgres/MongoDB/... (TBD) for **persistency**, and
+[EventStore]() as our event store,
 which will all be set up/provisioned using
-[Vagrant](https://www.vagrantup.com/)/[Docker](https://www.docker.com/)/... (TBD) for **provisioning**/Infrastructure as code.
+[Docker](https://www.docker.com/) on [Vagrant](https://www.vagrantup.com/) for **provisioning**/Infrastructure as code.
 
 We'll eventually handle **authentication and authorization** using
 [Apache Shiro](http://shiro.apache.org/) with the [Dropwizard Plugin](https://github.com/silb/dropwizard-shiro), with

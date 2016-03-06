@@ -1,34 +1,41 @@
 package be.swsb.fiazard.eventstore;
 
-import javax.ws.rs.core.MediaType;
+
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import org.glassfish.jersey.client.ClientResponse;
+import org.glassfish.jersey.client.JerseyClientBuilder;
 
 import com.google.common.base.Preconditions;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class AtomPoster {
+    //TODO sch3lp: make configurable (as Dropwizard module/provider?)
+    public static final String FIAZARD_STREAM = "http://localhost:2113/streams/fiazard";
 
-    private WebResource webResource;
+    private WebTarget webResource;
 
     public AtomPoster(String stream) {
     	Preconditions.checkNotNull(stream);
 
-        Client jerseyClient = new Client();
+        Client jerseyClient = new JerseyClientBuilder().build();
+        jerseyClient.register(JacksonJsonProvider.class);
 //        uncomment to see your request in sysout
 //        jerseyClient.addFilter(new LoggingFilter(System.out));
-        webResource = jerseyClient.resource(stream);
+        webResource = jerseyClient.target(stream);
     }
 
-    //TODO sch3lp: dw upgrade to 0.9.x works with jersey-client 2.21, this code won't work anymore then
     public void post(AtomEvent atomEvent) {
-        ClientResponse response = webResource
-                .type(MediaType.APPLICATION_JSON_TYPE)
+        Response post = webResource
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .header("ES-EventId", atomEvent.getUUID())
                 .header("ES-EventType", atomEvent.getEventType())
-                .post(ClientResponse.class, new Object[]{atomEvent.getPayload()});
-        System.out.println(response);
+                .post(Entity.json(atomEvent.getPayload()), Response.class);
+        System.out.println(post);
         //TODO sch3lp: errorhandling
     }
 }
